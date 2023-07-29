@@ -15,14 +15,15 @@ interface INavLink {
 const NavLink: FC<INavLink> = ({ href, icon, children, active, target, rel }) => {
     return (
         <Link href={href} target={target} rel={rel}>
-            <div
-                className={clsx(
-                    'flex gap-6 p-3 items-center hover:text-secondary rounded',
-                    active && 'text-secondary font-bold bg-light/10'
-                )}
-            >
-                <span className="text-xl">{icon}</span>
-                <span>{children}</span>
+            <div className={clsx('flex gap-6 p-3 items-center group', active && 'font-bold')}>
+                <span
+                    className={clsx('text-xl', !!active ? 'text-primary' : 'text-gray-400 group-hover:text-gray-500')}
+                >
+                    {icon}
+                </span>
+                <span className={clsx(!!active ? 'text-primary' : 'text-gray-400 group-hover:text-gray-500')}>
+                    {children}
+                </span>
             </div>
         </Link>
     );

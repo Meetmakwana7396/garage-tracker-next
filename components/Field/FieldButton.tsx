@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import IconLoaderDots from '@/components/Icon/IconLoaderDots';
 
 interface IFieldButton {
@@ -18,8 +18,8 @@ const FieldButton = ({ children, onClick, className, type, loading, disabled }: 
             className={`${className} btn relative`}
             onClick={onClick}
         >
-            <span className={classNames({ invisible: loading })}>{children}</span>
-            <span className={classNames({ hidden: !loading }, 'absolute inset-0 flex items-center justify-center')}>
+            <span className={clsx({ invisible: loading })}>{children}</span>
+            <span className={clsx({ hidden: !loading }, 'absolute inset-0 flex items-center justify-center')}>
                 <IconLoaderDots className="w-10" />
             </span>
         </button>

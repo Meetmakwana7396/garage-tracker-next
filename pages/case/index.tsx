@@ -159,7 +159,7 @@ const Index = () => {
                 <div className="panel mt-5 overflow-hidden border-0 p-0">
                     <div className="table-responsive">
                         <table className={`table-hover ${isLoading && 'opacity-50 pointer-events-none'}`}>
-                            <thead className="bg-primary/20">
+                            <thead>
                                 <tr>
                                     <th className={params?.order_field === 'id' ? 'text-primary' : ''}>
                                         <div

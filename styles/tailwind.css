@@ -8,7 +8,7 @@
     }
 
     body {
-        @apply bg-light font-inter;
+        @apply font-inter antialiased;
     }
 
     body.dark {
@@ -51,7 +51,7 @@
     }
 
     .main-container .main-content {
-        @apply transition-all duration-300 lg:ltr:ml-[260px] lg:rtl:mr-[260px];
+        @apply transition-all duration-300 lg:ltr:ml-56 lg:rtl:mr-56;
     }
 
     /* Horizontal layouts */
@@ -180,7 +180,7 @@
 
     /* Buttons */
     .btn {
-        @apply relative flex items-center justify-center rounded-md border px-5 py-2 text-sm font-semibold shadow-[0_10px_20px_-10px] outline-none transition duration-300 hover:shadow-none;
+        @apply relative flex items-center justify-center rounded border px-5 py-2 text-sm font-semibold outline-none transition duration-300 hover:bg-black hover:border-black;
     }
     .btn-lg {
         @apply px-7 py-2.5 text-base;
@@ -277,7 +277,7 @@
     .form-textarea,
     .form-select,
     .form-multiselect {
-        @apply w-full rounded-md border border-white-light bg-white px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-[#121e32] dark:text-white-dark dark:focus:border-primary;
+        @apply w-full rounded border border-white-light bg-white px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-[#121e32] dark:text-white-dark dark:focus:border-primary;
     }
 
     .form-input-lg,
@@ -429,7 +429,7 @@
     }
     table thead tr,
     table tfoot tr {
-        @apply border-b-0 bg-supporting dark:!bg-[#1a2941];
+        @apply border-b;
     }
     table thead tr th,
     table tfoot tr th,
@@ -438,13 +438,13 @@
     }
     table thead tr th,
     table tfoot tr th {
-        @apply text-white;
+        @apply text-black;
     }
     table tbody tr {
-        @apply border-b !border-white-light/40 dark:!border-[#191e3a];
+        @apply;
     }
     table.table-hover tbody tr {
-        @apply hover:!bg-white-light/20 dark:hover:!bg-[#1a2941]/40;
+        @apply hover:!bg-white-light/50 dark:hover:!bg-[#1a2941]/40;
     }
     table.table-striped tbody tr:nth-child(odd) {
         @apply !bg-white-light/20 dark:!bg-[#1a2941]/40;
@@ -636,7 +636,7 @@ pre.hljs {
 }
 
 .action-icon {
-    @apply w-5 h-5 cursor-pointer hover:text-black;
+    @apply w-5 h-5 cursor-pointer text-gray-400/70 hover:text-black;
 }
 
 /* Speciality Status  */
@@ -650,7 +650,7 @@ pre.hljs {
     @apply bg-slate-500;
 }
 .status-rejected {
-    @apply bg-red-500;
+    @apply bg-[#FF5733];
 }
 .status-approved {
     @apply bg-success;

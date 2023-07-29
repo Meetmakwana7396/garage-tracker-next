@@ -5,8 +5,8 @@ import axios from '@/libs/axios';
 import helper from '@/libs/helper';
 import Head from 'next/head';
 import Link from 'next/link';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { BiChevronDown, BiEdit } from 'react-icons/bi';
+import React, { useRef, useState } from 'react';
+import { BiEdit } from 'react-icons/bi';
 import { FiEye, FiRefreshCcw } from 'react-icons/fi';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -85,7 +85,7 @@ const Index = () => {
                 <title>Attorney</title>
             </Head>
             <Header title={'Attorneys'} />
-            <div className="p-6 px-5">
+            <div className="p-6 space-y-8">
                 {/* Table filters  */}
                 <div className="flex flex-wrap items-center justify-end gap-4">
                     {/* <h2 className="text-xl">Attorney</h2> */}
@@ -115,164 +115,166 @@ const Index = () => {
                     </div>
                 </div>
 
-                {/* Status Tabs  */}
-                <div className="overflow-auto border-b">
-                    <ul className="flex whitespace-nowrap gap-2 dark:border-[#191e3a] sm:flex">
-                        <TabBlock
-                            onClick={() => {
-                                setParams({ ...params, status: '' });
-                                setTabs('all');
-                            }}
-                            isActive={tabs === 'all'}
-                            count={counts && counts[1] + counts[2] + counts[3]}
-                            name="All"
-                        />
-                        <TabBlock
-                            onClick={() => {
-                                setParams({ ...params, status: '2' });
-                                setTabs('approved');
-                            }}
-                            isActive={tabs === 'approved'}
-                            count={counts && counts[2]}
-                            name="Approved"
-                        />
-                        <TabBlock
-                            onClick={() => {
-                                setParams({ ...params, status: '1' });
-                                setTabs('pending');
-                            }}
-                            isActive={tabs === 'pending'}
-                            count={counts && counts[1]}
-                            name="Pending"
-                        />
-                        <TabBlock
-                            onClick={() => {
-                                setParams({ ...params, status: '4' });
-                                setTabs('deleted');
-                            }}
-                            isActive={tabs === 'deleted'}
-                            count={counts && counts[4]}
-                            name="Rejected"
-                        />
-                    </ul>
-                </div>
-
                 {/* Table Section  */}
-                <div className="panel mt-5 overflow-hidden border-0 p-0">
-                    <div className="table-responsive">
-                        <table className={`table-hover ${isLoading && 'opacity-50 pointer-events-none'}`}>
-                            <thead className="bg-primary/20">
-                                <tr>
-                                    <Th
-                                        isActive={params?.order_field === 'id'}
-                                        isAscending={params.order === 'asc'}
-                                        // onClick={() => sortByField('id')}
-                                    >
-                                        Attorney Id
-                                    </Th>
-                                    <Th
-                                        isActive={params?.order_field === 'first_name'}
-                                        isAscending={params.order === 'asc'}
-                                    >
-                                        Name
-                                    </Th>
+                <div>
+                    {/* Status Tabs  */}
+                    <div className="overflow-auto w-full border border-b-0">
+                        <ul className="flex whitespace-nowrap gap-2 dark:border-[#191e3a] sm:flex">
+                            <TabBlock
+                                onClick={() => {
+                                    setParams({ ...params, status: '' });
+                                    setTabs('all');
+                                }}
+                                isActive={tabs === 'all'}
+                                count={counts && counts[1] + counts[2] + counts[3]}
+                                name="All"
+                            />
+                            <TabBlock
+                                onClick={() => {
+                                    setParams({ ...params, status: '2' });
+                                    setTabs('approved');
+                                }}
+                                isActive={tabs === 'approved'}
+                                count={counts && counts[2]}
+                                name="Approved"
+                            />
+                            <TabBlock
+                                onClick={() => {
+                                    setParams({ ...params, status: '1' });
+                                    setTabs('pending');
+                                }}
+                                isActive={tabs === 'pending'}
+                                count={counts && counts[1]}
+                                name="Pending"
+                            />
+                            <TabBlock
+                                onClick={() => {
+                                    setParams({ ...params, status: '4' });
+                                    setTabs('deleted');
+                                }}
+                                isActive={tabs === 'deleted'}
+                                count={counts && counts[4]}
+                                name="Rejected"
+                            />
+                        </ul>
+                    </div>
+                    {/* Table  */}
+                    <div className="overflow-hidden border p-0">
+                        <div className="table-responsive">
+                            <table className={`table-hover ${isLoading && 'opacity-50 pointer-events-none'}`}>
+                                <thead>
+                                    <tr>
+                                        <Th
+                                            isActive={params?.order_field === 'id'}
+                                            isAscending={params.order === 'asc'}
+                                            // onClick={() => sortByField('id')}
+                                        >
+                                            Attorney Id
+                                        </Th>
+                                        <Th
+                                            isActive={params?.order_field === 'first_name'}
+                                            isAscending={params.order === 'asc'}
+                                        >
+                                            Name
+                                        </Th>
 
-                                    <Th noSorting>Email</Th>
-                                    <Th
-                                        isActive={params?.order_field === 'created_at'}
-                                        isAscending={params.order === 'asc'}
-                                    >
-                                        Created At
-                                    </Th>
-                                    <Th
-                                        isActive={params?.order_field === 'status'}
-                                        isAscending={params.order === 'asc'}
-                                    >
-                                        Status
-                                    </Th>
-                                    <Th noSorting>Action</Th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {attorneys ? (
-                                    <>
-                                        {attorneys.length > 0 ? (
-                                            attorneys.map((data: any) => {
-                                                return (
-                                                    <tr key={data.id}>
-                                                        <td>
-                                                            <div className="whitespace-nowrap">{data.Id}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="whitespace-nowrap">{data.name}</div>
-                                                        </td>
+                                        <Th noSorting>Email</Th>
+                                        <Th
+                                            isActive={params?.order_field === 'created_at'}
+                                            isAscending={params.order === 'asc'}
+                                        >
+                                            Created At
+                                        </Th>
+                                        <Th
+                                            isActive={params?.order_field === 'status'}
+                                            isAscending={params.order === 'asc'}
+                                        >
+                                            Status
+                                        </Th>
+                                        <Th noSorting>Action</Th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {attorneys ? (
+                                        <>
+                                            {attorneys.length > 0 ? (
+                                                attorneys.map((data: any) => {
+                                                    return (
+                                                        <tr key={data.id}>
+                                                            <td>
+                                                                <div className="whitespace-nowrap">{data.Id}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="whitespace-nowrap">{data.name}</div>
+                                                            </td>
 
-                                                        <td>
-                                                            <div className="whitespace-nowrap">{data.email}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="whitespace-nowrap">
-                                                                {helper.formatDate(data.created_at)}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div
-                                                                className={`status capitalize status-${helper.getAttorneyStatus(
-                                                                    data?.status
-                                                                )}`}
-                                                                // className="status status-approved"
-                                                            >
-                                                                {helper.getAttorneyStatus(data?.status)}
-                                                            </div>
-                                                        </td>
+                                                            <td>
+                                                                <div className="whitespace-nowrap">{data.email}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="whitespace-nowrap">
+                                                                    {helper.formatDate(data.created_at)}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div
+                                                                    className={`status capitalize status-${helper.getAttorneyStatus(
+                                                                        data?.status
+                                                                    )}`}
+                                                                    // className="status status-approved"
+                                                                >
+                                                                    {helper.getAttorneyStatus(data?.status)}
+                                                                </div>
+                                                            </td>
 
-                                                        <td className="max-w-xs flex gap-2">
-                                                            <Link href={`/attorney/${data?.id}`}>
-                                                                <Tippy content="View Details">
+                                                            <td className="max-w-xs flex gap-2">
+                                                                <Link href={`/attorney/${data?.id}`}>
+                                                                    <Tippy content="View Details">
+                                                                        <span>
+                                                                            <FiEye className="action-icon text-secondary" />
+                                                                        </span>
+                                                                    </Tippy>
+                                                                </Link>
+                                                                <Tippy content="Edit Details">
                                                                     <span>
-                                                                        <FiEye className="action-icon text-blue-500" />
+                                                                        <BiEdit
+                                                                            className="action-icon text-secondary"
+                                                                            onClick={() => {
+                                                                                setTimeout(() => {
+                                                                                    editAttorneyModal.current.open(
+                                                                                        data?.id
+                                                                                    );
+                                                                                });
+                                                                            }}
+                                                                        />
                                                                     </span>
                                                                 </Tippy>
-                                                            </Link>
-                                                            <Tippy content="Edit Details">
-                                                                <span>
-                                                                    <BiEdit
-                                                                        className="action-icon text-blue-500"
-                                                                        onClick={() => {
-                                                                            setTimeout(() => {
-                                                                                editAttorneyModal.current.open(
-                                                                                    data?.id
-                                                                                );
-                                                                            });
-                                                                        }}
-                                                                    />
-                                                                </span>
-                                                            </Tippy>
 
-                                                            {data?.status === 4 && (
-                                                                <Tippy content="Restore Expert">
-                                                                    <span>
-                                                                        <FiRefreshCcw className="action-icon text-blue-500" />
-                                                                    </span>
-                                                                </Tippy>
-                                                            )}
-                                                        </td>
-                                                    </tr>
-                                                );
-                                            })
-                                        ) : (
-                                            <tr className="pointer-events-none">
-                                                <td colSpan={6} className="p-8">
-                                                    <p className="mx-auto w-fit"> No data found.</p>
-                                                </td>
-                                            </tr>
-                                        )}
-                                    </>
-                                ) : (
-                                    <TableLoader colspan={6} />
-                                )}
-                            </tbody>
-                        </table>
+                                                                {data?.status === 4 && (
+                                                                    <Tippy content="Restore Expert">
+                                                                        <span>
+                                                                            <FiRefreshCcw className="action-icon text-secondary" />
+                                                                        </span>
+                                                                    </Tippy>
+                                                                )}
+                                                            </td>
+                                                        </tr>
+                                                    );
+                                                })
+                                            ) : (
+                                                <tr className="pointer-events-none">
+                                                    <td colSpan={6} className="p-8">
+                                                        <p className="mx-auto w-fit"> No data found.</p>
+                                                    </td>
+                                                </tr>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <TableLoader colspan={6} />
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 

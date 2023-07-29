@@ -26,7 +26,7 @@ const Sidebar = () => {
     return (
         <div className={semidark ? 'dark' : ''}>
             <nav
-                className={`sidebar fixed top-0 bottom-0 z-[51] h-full min-h-screen w-[260px] shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300 ${
+                className={`sidebar fixed top-0 bottom-0 z-[51] h-full min-h-screen w-56 border-r transition-all duration-300 ${
                     semidark ? 'text-white-dark' : ''
                 }`}
             >
@@ -39,7 +39,7 @@ const Sidebar = () => {
                         <IconClose />
                     </button>
                 </div>
-                <div className="h-full bg-primary text-[#D8E3E7] dark:bg-black">
+                <div className="h-full bg-supporting text-black ">
                     <div className="flex items-center sm:justify-center justify-between p-3">
                         <Link href="/" className="main-logo -ml-3 justify-center items-center flex h-auto">
                             {/* <Image
