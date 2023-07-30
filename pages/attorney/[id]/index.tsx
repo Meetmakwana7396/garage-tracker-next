@@ -1,4 +1,6 @@
 import EditAttorney from '@/components/Attorney/EditAttorney';
+import IconChevronDown from '@/components/Icon/IconChevronDown';
+import IconEdit from '@/components/Icon/IconEdit';
 import Header from '@/components/Layout/Header';
 import Loading from '@/components/Loading';
 import axios from '@/libs/axios';
@@ -9,8 +11,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { BiEdit } from 'react-icons/bi';
-import { HiChevronLeft } from 'react-icons/hi';
 import 'tippy.js/dist/tippy.css';
 
 const Index = () => {
@@ -54,7 +54,7 @@ const Index = () => {
                 <div className="p-6 px-5">
                     <div className="mb-4">
                         <button className="btn-back" onClick={() => router.back()}>
-                            <HiChevronLeft className="action-icon hover:text-current" /> Back
+                            <IconChevronDown className="action-icon hover:text-current -rotate-90" /> Back
                         </button>
                     </div>
                     <div className="space-y-4 xl:space-y-[30px]">
@@ -80,7 +80,7 @@ const Index = () => {
                                 >
                                     <Tippy content="Edit Details">
                                         <span>
-                                            <BiEdit className="action-icon text-blue-500" />
+                                            <IconEdit className="action-icon text-blue-500" />
                                         </span>
                                     </Tippy>
                                 </button>

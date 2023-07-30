@@ -1,14 +1,13 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { toggleMenu, toggleSidebar } from '@/store/authSlice';
 import { IRootState } from '@/store/store';
-import { BiBarChartAlt2, BiCategoryAlt, BiGridAlt, BiHome, BiMenu, BiReceipt, BiStar, BiUser } from 'react-icons/bi';
-import { HiOutlineScale, HiOutlineUserGroup } from 'react-icons/hi';
 import IconClose from '../Icon/IconClose';
 import NavLink from '../Navlink';
+import IconDashboard from '../Icon/IconDashboard';
+import IconInventory from '../Icon/IconInventory';
 
 const Sidebar = () => {
     const dispatch = useDispatch();
@@ -55,28 +54,28 @@ const Sidebar = () => {
                         </Link>
                     </div>
                     <PerfectScrollbar className="relative h-[calc(100vh-80px)]">
-                        <ul className="relative space-y-0.5 mt-10 p-4 py-0 font-semibold">
+                        <ul className="relative space-y-3 mt-10 font-semibold">
                             <li>
-                                <NavLink href="/" icon={<BiHome />} active={isActive('/')}>
+                                <NavLink href="/" icon={<IconDashboard />} active={isActive('/')}>
                                     Dashboard
                                 </NavLink>
                             </li>
 
-                            <li>
-                                <NavLink href="/attorney" icon={<BiUser />} active={isActive('/attorney')}>
+                            {/* <li>
+                                <NavLink href="/attorney" icon={<IconInventory />} active={isActive('/attorney')}>
                                     Attorneys
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink href="/specialty" icon={<BiGridAlt />} active={isActive('/specialty')}>
+                                <NavLink href="/specialty" icon={<IconInventory />} active={isActive('/specialty')}>
                                     Specialties
                                 </NavLink>
-                            </li>
+                            </li> */}
 
                             <li>
-                                <NavLink href="/case" icon={<HiOutlineScale />} active={isActive('/case')}>
-                                    Cases
+                                <NavLink href="/inventory" icon={<IconInventory />} active={isActive('/inventory')}>
+                                    Inventory
                                 </NavLink>
                             </li>
                         </ul>

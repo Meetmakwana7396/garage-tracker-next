@@ -2,10 +2,11 @@ import { IRootState } from '@/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import Dropdown from '../Dropdown';
-import { BiLogOut, BiMenu, BiUser } from 'react-icons/bi';
 import { useAuth } from '@/hooks/useAuth';
 import Image from 'next/image';
 import { toggleSidebar } from '@/store/authSlice';
+import IconLogout from '../Icon/IconLogout';
+import IconUser from '../Icon/IconUser';
 
 const Header = (props: any) => {
     const themeConfig = useSelector((state: IRootState) => state.auth);
@@ -15,7 +16,7 @@ const Header = (props: any) => {
 
     return (
         <header className={themeConfig?.semidark && themeConfig?.menu === 'horizontal' ? 'dark' : ''}>
-            <div className="border-b">
+            <div>
                 <div className="relative flex w-fill justify-between items-center bg-transparent px-5 py-2.5 dark:bg-black">
                     <div className="flex items-center gap-3">
                         {
@@ -25,10 +26,11 @@ const Header = (props: any) => {
                                     sidebar && 'lg:hidden'
                                 }`}
                             >
-                                <BiMenu className="m-auto h-5 w-5" />
+                                {/* <BiMenu className="m-auto h-5 w-5" /> */}
+                                Menu
                             </span>
                         }
-                        <p className="font-semibold tracking-widest text-black text-lg">{props.title || 'title'}</p>
+                        {/* <p className="font-semibold tracking-widest text-black text-lg">{props.title || 'title'}</p> */}
                     </div>
                     <div className="flex items-center space-x-1.5 ml-auto dark:text-[#d0d2d6] lg:space-x-2">
                         <div className="dropdown flex shrink-0">
@@ -69,14 +71,14 @@ const Header = (props: any) => {
                                     </li>
                                     <li>
                                         <Link href="/profile" className="dark:hover:text-white">
-                                            <BiUser className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2" />
+                                            <IconUser className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2" />
                                             Profile
                                         </Link>
                                     </li>
 
                                     <li className="border-t border-white-light dark:border-white-light/10">
                                         <button className="!py-3 text-danger" onClick={logout}>
-                                            <BiLogOut className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2 rotate-180" />
+                                            <IconLogout className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2 rotate-180" />
                                             Log Out
                                         </button>
                                     </li>

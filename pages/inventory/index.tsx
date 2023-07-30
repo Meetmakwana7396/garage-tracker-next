@@ -1,20 +1,20 @@
 import IconSearch from '@/components/Icon/IconSearch';
 import Header from '@/components/Layout/Header';
 import Pagination from '@/components/Pagination';
-import AddSpecialty from '@/components/Specialty/AddSpecialty';
 import axios from '@/libs/axios';
 import helper from '@/libs/helper';
+import Head from 'next/head';
+import Link from 'next/link';
+import React, { useRef, useState } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import Head from 'next/head';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { BiChevronDown, BiEdit, BiTrash } from 'react-icons/bi';
-import Loading from '@/components/Loading';
 import TableLoader from '@/components/TableLoader';
+import EditAttorney from '@/components/Attorney/EditAttorney';
 import TabBlock from '@/components/Layout/TabBlock';
 import Th from '@/components/Table/Th';
-import Link from 'next/link';
-import { FiEye, FiRefreshCcw } from 'react-icons/fi';
+import IconEye from '@/components/Icon/IconEye';
+import IconEdit from '@/components/Icon/IconEdit';
+import IconReload from '@/components/Icon/IconReload';
 
 const defaultParams = {
     per_page: '10',
@@ -56,27 +56,41 @@ const dummyData = [
     },
 ];
 
-const Index = () => {
-    const addSpecialtyModal = useRef<any>();
-    const [attorneys, setAttorneys] = useState<any>(dummyData);
+const InventoryIndex = () => {
+    const editAttorneyModal = useRef<any>();
+    const [inventory, setInventory] = useState<any>(dummyData);
     const [meta, setMeta] = useState<any>(null);
     const [counts, setCounts] = useState<any>(null);
     const [tabs, setTabs] = useState('all');
     const [params, setParams] = useState(defaultParams);
     const [isLoading, setIsLoading] = useState(false);
 
+    const prevNextPage = async (url: string) => {
+        try {
+            setIsLoading(true);
+            if (url) {
+                const { data } = await axios.get(`/admin/attorneys${url}`);
+                setInventory(data.data.data);
+                setMeta(data.data.meta);
+            }
+        } catch {
+            setInventory(null);
+            setMeta(null);
+        }
+        setIsLoading(false);
+    };
+
     return (
         <React.Fragment>
             <Head>
-                <title>Specialty</title>
+                <title>GT - Inventory</title>
             </Head>
-            {/* Table filters  */}
-            <Header title={'Specialties'} />
             <div className="p-6 space-y-8">
-                <div className="flex flex-wrap items-center justify-end gap-4">
-                    {/* <h2 className="text-xl"></h2> */}
+                {/* Table filters  */}
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                    <h2 className="text-5xl tracking-wider leading-none">Inventory</h2>
                     <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
-                        <div className="flex gap-3">
+                        <div className="">
                             <div className="relative">
                                 <input
                                     type="text"
@@ -86,7 +100,7 @@ const Index = () => {
                                     onChange={(e) => setParams({ ...params, filter: e.target.value })}
                                     // onKeyDown={(e) => {
                                     //     if (e.key === 'Enter') {
-                                    //         getSpecialties('1');
+                                    //         getAttorneys('1');
                                     //     }
                                     // }}
                                 />
@@ -98,24 +112,13 @@ const Index = () => {
                                 </button>
                             </div>
                         </div>
-                        <div>
-                            <button
-                                type="button"
-                                className="btn btn-primary"
-                                onClick={() => {
-                                    addSpecialtyModal.current.open();
-                                }}
-                            >
-                                Add New
-                            </button>
-                        </div>
                     </div>
                 </div>
 
                 {/* Table Section  */}
                 <div>
                     {/* Status Tabs  */}
-                    <div className="overflow-auto w-full border border-b-0">
+                    <div className="overflow-auto w-full border-t mb-10">
                         <ul className="flex whitespace-nowrap gap-2 dark:border-[#191e3a] sm:flex">
                             <TabBlock
                                 onClick={() => {
@@ -192,10 +195,10 @@ const Index = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {attorneys ? (
+                                    {inventory ? (
                                         <>
-                                            {attorneys.length > 0 ? (
-                                                attorneys.map((data: any) => {
+                                            {inventory.length > 0 ? (
+                                                inventory.map((data: any) => {
                                                     return (
                                                         <tr key={data.id}>
                                                             <td>
@@ -228,29 +231,28 @@ const Index = () => {
                                                                 <Link href={`/attorney/${data?.id}`}>
                                                                     <Tippy content="View Details">
                                                                         <span>
-                                                                            <FiEye className="action-icon text-secondary" />
+                                                                            <IconEye className="action-icon text-secondary" />
                                                                         </span>
                                                                     </Tippy>
                                                                 </Link>
                                                                 <Tippy content="Edit Details">
-                                                                    <span>
-                                                                        <BiEdit
-                                                                            className="action-icon text-secondary"
-                                                                            // onClick={() => {
-                                                                            //     setTimeout(() => {
-                                                                            //         editAttorneyModal.current.open(
-                                                                            //             data?.id
-                                                                            //         );
-                                                                            //     });
-                                                                            // }}
-                                                                        />
+                                                                    <span
+                                                                        onClick={() => {
+                                                                            setTimeout(() => {
+                                                                                editAttorneyModal.current.open(
+                                                                                    data?.id
+                                                                                );
+                                                                            });
+                                                                        }}
+                                                                    >
+                                                                        <IconEdit className="action-icon text-secondary" />
                                                                     </span>
                                                                 </Tippy>
 
                                                                 {data?.status === 4 && (
                                                                     <Tippy content="Restore Expert">
                                                                         <span>
-                                                                            <FiRefreshCcw className="action-icon text-secondary" />
+                                                                            <IconReload className="action-icon text-secondary" />
                                                                         </span>
                                                                     </Tippy>
                                                                 )}
@@ -274,6 +276,13 @@ const Index = () => {
                         </div>
                     </div>
                 </div>
+
+                <Pagination
+                    meta={meta}
+                    prevNextPage={prevNextPage}
+                    page={(value) => setParams({ ...params, per_page: value })}
+                    goToPage={(value) => console.log(value)}
+                />
             </div>
         </React.Fragment>
     );
@@ -283,4 +292,4 @@ const Index = () => {
 //     auth: true,
 // };
 
-export default Index;
+export default InventoryIndex;

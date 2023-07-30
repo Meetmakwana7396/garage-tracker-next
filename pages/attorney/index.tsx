@@ -6,14 +6,15 @@ import helper from '@/libs/helper';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
-import { BiEdit } from 'react-icons/bi';
-import { FiEye, FiRefreshCcw } from 'react-icons/fi';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import TableLoader from '@/components/TableLoader';
 import EditAttorney from '@/components/Attorney/EditAttorney';
 import TabBlock from '@/components/Layout/TabBlock';
 import Th from '@/components/Table/Th';
+import IconEye from '@/components/Icon/IconEye';
+import IconEdit from '@/components/Icon/IconEdit';
+import IconReload from '@/components/Icon/IconReload';
 
 const defaultParams = {
     per_page: '10',
@@ -84,7 +85,6 @@ const Index = () => {
             <Head>
                 <title>Attorney</title>
             </Head>
-            <Header title={'Attorneys'} />
             <div className="p-6 space-y-8">
                 {/* Table filters  */}
                 <div className="flex flex-wrap items-center justify-end gap-4">
@@ -231,29 +231,28 @@ const Index = () => {
                                                                 <Link href={`/attorney/${data?.id}`}>
                                                                     <Tippy content="View Details">
                                                                         <span>
-                                                                            <FiEye className="action-icon text-secondary" />
+                                                                            <IconEye className="action-icon text-secondary" />
                                                                         </span>
                                                                     </Tippy>
                                                                 </Link>
                                                                 <Tippy content="Edit Details">
-                                                                    <span>
-                                                                        <BiEdit
-                                                                            className="action-icon text-secondary"
-                                                                            onClick={() => {
-                                                                                setTimeout(() => {
-                                                                                    editAttorneyModal.current.open(
-                                                                                        data?.id
-                                                                                    );
-                                                                                });
-                                                                            }}
-                                                                        />
+                                                                    <span
+                                                                        onClick={() => {
+                                                                            setTimeout(() => {
+                                                                                editAttorneyModal.current.open(
+                                                                                    data?.id
+                                                                                );
+                                                                            });
+                                                                        }}
+                                                                    >
+                                                                        <IconEdit className="action-icon text-secondary" />
                                                                     </span>
                                                                 </Tippy>
 
                                                                 {data?.status === 4 && (
                                                                     <Tippy content="Restore Expert">
                                                                         <span>
-                                                                            <FiRefreshCcw className="action-icon text-secondary" />
+                                                                            <IconReload className="action-icon text-secondary" />
                                                                         </span>
                                                                     </Tippy>
                                                                 )}

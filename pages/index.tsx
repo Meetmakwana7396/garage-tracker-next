@@ -1,10 +1,9 @@
+import IconDashboard from '@/components/Icon/IconDashboard';
 import Header from '@/components/Layout/Header';
 import axios from '@/libs/axios';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { BiCategoryAlt, BiGridAlt, BiReceipt, BiUser } from 'react-icons/bi';
-import { HiOutlineScale, HiOutlineUserGroup } from 'react-icons/hi';
 
 const Index = () => {
     const [allCounts, setAllCounts] = useState<any>(null);
@@ -32,7 +31,7 @@ const Index = () => {
                     <Link href="/expert">
                         <div className="dashboard-panels bg-gradient-to-r from-cyan-500 to-cyan-400 ">
                             <div className="icon-box">
-                                <HiOutlineUserGroup className="w-16 h-16 opacity-60 " />
+                                <IconDashboard className="w-16 h-16 opacity-60 " />
                             </div>
                             <div className="text-right">
                                 <p className="mt-4 text-4xl font-bold ">
@@ -49,7 +48,7 @@ const Index = () => {
                     <Link href="/attorney">
                         <div className="dashboard-panels bg-gradient-to-r from-purple-500 to-purple-400 ">
                             <div className="icon-box">
-                                <BiUser className="w-16 h-16 opacity-60 " />
+                                <IconDashboard className="w-16 h-16 opacity-60 " />
                             </div>
                             <div className="text-right">
                                 <p className="mt-4 text-4xl font-bold ">
@@ -68,7 +67,7 @@ const Index = () => {
                     <Link href="/case">
                         <div className="dashboard-panels bg-gradient-to-r from-blue-500 to-blue-400">
                             <div className="icon-box">
-                                <HiOutlineScale className="w-16 h-16 opacity-60 " />
+                                <IconDashboard className="w-16 h-16 opacity-60 " />
                             </div>
                             <div className="text-right">
                                 <p className="mt-4 text-4xl font-bold ">
@@ -85,7 +84,7 @@ const Index = () => {
                     <Link href="/invoice">
                         <div className="dashboard-panels bg-gradient-to-r from-fuchsia-500 to-fuchsia-400">
                             <div className="icon-box">
-                                <BiReceipt className="w-16 h-16 opacity-60 " />
+                                <IconDashboard className="w-16 h-16 opacity-60 " />
                             </div>
                             <div className="text-right">
                                 <p className="mt-4 text-4xl font-bold ">
@@ -104,7 +103,7 @@ const Index = () => {
                     <Link href="/specialty">
                         <div className="dashboard-panels bg-gradient-to-r from-orange-500 to-orange-400">
                             <div className="icon-box">
-                                <BiGridAlt className="w-16 h-16 opacity-60 " />
+                                <IconDashboard className="w-16 h-16 opacity-60 " />
                             </div>
                             <div className="text-right">
                                 <p className="mt-4 text-4xl font-bold ">
@@ -123,7 +122,7 @@ const Index = () => {
                     <Link href="/sub-specialty">
                         <div className="dashboard-panels bg-gradient-to-r from-green-500 to-green-400">
                             <div className="icon-box">
-                                <BiCategoryAlt className="w-16 h-16 opacity-60 " />
+                                <IconDashboard className="w-16 h-16 opacity-60 " />
                             </div>
                             <div className="text-right">
                                 <p className="mt-4 text-4xl font-bold ">

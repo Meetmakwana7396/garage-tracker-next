@@ -15,7 +15,7 @@ interface INavLink {
 const NavLink: FC<INavLink> = ({ href, icon, children, active, target, rel }) => {
     return (
         <Link href={href} target={target} rel={rel}>
-            <div className={clsx('flex gap-6 p-3 items-center group', active && 'font-bold')}>
+            <div className={clsx('flex gap-6 py-1 px-6 items-center group', active && 'font-bold border-r-4 border-primary')}>
                 <span
                     className={clsx('text-xl', !!active ? 'text-primary' : 'text-gray-400 group-hover:text-gray-500')}
                 >

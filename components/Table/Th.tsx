@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import { BiChevronDown } from 'react-icons/bi';
+import IconChevronDown from '../Icon/IconChevronDown';
 
 const Th = ({ children, isActive, isAscending, noSorting, onClick }: any) => {
     return (
@@ -11,7 +11,7 @@ const Th = ({ children, isActive, isAscending, noSorting, onClick }: any) => {
             >
                 {children}
                 {!noSorting && (
-                    <BiChevronDown
+                    <IconChevronDown
                         className={clsx(
                             'action-icon ml-1 group-hover:text-primary shrink-0',
                             !!isActive && '!text-primary',

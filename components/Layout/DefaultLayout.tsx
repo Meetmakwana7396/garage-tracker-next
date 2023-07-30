@@ -7,6 +7,7 @@ import Sidebar from './Sidebar';
 import Footer from './Footer';
 import Portals from '../Portals';
 import { IRootState } from '@/store/store';
+import Header from './Header';
 
 interface DefaultLayoutProps {
     children: ReactNode;
@@ -88,6 +89,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
                     {/* BEGIN CONTENT AREA */}
                     <div className="main-content">
                         <div>
+                            <Header />
                             {children}
                             <Footer />
                         </div>

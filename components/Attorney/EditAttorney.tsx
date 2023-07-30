@@ -5,7 +5,6 @@ import axios from '@/libs/axios';
 import { attorneyStatus } from '@/libs/helper';
 import { IEditAttorneyDetailForm, IEditAttorneyDetailModal } from '@/types/attorney';
 import FieldButton from '../Field/FieldButton';
-import { BiUpload, BiX } from 'react-icons/bi';
 import Image from 'next/image';
 import Loading from '../Loading';
 

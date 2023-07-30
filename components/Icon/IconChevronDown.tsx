@@ -1,7 +1,7 @@
 import { IIcon } from '@/types/auth';
 import clsx from 'clsx';
 
-const IconSearch = ({ className }: IIcon) => {
+const IconChevronDown = ({ className }: IIcon) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -13,12 +13,11 @@ const IconSearch = ({ className }: IIcon) => {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            className={clsx('lucide lucide-search', className)}
+            className={clsx('lucide lucide-chevron-down', className)}
         >
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.3-4.3" />
+            <path d="m6 9 6 6 6-6" />
         </svg>
     );
 };
 
-export default IconSearch;
+export default IconChevronDown;
