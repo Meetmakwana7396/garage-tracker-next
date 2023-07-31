@@ -1,6 +1,5 @@
 import IconSearch from '@/components/Icon/IconSearch';
 import Header from '@/components/Layout/Header';
-import Pagination from '@/components/Pagination';
 import axios from '@/libs/axios';
 import helper from '@/libs/helper';
 import Head from 'next/head';
@@ -8,13 +7,14 @@ import Link from 'next/link';
 import React, { useRef, useState } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import TableLoader from '@/components/TableLoader';
 import EditAttorney from '@/components/Attorney/EditAttorney';
 import TabBlock from '@/components/Layout/TabBlock';
 import Th from '@/components/Table/Th';
 import IconEye from '@/components/Icon/IconEye';
 import IconEdit from '@/components/Icon/IconEdit';
 import IconReload from '@/components/Icon/IconReload';
+import TableLoader from '@/components/Essentials/TableLoader';
+import Pagination from '@/components/Essentials/Pagination';
 
 const defaultParams = {
     per_page: '10',

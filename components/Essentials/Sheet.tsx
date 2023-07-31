@@ -1,6 +1,6 @@
 import { forwardRef, ReactNode, Ref, useImperativeHandle, useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import IconClose from './Icon/IconClose';
+import IconClose from '../Icon/IconClose';
 
 interface SheetProps {
     children: ReactNode;
@@ -48,10 +48,11 @@ const Sheet = forwardRef(({ children, width, button }: SheetProps, ref: Ref<Shee
                         <div>{children}</div>
                         <Dialog.Close asChild>
                             <button
-                                className="outline-none absolute top-2 right-2 w-4 h-4 flex items-center justify-center"
+                                className="outline-none btn absolute top-4 right-4 bg-gray-300 p-2 rounded-full"
                                 aria-label="Close"
                             >
-                                <IconClose className="text-black w-5 h-5" />
+                                {/* <IconClose className="text-black w-5 h-5" /> */}
+                                <span className='text-sm'>Esc</span>
                             </button>
                         </Dialog.Close>
                     </Dialog.Content>

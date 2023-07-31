@@ -1,6 +1,5 @@
 import IconSearch from '@/components/Icon/IconSearch';
 import Header from '@/components/Layout/Header';
-import Pagination from '@/components/Pagination';
 import axios from '@/libs/axios';
 import helper from '@/libs/helper';
 import Head from 'next/head';
@@ -8,13 +7,16 @@ import Link from 'next/link';
 import React, { useRef, useState } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import TableLoader from '@/components/TableLoader';
 import EditAttorney from '@/components/Attorney/EditAttorney';
 import TabBlock from '@/components/Layout/TabBlock';
 import Th from '@/components/Table/Th';
 import IconEye from '@/components/Icon/IconEye';
 import IconEdit from '@/components/Icon/IconEdit';
 import IconReload from '@/components/Icon/IconReload';
+import TableLoader from '@/components/Essentials/TableLoader';
+import Pagination from '@/components/Essentials/Pagination';
+import Sheet from '@/components/Essentials/Sheet';
+import AddInventoryItem from '@/components/Inventory/AddInventoryItem';
 
 const defaultParams = {
     per_page: '10',
@@ -85,10 +87,10 @@ const InventoryIndex = () => {
             <Head>
                 <title>GT - Inventory</title>
             </Head>
-            <div className="p-6 space-y-8">
+            <div className="p-6 space-y-10">
                 {/* Table filters  */}
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                    <h2 className="text-5xl tracking-wider leading-none">Inventory</h2>
+                <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b">
+                    <h2 className="text-5xl tracking-wide text-gray-400 font-semibold leading-none">Inventory</h2>
                     <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
                         <div className="">
                             <div className="relative">
@@ -117,8 +119,14 @@ const InventoryIndex = () => {
 
                 {/* Table Section  */}
                 <div>
+                    {/* Action Buttons  */}
+                    <div className="flex justify-end mb-3">
+                        <Sheet width="800px" button={<button className="btn btn-primary">Add item</button>}>
+                            <AddInventoryItem />
+                        </Sheet>
+                    </div>
                     {/* Status Tabs  */}
-                    <div className="overflow-auto w-full border-t mb-10">
+                    <div className="overflow-auto w-full border border-b-0">
                         <ul className="flex whitespace-nowrap gap-2 dark:border-[#191e3a] sm:flex">
                             <TabBlock
                                 onClick={() => {

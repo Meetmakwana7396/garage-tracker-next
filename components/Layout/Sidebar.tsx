@@ -5,9 +5,9 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { toggleMenu, toggleSidebar } from '@/store/authSlice';
 import { IRootState } from '@/store/store';
 import IconClose from '../Icon/IconClose';
-import NavLink from '../Navlink';
 import IconDashboard from '../Icon/IconDashboard';
 import IconInventory from '../Icon/IconInventory';
+import NavLink from '../Essentials/Navlink';
 
 const Sidebar = () => {
     const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import { IRootState } from '@/store/store';
 import { useRouter } from 'next/router';
 import { ReactNode, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Loading from '../Loading';
+import Loading from '../Essentials/Loading';
 
 interface AuthProps {
     children: ReactNode;

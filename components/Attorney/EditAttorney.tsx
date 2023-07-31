@@ -1,12 +1,12 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import Sheet from '../Sheet';
+import Sheet from '../Essentials/Sheet';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import axios from '@/libs/axios';
 import { attorneyStatus } from '@/libs/helper';
 import { IEditAttorneyDetailForm, IEditAttorneyDetailModal } from '@/types/attorney';
 import FieldButton from '../Field/FieldButton';
 import Image from 'next/image';
-import Loading from '../Loading';
+import Loading from '../Essentials/Loading';
 
 const EditAttorney = ({ selectedData, refresh, allAvailableStates }: IEditAttorneyDetailModal, forwardedRef: any) => {
     const modal = useRef<any>();

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import IconLoaderDots from './Icon/IconLoaderDots';
+import IconLoaderDots from '../Icon/IconLoaderDots';
 
 interface LoadingProps {
     message?: string;

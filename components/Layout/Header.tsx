@@ -1,12 +1,13 @@
 import { IRootState } from '@/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-import Dropdown from '../Dropdown';
 import { useAuth } from '@/hooks/useAuth';
 import Image from 'next/image';
 import { toggleSidebar } from '@/store/authSlice';
 import IconLogout from '../Icon/IconLogout';
 import IconUser from '../Icon/IconUser';
+import Dropdown from '../Essentials/Dropdown';
+import Pop from '../Essentials/Pop';
 
 const Header = (props: any) => {
     const themeConfig = useSelector((state: IRootState) => state.auth);
@@ -34,7 +35,7 @@ const Header = (props: any) => {
                     </div>
                     <div className="flex items-center space-x-1.5 ml-auto dark:text-[#d0d2d6] lg:space-x-2">
                         <div className="dropdown flex shrink-0">
-                            <Dropdown
+                            {/* <Dropdown
                                 offset={[0, 8]}
                                 placement="bottom-end"
                                 btnClassName="relative group block"
@@ -48,7 +49,7 @@ const Header = (props: any) => {
                                     />
                                 }
                             >
-                                <ul className="w-[230px] !py-0 font-semibold text-dark dark:text-white-dark dark:text-white-light/90">
+                                <ul className="w-[230px] shadow-none !py-0 font-semibold text-dark dark:text-white-dark dark:text-white-light/90">
                                     <li>
                                         <div className="flex items-center px-4 py-4">
                                             <Image
@@ -83,7 +84,35 @@ const Header = (props: any) => {
                                         </button>
                                     </li>
                                 </ul>
-                            </Dropdown>
+                            </Dropdown> */}
+                            <Pop
+                                button={
+                                    <Image
+                                        className="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100"
+                                        src="/assets/images/user-profile.png"
+                                        height={36}
+                                        width={36}
+                                        alt="userProfile"
+                                    />
+                                }
+                                width="w-[150px]"
+                            >
+                                <ul className="!py-0 font-semibold text-sm text-dark dark:text-white-dark dark:text-white-light/90">
+                                    <li className='p-3 hover:bg-supporting'>
+                                        <Link href="/profile" className="dark:hover:text-white flex items-center text-gray-400">
+                                            <IconUser className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2" />
+                                            Profile
+                                        </Link>
+                                    </li>
+
+                                    <li className="border-t p-3 border-white-light dark:border-white-light/10 opacity-70 hover:bg-danger/10">
+                                        <button className="text-danger flex items-center" onClick={logout}>
+                                            <IconLogout className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2 rotate-180" />
+                                            Log Out
+                                        </button>
+                                    </li>
+                                </ul>
+                            </Pop>
                         </div>
                     </div>
                 </div>

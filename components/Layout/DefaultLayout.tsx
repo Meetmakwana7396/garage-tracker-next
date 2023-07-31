@@ -5,9 +5,9 @@ import { ReactNode, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
-import Portals from '../Portals';
 import { IRootState } from '@/store/store';
 import Header from './Header';
+import Portals from '../Essentials/Portals';
 
 interface DefaultLayoutProps {
     children: ReactNode;
