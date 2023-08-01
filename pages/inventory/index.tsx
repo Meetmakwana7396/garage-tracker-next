@@ -17,6 +17,10 @@ import TableLoader from '@/components/Essentials/TableLoader';
 import Pagination from '@/components/Essentials/Pagination';
 import Sheet from '@/components/Essentials/Sheet';
 import AddInventoryItem from '@/components/Inventory/AddInventoryItem';
+import clsx from 'clsx';
+import IconCard from '@/components/Icon/IconCard';
+import IconList from '@/components/Icon/IconList';
+import CardInventory from '@/components/Inventory/CardInventory';
 
 const defaultParams = {
     per_page: '10',
@@ -66,6 +70,7 @@ const InventoryIndex = () => {
     const [tabs, setTabs] = useState('all');
     const [params, setParams] = useState(defaultParams);
     const [isLoading, setIsLoading] = useState(false);
+    const [layout, setLayout] = useState('card');
 
     const prevNextPage = async (url: string) => {
         try {
@@ -120,169 +125,209 @@ const InventoryIndex = () => {
                 {/* Table Section  */}
                 <div>
                     {/* Action Buttons  */}
-                    <div className="flex justify-end mb-3">
+                    <div className="flex justify-between mb-3">
+                        {/* Layout Switch  */}
+                        <div className=" flex rounded border overflow-hidden p-1">
+                            <div
+                                className={clsx(
+                                    'py-2 px-2 rounded-[2px] cursor-pointer text-gray-500',
+                                    layout === 'card' && 'bg-supporting'
+                                )}
+                                onClick={() => setLayout('card')}
+                            >
+                                <IconCard />
+                            </div>
+                            <div
+                                className={clsx(
+                                    'p-2 rounded-[2px] cursor-pointer text-gray-500',
+                                    layout === 'table' && 'bg-supporting'
+                                )}
+                                onClick={() => setLayout('table')}
+                            >
+                                <IconList />
+                            </div>
+                        </div>
                         <Sheet width="800px" button={<button className="btn btn-primary">Add item</button>}>
                             <AddInventoryItem />
                         </Sheet>
                     </div>
                     {/* Status Tabs  */}
-                    <div className="overflow-auto w-full border border-b-0">
-                        <ul className="flex whitespace-nowrap gap-2 dark:border-[#191e3a] sm:flex">
-                            <TabBlock
-                                onClick={() => {
-                                    setParams({ ...params, status: '' });
-                                    setTabs('all');
-                                }}
-                                isActive={tabs === 'all'}
-                                count={counts && counts[1] + counts[2] + counts[3]}
-                                name="All"
-                            />
-                            <TabBlock
-                                onClick={() => {
-                                    setParams({ ...params, status: '2' });
-                                    setTabs('approved');
-                                }}
-                                isActive={tabs === 'approved'}
-                                count={counts && counts[2]}
-                                name="Approved"
-                            />
-                            <TabBlock
-                                onClick={() => {
-                                    setParams({ ...params, status: '1' });
-                                    setTabs('pending');
-                                }}
-                                isActive={tabs === 'pending'}
-                                count={counts && counts[1]}
-                                name="Pending"
-                            />
-                            <TabBlock
-                                onClick={() => {
-                                    setParams({ ...params, status: '4' });
-                                    setTabs('deleted');
-                                }}
-                                isActive={tabs === 'deleted'}
-                                count={counts && counts[4]}
-                                name="Rejected"
-                            />
-                        </ul>
-                    </div>
-                    {/* Table  */}
-                    <div className="overflow-hidden border p-0">
-                        <div className="table-responsive">
-                            <table className={`table-hover ${isLoading && 'opacity-50 pointer-events-none'}`}>
-                                <thead>
-                                    <tr>
-                                        <Th
-                                            isActive={params?.order_field === 'id'}
-                                            isAscending={params.order === 'asc'}
-                                            // onClick={() => sortByField('id')}
-                                        >
-                                            Attorney Id
-                                        </Th>
-                                        <Th
-                                            isActive={params?.order_field === 'first_name'}
-                                            isAscending={params.order === 'asc'}
-                                        >
-                                            Name
-                                        </Th>
+                    {layout === 'table' ? (
+                        <>
+                            <div className="overflow-auto w-full border border-b-0">
+                                <ul className="flex whitespace-nowrap gap-2 dark:border-[#191e3a] sm:flex">
+                                    <TabBlock
+                                        onClick={() => {
+                                            setParams({ ...params, status: '' });
+                                            setTabs('all');
+                                        }}
+                                        isActive={tabs === 'all'}
+                                        count={counts && counts[1] + counts[2] + counts[3]}
+                                        name="All"
+                                    />
+                                    <TabBlock
+                                        onClick={() => {
+                                            setParams({ ...params, status: '2' });
+                                            setTabs('approved');
+                                        }}
+                                        isActive={tabs === 'approved'}
+                                        count={counts && counts[2]}
+                                        name="Approved"
+                                    />
+                                    <TabBlock
+                                        onClick={() => {
+                                            setParams({ ...params, status: '1' });
+                                            setTabs('pending');
+                                        }}
+                                        isActive={tabs === 'pending'}
+                                        count={counts && counts[1]}
+                                        name="Pending"
+                                    />
+                                    <TabBlock
+                                        onClick={() => {
+                                            setParams({ ...params, status: '4' });
+                                            setTabs('deleted');
+                                        }}
+                                        isActive={tabs === 'deleted'}
+                                        count={counts && counts[4]}
+                                        name="Rejected"
+                                    />
+                                </ul>
+                            </div>
+                            {/* Table  */}
+                            <div className="overflow-hidden border p-0">
+                                <div className="table-responsive">
+                                    <table className={`table-hover ${isLoading && 'opacity-50 pointer-events-none'}`}>
+                                        <thead>
+                                            <tr>
+                                                <Th
+                                                    isActive={params?.order_field === 'id'}
+                                                    isAscending={params.order === 'asc'}
+                                                    // onClick={() => sortByField('id')}
+                                                >
+                                                    Attorney Id
+                                                </Th>
+                                                <Th
+                                                    isActive={params?.order_field === 'first_name'}
+                                                    isAscending={params.order === 'asc'}
+                                                >
+                                                    Name
+                                                </Th>
 
-                                        <Th noSorting>Email</Th>
-                                        <Th
-                                            isActive={params?.order_field === 'created_at'}
-                                            isAscending={params.order === 'asc'}
-                                        >
-                                            Created At
-                                        </Th>
-                                        <Th
-                                            isActive={params?.order_field === 'status'}
-                                            isAscending={params.order === 'asc'}
-                                        >
-                                            Status
-                                        </Th>
-                                        <Th noSorting>Action</Th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {inventory ? (
-                                        <>
-                                            {inventory.length > 0 ? (
-                                                inventory.map((data: any) => {
-                                                    return (
-                                                        <tr key={data.id}>
-                                                            <td>
-                                                                <div className="whitespace-nowrap">{data.Id}</div>
-                                                            </td>
-                                                            <td>
-                                                                <div className="whitespace-nowrap">{data.name}</div>
-                                                            </td>
+                                                <Th noSorting>Email</Th>
+                                                <Th
+                                                    isActive={params?.order_field === 'created_at'}
+                                                    isAscending={params.order === 'asc'}
+                                                >
+                                                    Created At
+                                                </Th>
+                                                <Th
+                                                    isActive={params?.order_field === 'status'}
+                                                    isAscending={params.order === 'asc'}
+                                                >
+                                                    Status
+                                                </Th>
+                                                <Th noSorting>Action</Th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {inventory ? (
+                                                <>
+                                                    {inventory.length > 0 ? (
+                                                        inventory.map((data: any) => {
+                                                            return (
+                                                                <tr key={data.id}>
+                                                                    <td>
+                                                                        <div className="whitespace-nowrap">
+                                                                            {data.Id}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div className="whitespace-nowrap">
+                                                                            {data.name}
+                                                                        </div>
+                                                                    </td>
 
-                                                            <td>
-                                                                <div className="whitespace-nowrap">{data.email}</div>
-                                                            </td>
-                                                            <td>
-                                                                <div className="whitespace-nowrap">
-                                                                    {helper.formatDate(data.created_at)}
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div
-                                                                    className={`status capitalize status-${helper.getAttorneyStatus(
-                                                                        data?.status
-                                                                    )}`}
-                                                                    // className="status status-approved"
-                                                                >
-                                                                    {helper.getAttorneyStatus(data?.status)}
-                                                                </div>
-                                                            </td>
+                                                                    <td>
+                                                                        <div className="whitespace-nowrap">
+                                                                            {data.email}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div className="whitespace-nowrap">
+                                                                            {helper.formatDate(data.created_at)}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div
+                                                                            className={`status capitalize status-${helper.getAttorneyStatus(
+                                                                                data?.status
+                                                                            )}`}
+                                                                            // className="status status-approved"
+                                                                        >
+                                                                            {helper.getAttorneyStatus(data?.status)}
+                                                                        </div>
+                                                                    </td>
 
-                                                            <td className="max-w-xs flex gap-2">
-                                                                <Link href={`/attorney/${data?.id}`}>
-                                                                    <Tippy content="View Details">
-                                                                        <span>
-                                                                            <IconEye className="action-icon text-secondary" />
-                                                                        </span>
-                                                                    </Tippy>
-                                                                </Link>
-                                                                <Tippy content="Edit Details">
-                                                                    <span
-                                                                        onClick={() => {
-                                                                            setTimeout(() => {
-                                                                                editAttorneyModal.current.open(
-                                                                                    data?.id
-                                                                                );
-                                                                            });
-                                                                        }}
-                                                                    >
-                                                                        <IconEdit className="action-icon text-secondary" />
-                                                                    </span>
-                                                                </Tippy>
+                                                                    <td className="max-w-xs flex gap-2">
+                                                                        <Link href={`/attorney/${data?.id}`}>
+                                                                            <Tippy content="View Details">
+                                                                                <span>
+                                                                                    <IconEye className="action-icon text-secondary" />
+                                                                                </span>
+                                                                            </Tippy>
+                                                                        </Link>
+                                                                        <Tippy content="Edit Details">
+                                                                            <span
+                                                                                onClick={() => {
+                                                                                    setTimeout(() => {
+                                                                                        editAttorneyModal.current.open(
+                                                                                            data?.id
+                                                                                        );
+                                                                                    });
+                                                                                }}
+                                                                            >
+                                                                                <IconEdit className="action-icon text-secondary" />
+                                                                            </span>
+                                                                        </Tippy>
 
-                                                                {data?.status === 4 && (
-                                                                    <Tippy content="Restore Expert">
-                                                                        <span>
-                                                                            <IconReload className="action-icon text-secondary" />
-                                                                        </span>
-                                                                    </Tippy>
-                                                                )}
+                                                                        {data?.status === 4 && (
+                                                                            <Tippy content="Restore Expert">
+                                                                                <span>
+                                                                                    <IconReload className="action-icon text-secondary" />
+                                                                                </span>
+                                                                            </Tippy>
+                                                                        )}
+                                                                    </td>
+                                                                </tr>
+                                                            );
+                                                        })
+                                                    ) : (
+                                                        <tr className="pointer-events-none">
+                                                            <td colSpan={6} className="p-8">
+                                                                <p className="mx-auto w-fit"> No data found.</p>
                                                             </td>
                                                         </tr>
-                                                    );
-                                                })
+                                                    )}
+                                                </>
                                             ) : (
-                                                <tr className="pointer-events-none">
-                                                    <td colSpan={6} className="p-8">
-                                                        <p className="mx-auto w-fit"> No data found.</p>
-                                                    </td>
-                                                </tr>
+                                                <TableLoader colspan={6} />
                                             )}
-                                        </>
-                                    ) : (
-                                        <TableLoader colspan={6} />
-                                    )}
-                                </tbody>
-                            </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                            <CardInventory />
+                            <CardInventory />
+                            <CardInventory />
+                            <CardInventory />
+                            <CardInventory />
+
                         </div>
-                    </div>
+                    )}
                 </div>
 
                 <Pagination

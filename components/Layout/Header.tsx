@@ -8,6 +8,7 @@ import IconLogout from '../Icon/IconLogout';
 import IconUser from '../Icon/IconUser';
 import Dropdown from '../Essentials/Dropdown';
 import Pop from '../Essentials/Pop';
+import IconMenu from '../Icon/IconMenu';
 
 const Header = (props: any) => {
     const themeConfig = useSelector((state: IRootState) => state.auth);
@@ -27,8 +28,7 @@ const Header = (props: any) => {
                                     sidebar && 'lg:hidden'
                                 }`}
                             >
-                                {/* <BiMenu className="m-auto h-5 w-5" /> */}
-                                Menu
+                                <IconMenu />
                             </span>
                         }
                         {/* <p className="font-semibold tracking-widest text-black text-lg">{props.title || 'title'}</p> */}
@@ -98,8 +98,11 @@ const Header = (props: any) => {
                                 width="w-[150px]"
                             >
                                 <ul className="!py-0 font-semibold text-sm text-dark dark:text-white-dark dark:text-white-light/90">
-                                    <li className='p-3 hover:bg-supporting'>
-                                        <Link href="/profile" className="dark:hover:text-white flex items-center text-gray-400">
+                                    <li className="p-3 hover:bg-supporting">
+                                        <Link
+                                            href="/profile"
+                                            className="dark:hover:text-white flex items-center text-gray-400"
+                                        >
                                             <IconUser className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2" />
                                             Profile
                                         </Link>

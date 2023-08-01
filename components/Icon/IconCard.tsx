@@ -1,7 +1,7 @@
 import { IIcon } from '@/types/auth';
 import clsx from 'clsx';
 
-const IconChevronDown = ({ className }: IIcon) => {
+const IconCard = ({ className }: IIcon) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -13,11 +13,14 @@ const IconChevronDown = ({ className }: IIcon) => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={clsx('lucide lucide-chevron-down', className)}
+            className={clsx('lucide lucide-layout-grid', className)}
         >
-            <path d="m6 9 6 6 6-6" />
+            <rect width="7" height="7" x="3" y="3" rx="1" />
+            <rect width="7" height="7" x="14" y="3" rx="1" />
+            <rect width="7" height="7" x="14" y="14" rx="1" />
+            <rect width="7" height="7" x="3" y="14" rx="1" />
         </svg>
     );
 };
 
-export default IconChevronDown;
+export default IconCard;
