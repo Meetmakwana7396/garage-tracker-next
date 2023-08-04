@@ -1,6 +1,5 @@
 import React from 'react';
 import * as Popover from '@radix-ui/react-popover';
-import IconClose from '../Icon/IconClose';
 import clsx from 'clsx';
 
 const Pop = ({ width, button, children }: any) => (

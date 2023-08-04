@@ -88,12 +88,9 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
                     <Sidebar />
                     {/* BEGIN CONTENT AREA */}
                     <div className="main-content">
-                        <div>
-                            <Header />
-                            {children}
-                            <Footer />
-                        </div>
-                        <Portals />
+                        <Header />
+                        <div className="p-6">{children}</div>
+                        <Footer />
                     </div>
                 </div>
                 {/* END CONTENT AREA */}

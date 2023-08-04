@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { toggleSidebar } from '@/store/authSlice';
 import IconLogout from '../Icon/IconLogout';
 import IconUser from '../Icon/IconUser';
-import Dropdown from '../Essentials/Dropdown';
 import Pop from '../Essentials/Pop';
 import IconMenu from '../Icon/IconMenu';
 

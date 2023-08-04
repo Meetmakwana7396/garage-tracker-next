@@ -3,7 +3,7 @@ import React from 'react';
 
 const CardInventory = () => {
     return (
-        <div className="border max-w-[250px] bg-supporting rounded overflow-hidden p-4 hover:border-black mx-auto">
+        <div className="border bg-supporting rounded overflow-hidden p-4 hover:border-black mx-auto">
             <Image src="/assets/images/sample.jpg" width={200} height={500} className='w-full h-auto' alt="part image" />
             <div className="pt-2 w-full">
                 <p className="font-semibold text-2xl">Hello</p>

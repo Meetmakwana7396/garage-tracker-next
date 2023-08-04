@@ -1,13 +1,11 @@
 import IconSearch from '@/components/Icon/IconSearch';
-import Header from '@/components/Layout/Header';
 import axios from '@/libs/axios';
 import helper from '@/libs/helper';
 import Head from 'next/head';
 import Link from 'next/link';
-import React, { useRef, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import EditAttorney from '@/components/Attorney/EditAttorney';
 import TabBlock from '@/components/Layout/TabBlock';
 import Th from '@/components/Table/Th';
 import IconEye from '@/components/Icon/IconEye';
@@ -15,8 +13,6 @@ import IconEdit from '@/components/Icon/IconEdit';
 import IconReload from '@/components/Icon/IconReload';
 import TableLoader from '@/components/Essentials/TableLoader';
 import Pagination from '@/components/Essentials/Pagination';
-import Sheet from '@/components/Essentials/Sheet';
-import AddInventoryItem from '@/components/Inventory/AddInventoryItem';
 import clsx from 'clsx';
 import IconCard from '@/components/Icon/IconCard';
 import IconList from '@/components/Icon/IconList';
@@ -88,11 +84,11 @@ const InventoryIndex = () => {
     };
 
     return (
-        <React.Fragment>
+        <Fragment>
             <Head>
-                <title>GT - Inventory</title>
+                <title>Inventory | GT</title>
             </Head>
-            <div className="p-6 space-y-10">
+            <div className="space-y-10">
                 {/* Table filters  */}
                 <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b">
                     <h2 className="text-5xl tracking-wide text-gray-400 font-semibold leading-none">Inventory</h2>
@@ -135,7 +131,7 @@ const InventoryIndex = () => {
                                 )}
                                 onClick={() => setLayout('card')}
                             >
-                                <IconCard />
+                                <IconCard className="w-4 h-4" />
                             </div>
                             <div
                                 className={clsx(
@@ -144,12 +140,12 @@ const InventoryIndex = () => {
                                 )}
                                 onClick={() => setLayout('table')}
                             >
-                                <IconList />
+                                <IconList className="w-4 h-4" />
                             </div>
                         </div>
-                        <Sheet width="800px" button={<button className="btn btn-primary">Add item</button>}>
-                            <AddInventoryItem />
-                        </Sheet>
+                        <Link className="btn btn-primary h-fit" href="/inventory/inventory-add">
+                            Add Item
+                        </Link>
                     </div>
                     {/* Status Tabs  */}
                     {layout === 'table' ? (
@@ -319,13 +315,13 @@ const InventoryIndex = () => {
                             </div>
                         </>
                     ) : (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                        //  Card Layout
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                             <CardInventory />
                             <CardInventory />
                             <CardInventory />
                             <CardInventory />
                             <CardInventory />
-
                         </div>
                     )}
                 </div>
@@ -337,7 +333,7 @@ const InventoryIndex = () => {
                     goToPage={(value) => console.log(value)}
                 />
             </div>
-        </React.Fragment>
+        </Fragment>
     );
 };
 

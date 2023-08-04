@@ -17,11 +17,11 @@ const VerifyOtp = () => {
         },
     });
 
-    useEffect(() => {
-        if (router.isReady && !email) {
-            router.push('/login');
-        }
-    }, [router, email]);
+    // useEffect(() => {
+    //     if (router.isReady && !email) {
+    //         router.push('/login');
+    //     }
+    // }, [router, email]);
 
     const formHandler: SubmitHandler<IVerifyOtp> = async (data) => {
         await verifyEmail({ ...data, email: email || '' });
@@ -74,9 +74,9 @@ const VerifyOtp = () => {
 
 export default VerifyOtp;
 
-VerifyOtp.middleware = {
-    auth: false,
-    verify: false,
-};
+// VerifyOtp.middleware = {
+//     auth: false,
+//     verify: false,
+// };
 
 VerifyOtp.layout = 'nosidebar';
