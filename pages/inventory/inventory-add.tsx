@@ -1,16 +1,16 @@
+import FieldButton from '@/components/Field/FieldButton';
 import IconSearch from '@/components/Icon/IconSearch';
-import Footer from '@/components/Layout/Footer';
 import Head from 'next/head';
-import React from 'react';
+import { Fragment } from 'react';
 
 const InventoryAdd = () => {
     return (
-        <React.Fragment>
+        <Fragment>
             <Head>
                 <title>Add Inventory | GT</title>
             </Head>
             <div className="space-y-10">
-                {/* Table filters  */}
+                {/* Page Title */}
                 <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b">
                     <h2 className="text-5xl tracking-wide text-gray-400 font-semibold leading-none">
                         Add - Inventory Item
@@ -40,8 +40,122 @@ const InventoryAdd = () => {
                         </div>
                     </div>
                 </div>
+
+                <form className="mb-5 rounded-md border shadow bg-white p-4 dark:border-[#191e3a] dark:bg-black">
+                    <h1 className="mb-5 text-lg font-bold">Basic Information</h1>
+
+                    <div className="flex flex-col gap-4 sm:flex-row">
+                        <div className="grid flex-1 mt-5 grid-cols-1 gap-5 sm:grid-cols-2">
+                            <div>
+                                <label>Product Name</label>
+                                <input
+                                    name="product_name"
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="Product Name..."
+                                />
+                            </div>
+
+                            <div>
+                                <label>Product Number</label>
+                                <input
+                                    name="product_number"
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="Ex. P202300XX"
+                                />
+                            </div>
+
+                            <div>
+                                <label>Car Model</label>
+                                <input
+                                    name="car_model"
+                                    type="text"
+                                    className="form-input disabled:opacity-60 disabled:bg-black/20"
+                                    placeholder="Ex. Suzuki abc xli"
+                                    // disabled
+                                />
+                            </div>
+
+                            <div>
+                                <label>Available Stock</label>
+                                <input
+                                    name="car_model"
+                                    type="number"
+                                    className="form-input disabled:opacity-60 disabled:bg-black/20"
+                                    placeholder="Enter available stock in number..."
+                                    // disabled
+                                    min={0}
+                                />
+                            </div>
+
+                            <div>
+                                <label>Minimum Stock Level</label>
+                                <input
+                                    name="car_model"
+                                    type="number"
+                                    className="form-input disabled:opacity-60 disabled:bg-black/20"
+                                    placeholder="Enter minimum stock level in number..."
+                                    // disabled
+                                    min={0}
+                                />
+                            </div>
+
+                            <div>
+                                <label>Purchase Date</label>
+                                <input
+                                    name="car_model"
+                                    type="date"
+                                    className="form-input disabled:opacity-60 disabled:bg-black/20 picker"
+                                    placeholder="Enter price in number..."
+                                    // onClick={(e) => e.target.focus()} // disabled
+                                />
+                            </div>
+
+                            <div className="col-span-2">
+                                <label>Additional Notes</label>
+                                <textarea
+                                    name="car_model"
+                                    rows={10}
+                                    className="form-input disabled:opacity-60 disabled:bg-black/20 picker"
+                                    placeholder="Additional Notes about product"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="py-3 z-20 sm:col-span-2 w-full bg-white text-right">
+                        <FieldButton type="submit" className="btn btn-primary">
+                            Save
+                        </FieldButton>
+                    </div>
+                    {/* <button>Hello</button> */}
+                </form>
+
+                <form className="mb-5 rounded-md border shadow bg-white p-4 dark:border-[#191e3a] dark:bg-black">
+                    <h1 className="mb-5 text-lg font-bold">Supplier Information</h1>
+
+                    <div className="flex flex-col gap-4 sm:flex-row">
+                        <div className="grid flex-1 mt-5 grid-cols-1 gap-5 sm:grid-cols-2">
+                            <div>
+                                <label>Product Name</label>
+                                <input
+                                    name="product_name"
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="Product Name..."
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="py-3 z-20 sm:col-span-2 w-full bg-white text-right">
+                        <FieldButton type="submit" className="btn btn-primary">
+                            Save
+                        </FieldButton>
+                    </div>
+                    {/* <button>Hello</button> */}
+                </form>
             </div>
-        </React.Fragment>
+        </Fragment>
     );
 };
 

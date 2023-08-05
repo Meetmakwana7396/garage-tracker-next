@@ -7,8 +7,6 @@ import Sidebar from './Sidebar';
 import Footer from './Footer';
 import { IRootState } from '@/store/store';
 import Header from './Header';
-import Portals from '../Essentials/Portals';
-
 interface DefaultLayoutProps {
     children: ReactNode;
 }
