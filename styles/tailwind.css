@@ -319,7 +319,9 @@
     .has-error .form-checkbox {
         @apply border-danger;
     }
-
+    .formm-label {
+        @apply whitespace-pre-wrap;
+    }
     .has-success .form-input,
     .has-success .form-textarea,
     .has-success .form-select,
@@ -340,11 +342,11 @@
         @apply border-success;
     }
 
-    input.picker[type="date"] {
+    input.picker[type='date'] {
         position: relative;
-      }
+    }
 
-      input.picker[type="date"]::-webkit-calendar-picker-indicator {
+    input.picker[type='date']::-webkit-calendar-picker-indicator {
         position: absolute;
         top: 0;
         right: 0;
@@ -353,7 +355,7 @@
         padding: 0;
         color: transparent;
         background: transparent;
-      }
+    }
 
     /* checkbox & radio */
     .form-radio,
