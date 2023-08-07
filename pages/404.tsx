@@ -2,7 +2,6 @@ import Link from 'next/link';
 
 export default function Custom404() {
     return (
-        <div className="dark">
             <section className="flex items-center h-screen p-16 dark:bg-black dark:text-gray-100">
                 <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
                     <div className="max-w-md text-center">
@@ -19,7 +18,6 @@ export default function Custom404() {
                     </div>
                 </div>
             </section>
-        </div>
     );
 }
 

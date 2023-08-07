@@ -2,7 +2,6 @@ import FieldButton from '@/components/Field/FieldButton';
 import { useAuth } from '@/hooks/useAuth';
 import { IAuthLogin } from '@/types/auth';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';

@@ -1,5 +1,4 @@
 import IconDashboard from '@/components/Icon/IconDashboard';
-import Header from '@/components/Layout/Header';
 import axios from '@/libs/axios';
 import Head from 'next/head';
 import Link from 'next/link';
