@@ -24,10 +24,13 @@ const Login = () => {
             <Head>
                 <title>Garage Tracker Login</title>
             </Head>
-            <div className="flex border-2  min-h-screen items-center justify-center bg-cover bg-center dark:bg-[url('/assets/images/map-dark.svg')]">
-                <div className="">
+            <div
+                className="flex min-h-screen items-center justify-center bg-cover bg-center bg-[#000000]/30 bg-blend-overlay"
+                style={{ backgroundImage: 'url(/assets/images/login-poster1.jpg)' }}
+            >
+                <div>
                     <div className="-mt-20 flex-none">
-                       <p className='text-center'>Logo</p>
+                        <p className="text-center">Logo</p>
                     </div>
 
                     <div className="panel m-6 w-full mt-20  max-w-lg sm:w-[480px]">
