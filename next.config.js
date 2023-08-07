@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['nyc3.digitaloceanspaces.com', "localhost"],
-    },
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: '*',
+            port: '',
+            // pathname: '/account123/**',
+          },
+        ],
+      },
 };
 
 module.exports = nextConfig;

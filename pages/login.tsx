@@ -2,7 +2,6 @@ import FieldButton from '@/components/Field/FieldButton';
 import { useAuth } from '@/hooks/useAuth';
 import { IAuthLogin } from '@/types/auth';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -23,19 +22,14 @@ const Login = () => {
     return (
         <React.Fragment>
             <Head>
-                <title>Expert Info Login</title>
+                <title>Garage Tracker Login</title>
             </Head>
             <div className="flex border-2  min-h-screen items-center justify-center bg-cover bg-center dark:bg-[url('/assets/images/map-dark.svg')]">
                 <div className="">
-                    <Image
-                        className="w-[60%] mx-auto h-auto -mt-20 object-cover flex-none"
-                        src="/assets/images/logo.svg"
-                        alt="logo"
-                        width={32}
-                        height={28}
-                        priority
-                        quality={100}
-                    />
+                    <div className="-mt-20 flex-none">
+                       <p className='text-center'>Logo</p>
+                    </div>
+
                     <div className="panel m-6 w-full mt-20  max-w-lg sm:w-[480px]">
                         <h2 className="mb-3 font-bold text-xl">Sign In</h2>
                         <p className="mb-7 ">Enter your email and password to login</p>

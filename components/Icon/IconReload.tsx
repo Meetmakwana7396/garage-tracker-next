@@ -1,7 +1,7 @@
 import { IIcon } from '@/types/auth';
 import clsx from 'clsx';
 
-const IconDashboard = ({ className }: IIcon) => {
+const IconReload = ({ className }: IIcon) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -13,12 +13,14 @@ const IconDashboard = ({ className }: IIcon) => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={clsx('lucide lucide-gauge', className)}
+            className={clsx('lucide lucide-refresh-ccw', className)}
         >
-            <path d="m12 14 4-4" />
-            <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+            <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
+            <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+            <path d="M16 16h5v5" />
         </svg>
     );
 };
 
-export default IconDashboard;
+export default IconReload;

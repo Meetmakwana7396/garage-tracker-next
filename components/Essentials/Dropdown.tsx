@@ -1,4 +1,4 @@
-import React, { ReactNode, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Modifier, usePopper } from 'react-popper';
 
 interface DropdownProps {

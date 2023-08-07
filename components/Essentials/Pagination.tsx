@@ -25,7 +25,7 @@ const Pagination: FC<IPagination> = ({ meta, prevNextPage, page, goToPage, prevN
 
     return (
         <>
-            <div className="flex gap-2 py-5 sm:items-center">
+            <div className="flex gap-2 sm:items-center">
                 {meta?.last_page > 1 && (
                     <div className="flex gap-2">
                         <div className="">

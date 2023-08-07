@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import Sheet from '../Sheet';
+import Sheet from '../Essentials/Sheet';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import axios from '@/libs/axios';
 import { IAddSpecialityForm, IAddSpecialityModal } from '@/types/speciality';
