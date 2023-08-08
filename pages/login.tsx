@@ -3,11 +3,13 @@ import { useAuth } from '@/hooks/useAuth';
 import { IAuthLogin } from '@/types/auth';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 const Login = () => {
     const { login } = useAuth();
+    const router = useRouter();
     const { register, handleSubmit, formState } = useForm<IAuthLogin>({
         defaultValues: {
             email: '', // Set initial value for email field

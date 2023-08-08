@@ -47,7 +47,7 @@ const authSlice = createSlice({
         },
 
         setLogout(state) {
-            destroyCookie('auth.__token');
+            destroyCookie('gt-token');
             state.user = null;
             state.status = 'unauthenticated';
         },

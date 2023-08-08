@@ -7,7 +7,7 @@ const axios = Axios.create({
 });
 
 axios.interceptors.request.use((config) => {
-    const token = getCookie('auth.__token');
+    const token = getCookie('gt-token');
     config.headers.Authorization = token ? `Bearer ${token}` : '';
     return config;
 });
