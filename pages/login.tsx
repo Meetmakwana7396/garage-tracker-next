@@ -18,7 +18,7 @@ const Login = () => {
     });
 
     const formHandler: SubmitHandler<IAuthLogin> = async (data) => {
-        await login({ ...data, is_admin: true });
+        await login(data);
     };
 
     return (
