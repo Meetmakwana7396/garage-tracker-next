@@ -1,6 +1,6 @@
 import { forwardRef, ReactNode, Ref, useImperativeHandle, useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import IconClose from './Icon/IconClose';
+import IconClose from '../Icon/IconClose';
 
 interface ModalProps {
     children: ReactNode;

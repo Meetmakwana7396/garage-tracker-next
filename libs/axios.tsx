@@ -15,7 +15,9 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use(
     (response) => {
         if (response?.data) {
-            if (response.data?.status && response?.data?.message) {
+            console.log(response,"yo");
+
+            if (response.data && response?.data?.message) {
                 toast.success(response.data.message);
             }
 

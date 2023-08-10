@@ -26,7 +26,7 @@ export const useAuth = () => {
     const login = async (args: IAuthLogin) => {
         try {
             const { data } = await axios.post('/auth/login', args);
-            setCookie('gt-token', data.data.data.access_token);
+            setCookie('gt-token', data.access_token);
             router.push('/');
             // fetchUser();
         } catch {}
@@ -42,16 +42,13 @@ export const useAuth = () => {
     const forgotPassword = async (args: IAuthForgotPassword) => {
         try {
             await axios.post('/auth/forgot-password', args);
-            setTimeout(() => {
-                const encodedEmail = encodeURIComponent(args.email);
-                router.push(`/account/verify-otp?email=${encodedEmail}`);
-            }, 1000);
+            router.push(`/account/verify?email=${args.email}`);
         } catch {}
     };
 
     const resetPassword = async (args: IAuthResetPassword) => {
         try {
-            await axios.post('/auth/password/reset/set-password', args);
+            await axios.post('/auth/reset-password', args);
             router.push('/login');
         } catch {}
     };
