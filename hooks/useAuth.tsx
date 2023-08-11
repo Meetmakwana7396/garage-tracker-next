@@ -13,9 +13,8 @@ export const useAuth = () => {
     const { status, user: authUser } = useSelector((state: IRootState) => state.auth);
 
     const fetchUser = useCallback(() => {
-
         try {
-            const token = getCookie('auth.__token');
+            const token = getCookie('gt-token');
             if (token) {
                 dispatch(getUser() as any);
             } else {
@@ -26,10 +25,10 @@ export const useAuth = () => {
 
     const login = async (args: IAuthLogin) => {
         try {
-
             const { data } = await axios.post('/auth/login', args);
-            setCookie('auth.__token', data.data.token);
-            fetchUser();
+            setCookie('gt-token', data.access_token);
+            router.push('/');
+            // fetchUser();
         } catch {}
     };
 
@@ -42,17 +41,14 @@ export const useAuth = () => {
 
     const forgotPassword = async (args: IAuthForgotPassword) => {
         try {
-            await axios.post('/auth/password/forgot', args);
-            setTimeout(() => {
-                const encodedEmail = encodeURIComponent(args.email);
-                router.push(`/account/verify-otp?email=${encodedEmail}`);
-            }, 1000);
+            await axios.post('/auth/forgot-password', args);
+            router.push(`/account/verify?email=${args.email}`);
         } catch {}
     };
 
     const resetPassword = async (args: IAuthResetPassword) => {
         try {
-            await axios.post('/auth/password/reset/set-password', args);
+            await axios.post('/auth/reset-password', args);
             router.push('/login');
         } catch {}
     };

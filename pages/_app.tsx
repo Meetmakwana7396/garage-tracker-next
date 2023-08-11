@@ -12,7 +12,30 @@ export default function App({ Component, pageProps }: any) {
             <Site layout={Component?.layout || 'default'} middleware={Component?.middleware}>
                 <Component {...pageProps} />
             </Site>
-            <Toaster toastOptions={{ duration: 5000, style: { maxWidth: 'none' } }} />
+            <Toaster
+                toastOptions={{
+                    duration: 5000,
+                    style: { maxWidth: 'none', borderRadius: '4px', color: 'white' },
+                    success: {
+                        iconTheme: {
+                            primary: 'white',
+                            secondary: '#00ab55',
+                        },
+                        style: {
+                            background: 'green',
+                        },
+                    },
+                    error: {
+                        style: {
+                            background: '#e7515a',
+                        },
+                        iconTheme: {
+                            primary: 'black',
+                            secondary: '#e7515a',
+                        },
+                    },
+                }}
+            />
         </Provider>
     );
 }

@@ -47,7 +47,7 @@ const authSlice = createSlice({
         },
 
         setLogout(state) {
-            destroyCookie('auth.__token');
+            destroyCookie('gt-token');
             state.user = null;
             state.status = 'unauthenticated';
         },
@@ -116,9 +116,7 @@ const authSlice = createSlice({
             state.sidebar = !state.sidebar;
         },
 
-        setPageTitle(state, { payload }) {
-            document.title = `${payload} | VRISTO - Multipurpose Tailwind Dashboard Template`;
-        },
+
     },
 });
 
@@ -146,6 +144,5 @@ export const {
     toggleSemidark,
     toggleLocale,
     toggleSidebar,
-    setPageTitle,
 } = authSlice.actions;
 export default authSlice.reducer;

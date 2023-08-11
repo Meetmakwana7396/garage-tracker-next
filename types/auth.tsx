@@ -3,16 +3,14 @@ export interface IAuthForgotPassword {
 }
 
 export interface IAuthResetPassword {
-    email?: string | undefined | string[];
-    otp?: string | undefined | string[];
     password: string;
+    verification_token?: any;
     password_confirmation: string;
 }
 
 export interface IAuthLogin {
     email: string;
     password: string;
-    is_admin: boolean;
 }
 
 export interface IForgotPassword {

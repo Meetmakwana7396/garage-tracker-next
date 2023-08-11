@@ -14,9 +14,9 @@ const Index = () => {
         } catch (error) {}
     };
 
-    useEffect(() => {
-        getDashboardData();
-    }, []);
+    // useEffect(() => {
+    //     getDashboardData();
+    // }, []);
 
     return (
         <React.Fragment>

@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@headlessui/react": "^1.7.15",
+        "@hookform/resolvers": "^3.2.0",
         "@reduxjs/toolkit": "^1.9.3",
         "@tailwindcss/line-clamp": "^0.4.4",
         "@tailwindcss/typography": "^0.5.9",
@@ -35,7 +36,8 @@
         "react-popper": "^2.3.0",
         "react-redux": "^8.0.5",
         "react-select": "^5.7.3",
-        "typescript": "5.0.4"
+        "typescript": "5.0.4",
+        "yup": "^1.2.0"
     },
     "devDependencies": {
         "@radix-ui/react-dialog": "^1.0.2",

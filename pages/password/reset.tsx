@@ -1,32 +1,52 @@
 import FieldButton from '@/components/Field/FieldButton';
+import PasswordField from '@/components/Field/PasswordField';
+import IconChevronDown from '@/components/Icon/IconChevronDown';
 import { useAuth } from '@/hooks/useAuth';
+import toast from '@/libs/toast';
 import { IAuthResetPassword } from '@/types/auth';
+import { yupResolver } from '@hookform/resolvers/yup';
+import clsx from 'clsx';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
 const ResetPassword = () => {
     const router = useRouter();
-    const { email, otp } = router.query;
+    const { token } = router.query;
     const { resetPassword } = useAuth();
-    const { register, handleSubmit, formState } = useForm<IAuthResetPassword>({
+
+    const validationSchema = yup.object().shape({
+        password: yup.string().min(8).required(),
+        password_confirmation: yup.string().min(8).required(),
+    });
+
+    const {
+        register,
+        handleSubmit,
+        formState: { isSubmitting, errors },
+    } = useForm<IAuthResetPassword>({
         defaultValues: {
             password: '',
             password_confirmation: '',
         },
+        resolver: yupResolver(validationSchema),
     });
 
     useEffect(() => {
-        if (router.isReady && !email && !otp) {
+        if (router.isReady && !token) {
             router.push('/login');
         }
-    }, [router, email, otp]);
+    }, [router, token]);
 
     const formHandler: SubmitHandler<IAuthResetPassword> = async (values) => {
-        await resetPassword({ ...values, email: email, otp: otp });
+        if (values.password === values.password_confirmation) {
+            await resetPassword({ ...values, verification_token: token });
+        } else {
+            toast.error('Passwords does not match.');
+        }
     };
 
     return (
@@ -34,65 +54,46 @@ const ResetPassword = () => {
             <Head>
                 <title>Reset Password</title>
             </Head>
-            <div className="flex min-h-screen items-center justify-center bg-cover bg-center dark:bg-[url('/assets/images/map-dark.svg')]">
-                <div className="">
-                    <Image
-                        className="w-[60%] mx-auto h-auto -mt-20 object-cover flex-none"
-                        src="/assets/images/logo.svg"
-                        alt="logo"
-                        width={32}
-                        height={28}
-                        priority
-                        quality={100}
-                    />
+            <div
+                className="flex min-h-screen items-center justify-center bg-cover bg-center bg-[#000000]/5 bg-blend-overlay"
+                style={{ backgroundImage: 'url(/assets/images/bg-poster.jpg)' }}
+            >
+                <div>
+                    <div className="-mt-20 flex-none">
+                        <p className="text-center text-[48px] text-white font-bold">Logo</p>
+                    </div>
                     <div className="panel m-6 mt-20 w-full max-w-lg sm:w-[480px]">
                         <div className="mx-auto space-y-[25px] rounded bg-white">
                             <h2 className="mb-3 text-2xl font-bold">Reset Password</h2>
 
                             <form className="space-y-4" onSubmit={handleSubmit(formHandler)}>
-                                <div>
+                                <div className={clsx(!!errors && errors.password && 'has-error')}>
                                     <label className="form-label">Password</label>
-                                    <div>
-                                        <input
-                                            {...register('password')}
-                                            name="password"
-                                            type="password"
-                                            className="form-input"
-                                            placeholder="Password"
-                                        />
-                                    </div>
+                                    <PasswordField register={{ ...register('password') }} />
                                 </div>
 
-                                <div>
+                                <div className={clsx(!!errors && errors.password_confirmation && 'has-error')}>
                                     <label className="form-label">Confirm password</label>
-                                    <div>
-                                        <input
-                                            {...register('password_confirmation')}
-                                            name="password_confirmation"
-                                            type="password"
-                                            className="form-input"
-                                            placeholder="Confirm password"
-                                        />
-                                    </div>
+                                    <PasswordField register={{ ...register('password_confirmation') }} />
                                 </div>
 
                                 <div>
                                     <FieldButton
-                                        disabled={formState.isSubmitting}
+                                        loading={isSubmitting}
                                         type="submit"
-                                        className="btn-primary mt-6 block w-full"
+                                        className="btn-primary mt-6 block btn-lg w-full"
                                     >
                                         Reset Password
                                     </FieldButton>
                                 </div>
                             </form>
 
-                            <p className="text-lightblack text-center">
+                            <p className="text-lightblack text-sm">
                                 <Link
                                     href="/login"
-                                    className="text-darkblue hover:text-primary underline transition-all duration-300"
+                                    className="hover:text-primary hover:underline flex items-center  w-fit p-1 rounded"
                                 >
-                                    Login
+                                    <IconChevronDown className="h-4 w-4 rotate-90" /> Back to login
                                 </Link>
                             </p>
                         </div>
