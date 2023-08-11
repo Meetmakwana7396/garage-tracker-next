@@ -20,10 +20,7 @@ const ResetPassword = () => {
 
     const validationSchema = yup.object().shape({
         password: yup.string().min(8).required(),
-        password_confirmation: yup
-            .string()
-            .oneOf([yup.ref('password')])
-            .required(),
+        password_confirmation: yup.string().min(8).required(),
     });
 
     const {
@@ -48,7 +45,7 @@ const ResetPassword = () => {
         if (values.password === values.password_confirmation) {
             await resetPassword({ ...values, verification_token: token });
         } else {
-            toast.error('Password confirmation does not match.');
+            toast.error('Passwords does not match.');
         }
     };
 
