@@ -11,7 +11,6 @@ export interface IAuthResetPassword {
 export interface IAuthLogin {
     email: string;
     password: string;
-    is_admin: boolean;
 }
 
 export interface IForgotPassword {

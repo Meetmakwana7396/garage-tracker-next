@@ -5,14 +5,27 @@ import { IAuthForgotPassword } from '@/types/auth';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
+import * as yup from 'yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import clsx from 'clsx';
 
 const ForgotPassword = () => {
     const { forgotPassword } = useAuth();
-    const { register, handleSubmit, formState } = useForm<IAuthForgotPassword>({
+
+    const validationSchema = yup.object().shape({
+        email: yup.string().email().required(),
+    });
+
+    const {
+        register,
+        handleSubmit,
+        formState: { isSubmitting, errors },
+    } = useForm<IAuthForgotPassword>({
         defaultValues: {
             email: '', // Set initial value for email field
         },
+        resolver: yupResolver(validationSchema),
     });
 
     const formHandler: SubmitHandler<IAuthForgotPassword> = async (data) => {
@@ -25,8 +38,8 @@ const ForgotPassword = () => {
                 <title>Verify Email</title>
             </Head>
             <div
-                className="flex min-h-screen items-center justify-center bg-center bg-cover bg-[#000000]/30 bg-blend-overlay"
-                style={{ backgroundImage: 'url(/assets/images/login-poster1.jpg)' }}
+                className="flex min-h-screen items-center justify-center bg-center bg-cover bg-[#000000]/5 bg-blend-overlay"
+                style={{ backgroundImage: 'url(/assets/images/bg-poster.jpg)' }}
             >
                 <div className="">
                     <div className="-mt-20 flex-none">
@@ -37,8 +50,7 @@ const ForgotPassword = () => {
                         <p className="mb-7">Enter your email to recover your ID</p>
 
                         <form className="space-y-5" onSubmit={handleSubmit(formHandler)}>
-                            <div>
-                                {' '}
+                            <div className={clsx(!!errors && errors.email && 'has-error')}>
                                 <label className="form-label">Email address</label>
                                 <input
                                     {...register('email')}
@@ -48,7 +60,11 @@ const ForgotPassword = () => {
                                     placeholder="Enter Email"
                                 />
                             </div>
-                            <FieldButton loading={formState.isSubmitting} type="submit" className="btn-primary btn-lg w-full">
+                            <FieldButton
+                                loading={isSubmitting}
+                                type="submit"
+                                className="btn-primary btn-lg w-full"
+                            >
                                 Send
                             </FieldButton>
                             <p className="text-lightblack text-sm">
