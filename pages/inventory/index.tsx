@@ -16,7 +16,7 @@ import Pagination from '@/components/Essentials/Pagination';
 import clsx from 'clsx';
 import IconCard from '@/components/Icon/IconCard';
 import IconList from '@/components/Icon/IconList';
-import CardInventory from '@/components/Inventory/CardInventory';
+import InventoryCard from '@/components/Inventory/InventoryCard';
 
 const defaultParams = {
     per_page: '10',
@@ -119,7 +119,7 @@ const InventoryIndex = () => {
                 </div>
 
                 {/* Table Section  */}
-                <div>
+                <div className='container max-w-[1600px]'>
                     {/* Action Buttons  */}
                     <div className="flex justify-between mb-3">
                         {/* Layout Switch  */}
@@ -316,12 +316,12 @@ const InventoryIndex = () => {
                         </>
                     ) : (
                         //  Card Layout
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                            <CardInventory />
-                            <CardInventory />
-                            <CardInventory />
-                            <CardInventory />
-                            <CardInventory />
+                        <div className="grid border grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                            <InventoryCard />
+                            <InventoryCard />
+                            <InventoryCard />
+                            <InventoryCard />
+                            <InventoryCard />
                         </div>
                     )}
                 </div>
