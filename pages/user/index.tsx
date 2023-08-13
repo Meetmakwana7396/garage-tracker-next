@@ -1,5 +1,4 @@
 import IconSearch from '@/components/Icon/IconSearch';
-import axios from '@/libs/axios';
 import helper from '@/libs/helper';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -16,7 +15,8 @@ import Pagination from '@/components/Essentials/Pagination';
 import clsx from 'clsx';
 import IconCard from '@/components/Icon/IconCard';
 import IconList from '@/components/Icon/IconList';
-import InventoryCard from '@/components/Inventory/InventoryCard';
+import useSWRImmutable from 'swr/immutable';
+import axios from '@/libs/axios';
 
 const defaultParams = {
     per_page: '10',
@@ -27,46 +27,30 @@ const defaultParams = {
     status: '',
 };
 
-const dummyData = [
-    {
-        Id: 1,
-        name: 'John Doe',
-        email: 'john.doe@example.com',
-        created_at: '2023-07-28T12:34:56Z',
-        status: 1,
-    },
-    {
-        Id: 2,
-        name: 'Jane Smith',
-        email: 'jane.smith@example.com',
-        created_at: '2023-07-27T09:21:34Z',
-        status: 3,
-    },
-    {
-        Id: 3,
-        name: 'Michael Johnson',
-        email: 'michael.johnson@example.com',
-        created_at: '2023-07-26T15:43:21Z',
-        status: 2,
-    },
-    {
-        Id: 4,
-        name: 'Emily Brown',
-        email: 'emily.brown@example.com',
-        created_at: '2023-07-25T18:09:47Z',
-        status: 4,
-    },
-];
+const fetchUsers = async (url: string, filters: any) => {
+    try {
+        const { data } = await axios.get(url, filters);
+        return data;
+    } catch (error) {}
+};
 
 const InventoryIndex = () => {
     const editAttorneyModal = useRef<any>();
-    const [inventory, setInventory] = useState<any>(dummyData);
-    const [meta, setMeta] = useState<any>(null);
-    const [counts, setCounts] = useState<any>(null);
+    const [inventory, setInventory] = useState<any>(null);
+    const [meta, setMeta] = useState(null);
+    const [counts, setCounts] = useState(null);
+    const [filters, setFilters] = useState({
+        page: 1,
+        per_page: 10,
+        search: '',
+    });
     const [tabs, setTabs] = useState('all');
     const [params, setParams] = useState(defaultParams);
-    const [isLoading, setIsLoading] = useState(false);
     const [layout, setLayout] = useState('card');
+
+    const { data, error, isLoading } = useSWRImmutable(['/users', filters], ([url, filters]) =>
+        fetchUsers(url, filters)
+    );
 
     return (
         <Fragment>
@@ -207,81 +191,73 @@ const InventoryIndex = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {inventory ? (
-                                        <>
-                                            {inventory.length > 0 ? (
-                                                inventory.map((data: any) => {
-                                                    return (
-                                                        <tr key={data.id}>
-                                                            <td>
-                                                                <div className="whitespace-nowrap">{data.Id}</div>
-                                                            </td>
-                                                            <td>
-                                                                <div className="whitespace-nowrap">{data.name}</div>
-                                                            </td>
+                                    {inventory?.length > 0 ? (
+                                        inventory.map((data: any) => {
+                                            return (
+                                                <tr key={data.id}>
+                                                    <td>
+                                                        <div className="whitespace-nowrap">{data.Id}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div className="whitespace-nowrap">{data.name}</div>
+                                                    </td>
 
-                                                            <td>
-                                                                <div className="whitespace-nowrap">{data.email}</div>
-                                                            </td>
-                                                            <td>
-                                                                <div className="whitespace-nowrap">
-                                                                    {helper.formatDate(data.created_at)}
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div
-                                                                    className={`status capitalize status-${helper.getAttorneyStatus(
-                                                                        data?.status
-                                                                    )}`}
-                                                                    // className="status status-approved"
-                                                                >
-                                                                    {helper.getAttorneyStatus(data?.status)}
-                                                                </div>
-                                                            </td>
+                                                    <td>
+                                                        <div className="whitespace-nowrap">{data.email}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div className="whitespace-nowrap">
+                                                            {helper.formatDate(data.created_at)}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div
+                                                            className={`status capitalize status-${helper.getAttorneyStatus(
+                                                                data?.status
+                                                            )}`}
+                                                            // className="status status-approved"
+                                                        >
+                                                            {helper.getAttorneyStatus(data?.status)}
+                                                        </div>
+                                                    </td>
 
-                                                            <td className="max-w-xs flex gap-2">
-                                                                <Link href={`/attorney/${data?.id}`}>
-                                                                    <Tippy content="View Details">
-                                                                        <span>
-                                                                            <IconEye className="action-icon text-secondary" />
-                                                                        </span>
-                                                                    </Tippy>
-                                                                </Link>
-                                                                <Tippy content="Edit Details">
-                                                                    <span
-                                                                        onClick={() => {
-                                                                            setTimeout(() => {
-                                                                                editAttorneyModal.current.open(
-                                                                                    data?.id
-                                                                                );
-                                                                            });
-                                                                        }}
-                                                                    >
-                                                                        <IconEdit className="action-icon text-secondary" />
-                                                                    </span>
-                                                                </Tippy>
+                                                    <td className="max-w-xs flex gap-2">
+                                                        <Link href={`/attorney/${data?.id}`}>
+                                                            <Tippy content="View Details">
+                                                                <span>
+                                                                    <IconEye className="action-icon text-secondary" />
+                                                                </span>
+                                                            </Tippy>
+                                                        </Link>
+                                                        <Tippy content="Edit Details">
+                                                            <span
+                                                                onClick={() => {
+                                                                    setTimeout(() => {
+                                                                        editAttorneyModal.current.open(data?.id);
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <IconEdit className="action-icon text-secondary" />
+                                                            </span>
+                                                        </Tippy>
 
-                                                                {data?.status === 4 && (
-                                                                    <Tippy content="Restore Expert">
-                                                                        <span>
-                                                                            <IconReload className="action-icon text-secondary" />
-                                                                        </span>
-                                                                    </Tippy>
-                                                                )}
-                                                            </td>
-                                                        </tr>
-                                                    );
-                                                })
-                                            ) : (
-                                                <tr className="pointer-events-none">
-                                                    <td colSpan={6} className="p-8">
-                                                        <p className="mx-auto w-fit"> No data found.</p>
+                                                        {data?.status === 4 && (
+                                                            <Tippy content="Restore Expert">
+                                                                <span>
+                                                                    <IconReload className="action-icon text-secondary" />
+                                                                </span>
+                                                            </Tippy>
+                                                        )}
                                                     </td>
                                                 </tr>
-                                            )}
-                                        </>
+                                            );
+                                        })
                                     ) : (
-                                        <TableLoader colspan={6} />
+                                        <tr className="pointer-events-none">
+                                            <td colSpan={6} className="p-8">
+                                                <p className="mx-auto w-fit"> No data found.</p>
+                                            </td>
+                                        </tr>
                                     )}
                                 </tbody>
                             </table>
