@@ -18,7 +18,7 @@ export const useAuth = () => {
             if (token) {
                 dispatch(getUser() as any);
             } else {
-                dispatch(setLogout());
+                // dispatch(setLogout());
             }
         } catch {}
     }, [dispatch]);
@@ -26,9 +26,9 @@ export const useAuth = () => {
     const login = async (args: IAuthLogin) => {
         try {
             const { data } = await axios.post('/auth/login', args);
-            setCookie('gt-token', data.access_token);
-            router.push('/');
-            // fetchUser();
+            await setCookie('gt-token', data.data.access_token);
+            // router.push('/');
+            fetchUser();
         } catch {}
     };
 
@@ -59,19 +59,6 @@ export const useAuth = () => {
         } catch {}
     };
 
-    const verifyEmail = async (args: IVerifyOtp) => {
-        try {
-            // await axios.get(router.query.token as string);
-            await axios.post('/auth/password/reset/otp-verification', args);
-            const encodedEmail = encodeURIComponent(args.email);
-            const encodedOtp = encodeURIComponent(args.otp);
-
-            router.push(`/password/reset?email=${encodedEmail}&&otp=${encodedOtp}`);
-
-            // await fetchUser();
-        } catch {}
-    };
-
     const logout = async () => {
         try {
             await axios.post('/auth/logout');
@@ -95,7 +82,6 @@ export const useAuth = () => {
         forgotPassword,
         resetPassword,
         resendEmailVerification,
-        verifyEmail,
         logout,
         isLoggedIn,
         isAdmin,

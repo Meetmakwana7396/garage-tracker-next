@@ -115,15 +115,15 @@ const authSlice = createSlice({
         toggleSidebar(state) {
             state.sidebar = !state.sidebar;
         },
-
-
     },
 });
 
 export const fetchUser = () => {
     return async (dispatch: Dispatch) => {
         try {
-            const { data } = await axios.get('/auth/user');
+            const { data } = await axios.get('/users/profile');
+            console.log(data);
+
             dispatch(setUser(data.data.user));
         } catch {
             dispatch(setLogout());

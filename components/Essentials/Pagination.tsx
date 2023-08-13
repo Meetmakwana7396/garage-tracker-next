@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from 'react';
 
 interface IPagination {
     meta: any;
-    prevNextPage: (arg: string) => void;
+    prevNextPage?: (arg: string) => void;
     page: (arg: string) => void;
     goToPage: (arg: string) => void;
     prevNextPage1?: (arg: number) => void;

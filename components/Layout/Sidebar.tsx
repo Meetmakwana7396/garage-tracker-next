@@ -8,6 +8,7 @@ import IconClose from '../Icon/IconClose';
 import IconDashboard from '../Icon/IconDashboard';
 import IconInventory from '../Icon/IconInventory';
 import NavLink from '../Essentials/Navlink';
+import IconUser from '../Icon/IconUser';
 
 const Sidebar = () => {
     const dispatch = useDispatch();
@@ -54,28 +55,21 @@ const Sidebar = () => {
                         </Link>
                     </div>
                     <PerfectScrollbar className="relative h-[calc(100vh-80px)]">
-                        <ul className="relative space-y-3 mt-10 font-semibold">
+                        <ul className="relative space-y-1 mt-10 font-semibold">
                             <li>
                                 <NavLink href="/" icon={<IconDashboard />} active={isActive('/')}>
                                     Dashboard
                                 </NavLink>
                             </li>
 
-                            {/* <li>
-                                <NavLink href="/attorney" icon={<IconInventory />} active={isActive('/attorney')}>
-                                    Attorneys
-                                </NavLink>
-                            </li>
-
-                            <li>
-                                <NavLink href="/specialty" icon={<IconInventory />} active={isActive('/specialty')}>
-                                    Specialties
-                                </NavLink>
-                            </li> */}
-
                             <li>
                                 <NavLink href="/inventory" icon={<IconInventory />} active={isActive('/inventory')}>
                                     Inventory
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink href="/user" icon={<IconUser />} active={isActive('/user')}>
+                                    User
                                 </NavLink>
                             </li>
                         </ul>

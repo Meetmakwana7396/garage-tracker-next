@@ -30,60 +30,9 @@ const Header = (props: any) => {
                                 <IconMenu />
                             </span>
                         }
-                        {/* <p className="font-semibold tracking-widest text-black text-lg">{props.title || 'title'}</p> */}
                     </div>
                     <div className="flex items-center space-x-1.5 ml-auto dark:text-[#d0d2d6] lg:space-x-2">
                         <div className="dropdown flex shrink-0">
-                            {/* <Dropdown
-                                offset={[0, 8]}
-                                placement="bottom-end"
-                                btnClassName="relative group block"
-                                button={
-                                    <Image
-                                        className="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100"
-                                        src="/assets/images/user-profile.png"
-                                        height={36}
-                                        width={36}
-                                        alt="userProfile"
-                                    />
-                                }
-                            >
-                                <ul className="w-[230px] shadow-none !py-0 font-semibold text-dark dark:text-white-dark dark:text-white-light/90">
-                                    <li>
-                                        <div className="flex items-center px-4 py-4">
-                                            <Image
-                                                className="h-10 w-10 rounded-md object-cover"
-                                                height={40}
-                                                width={40}
-                                                src="/assets/images/user-profile.png"
-                                                alt="userProfile"
-                                            />
-                                            <div className="truncate ltr:pl-4 rtl:pr-4">
-                                                <h4 className="text-base">{user?.first_name}</h4>
-                                                <button
-                                                    type="button"
-                                                    className="text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white"
-                                                >
-                                                    {user?.email}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <Link href="/profile" className="dark:hover:text-white">
-                                            <IconUser className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2" />
-                                            Profile
-                                        </Link>
-                                    </li>
-
-                                    <li className="border-t border-white-light dark:border-white-light/10">
-                                        <button className="!py-3 text-danger" onClick={logout}>
-                                            <IconLogout className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2 rotate-180" />
-                                            Log Out
-                                        </button>
-                                    </li>
-                                </ul>
-                            </Dropdown> */}
                             <Pop
                                 button={
                                     <Image
@@ -97,22 +46,22 @@ const Header = (props: any) => {
                                 width="w-[150px]"
                             >
                                 <ul className="!py-0 font-semibold text-sm text-dark dark:text-white-dark dark:text-white-light/90">
-                                    <li className="p-3 hover:bg-supporting">
-                                        <Link
-                                            href="/profile"
-                                            className="dark:hover:text-white flex items-center text-gray-400"
-                                        >
-                                            <IconUser className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2" />
-                                            Profile
-                                        </Link>
-                                    </li>
+                                    <Link
+                                        href="/profile"
+                                        className="dark:hover:text-white flex items-center text-gray-400 px-3 py-2 hover:bg-supporting cursor-pointer"
+                                    >
+                                        <IconUser className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2" />
+                                        Profile
+                                    </Link>
 
-                                    <li className="border-t p-3 border-white-light dark:border-white-light/10 opacity-70 hover:bg-danger/10">
-                                        <button className="text-danger flex items-center" onClick={logout}>
-                                            <IconLogout className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2 rotate-180" />
-                                            Log Out
-                                        </button>
-                                    </li>
+
+                                    <button
+                                        className="text-danger w-full flex items-center border-t px-3 py-2 border-white-light dark:border-white-light/10 hover:bg-danger hover:text-white"
+                                        onClick={logout}
+                                    >
+                                        <IconLogout className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2 rotate-180" />
+                                        Log Out
+                                    </button>
                                 </ul>
                             </Pop>
                         </div>
