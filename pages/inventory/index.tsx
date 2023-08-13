@@ -324,12 +324,7 @@ const InventoryIndex = () => {
                     )}
                 </div>
 
-                <Pagination
-                    meta={meta}
-                    prevNextPage={prevNextPage}
-                    page={(value) => setParams({ ...params, per_page: value })}
-                    goToPage={(value) => console.log(value)}
-                />
+                {/* <Pagination meta={meta} /> */}
             </div>
         </Fragment>
     );

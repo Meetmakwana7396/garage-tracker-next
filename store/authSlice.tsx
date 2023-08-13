@@ -122,7 +122,6 @@ export const fetchUser = () => {
     return async (dispatch: Dispatch) => {
         try {
             const { data } = await axios.get('/users/profile');
-            console.log(data);
             dispatch(setUser(data.data.user));
         } catch {
             dispatch(setLogout());
