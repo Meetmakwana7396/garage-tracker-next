@@ -14,6 +14,7 @@ import axios from '@/libs/axios';
 import UserRow from '@/components/User/UserRow';
 import { useRouter } from 'next/router';
 import Loading from '@/components/Essentials/Loading';
+import Image from 'next/image';
 
 const defaultFilters = {
     per_page: 10,
@@ -21,7 +22,6 @@ const defaultFilters = {
     order_field: 'id',
     filter: '',
     page: 1,
-    status: '',
 };
 
 const fetchUserList = async (url: any, filters: any) => {
@@ -54,16 +54,16 @@ const InventoryIndex = () => {
                 <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b">
                     <h2 className="text-5xl tracking-wide font-semibold leading-none">Users</h2>
                     <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
-                        <Link className="btn btn-primary h-fit" href="/inventory/inventory-add">
-                            Add user
-                        </Link>
+                        {!!UserList?.data?.length && (
+                            <Link className="btn btn-primary h-fit" href="/inventory/inventory-add">
+                                Add user
+                            </Link>
+                        )}
                     </div>
                 </div>
 
                 {/* Data Section  */}
-                {isLoading ? (
-                    <Loading />
-                ) : (
+                {!!UserList?.data?.length ? (
                     <div className="container max-w-[1600px]">
                         {/* Filters */}
                         <div className="flex justify-between mb-5">
@@ -109,7 +109,7 @@ const InventoryIndex = () => {
                             <ul className="flex whitespace-nowrap gap-2 dark:border-[#191e3a] sm:flex">
                                 <TabBlock
                                     onClick={() => {
-                                        setFilters({ ...filters, status: '' });
+                                        // setFilters({ ...filters, status: '' });
                                         setTabs('all');
                                     }}
                                     isActive={tabs === 'all'}
@@ -118,7 +118,7 @@ const InventoryIndex = () => {
                                 />
                                 <TabBlock
                                     onClick={() => {
-                                        setFilters({ ...filters, status: '2' });
+                                        // setFilters({ ...filters, status: '2' });
                                         setTabs('approved');
                                     }}
                                     isActive={tabs === 'approved'}
@@ -127,7 +127,7 @@ const InventoryIndex = () => {
                                 />
                                 <TabBlock
                                     onClick={() => {
-                                        setFilters({ ...filters, status: '1' });
+                                        // setFilters({ ...filters, status: '1' });
                                         setTabs('pending');
                                     }}
                                     isActive={tabs === 'pending'}
@@ -136,7 +136,7 @@ const InventoryIndex = () => {
                                 />
                                 <TabBlock
                                     onClick={() => {
-                                        setFilters({ ...filters, status: '4' });
+                                        // setFilters({ ...filters, status: '4' });
                                         setTabs('deleted');
                                     }}
                                     isActive={tabs === 'deleted'}
@@ -182,27 +182,34 @@ const InventoryIndex = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {UserList?.data?.length > 0 ? (
-                                            UserList.data.map((user: any) => (
-                                                <>
-                                                    <UserRow data={user} key={user.id} />
-                                                </>
-                                            ))
-                                        ) : (
-                                            <tr className="pointer-events-none">
-                                                <td colSpan={6} className="p-8">
-                                                    <p className="mx-auto w-fit"> No data found.</p>
-                                                </td>
-                                            </tr>
-                                        )}
+                                        {UserList?.data?.length > 0 &&
+                                            UserList.data.map((user: any) => <UserRow data={user} key={user.id} />)}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                        <Pagination meta={UserList?.meta} setFilters={setFilters} />
+                    </div>
+                ) : (
+                    <div className="h-[calc(100vh-220px)] flex items-center justify-center text-center">
+                        <div className="space-y-5">
+                            <Image
+                                src="/assets/images/empty.jpg"
+                                height={100}
+                                width={200}
+                                className="h-44 mx-auto w-44"
+                                alt="no data found"
+                            />
+                            <h2 className="text-3xl font-semibold">No users are added yet</h2>
+                            <span className="text-gray-500 text-xl">Add few users to get started</span>
+                            <Link className="btn mx-auto btn-primary w-fit" href="/inventory/inventory-add">
+                                Add user
+                            </Link>
+                        </div>
                     </div>
                 )}
 
-                <Pagination meta={UserList?.meta} setFilters={setFilters} />
+                {isLoading && <Loading />}
             </div>
         </Fragment>
     );

@@ -4,12 +4,19 @@ import Tippy from '@tippyjs/react';
 import IconEye from '../Icon/IconEye';
 import helper from '@/libs/helper';
 import Link from 'next/link';
+import IconTrash from '../Icon/IconTrash';
+import axios from '@/libs/axios';
 
 interface IUserRow {
     data: any;
 }
 
 const UserRow = ({ data }: IUserRow) => {
+    const deleteUser = async () => {
+        try {
+            await axios.delete(`/users/${data.id}`);
+        } catch (error) {}
+    };
     return (
         <tr key={data.id}>
             <td>
@@ -27,10 +34,10 @@ const UserRow = ({ data }: IUserRow) => {
             </td>
             <td>
                 <div
-                    className={`status capitalize status-${helper.getAttorneyStatus(data?.status)}`}
+                    className={`status capitalize status-${(data?.status).toLowerCase()}`}
                     // className="status status-approved"
                 >
-                    {helper.getAttorneyStatus(data?.status)}
+                    {data?.status}
                 </div>
             </td>
 
@@ -42,9 +49,14 @@ const UserRow = ({ data }: IUserRow) => {
                         </span>
                     </Tippy>
                 </Link>
-                <Tippy content="Edit Details">
+                <Tippy content="Edit User">
                     <span>
                         <IconEdit className="action-icon text-secondary" />
+                    </span>
+                </Tippy>
+                <Tippy content="Delete User">
+                    <span onClick={deleteUser}>
+                        <IconTrash className="action-icon hover:text-danger text-secondary" />
                     </span>
                 </Tippy>
 

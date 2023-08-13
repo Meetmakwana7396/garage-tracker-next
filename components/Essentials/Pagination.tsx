@@ -21,17 +21,17 @@ const Pagination: FC<IPagination> = ({ meta, setFilters }) => {
                                 type="button"
                                 className="btn btn-primary"
                                 disabled={meta?.current_page === meta?.first_page}
-                                onClick={() => router.push(`${asPath}/${meta?.previous_page_url}`)}
+                                onClick={() => setFilters((prev: any) => ({ ...prev, page: meta.current_page - 1 }))}
                             >
                                 Previous
                             </button>
                         </div>
-                        <div className="">
+                        <div>
                             <button
                                 type="button"
                                 className="btn btn-primary"
                                 disabled={meta?.current_page === meta?.last_page}
-                                onClick={() => router.push(`${asPath}/${meta?.next_page_url}`)}
+                                onClick={() => setFilters((prev: any) => ({ ...prev, page: meta.current_page + 1 }))}
                             >
                                 Next
                             </button>

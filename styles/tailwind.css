@@ -661,13 +661,14 @@ pre.hljs {
     @apply relative w-fit rounded-full px-2 py-0.5 text-xs text-center font-semibold text-white bg-black;
 }
 .status-active {
-    @apply bg-primary;
+    @apply bg-[#3CABFF];
 }
 .status-pending {
-    @apply bg-slate-500;
+    @apply bg-[#7D828A];
 }
-.status-rejected {
-    @apply bg-[#FF5733];
+
+.status-deleted {
+    @apply bg-[#FF5733] text-white;
 }
 .status-approved {
     @apply bg-success;
@@ -683,10 +684,6 @@ pre.hljs {
 
 .status-inprogress {
     @apply bg-primary;
-}
-
-.status-deleted {
-    @apply bg-black text-white;
 }
 
 /* invoice Status  */
