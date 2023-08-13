@@ -18,7 +18,7 @@ export const useAuth = () => {
             if (token) {
                 dispatch(getUser() as any);
             } else {
-                // dispatch(setLogout());
+                dispatch(setLogout());
             }
         } catch {}
     }, [dispatch]);
@@ -60,9 +60,9 @@ export const useAuth = () => {
     };
 
     const logout = async () => {
-        try {
-            await axios.post('/auth/logout');
-        } catch {}
+        // try {
+        //     await axios.post('/auth/logout');
+        // } catch {}
 
         dispatch(setLogout());
     };

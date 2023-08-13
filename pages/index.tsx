@@ -138,6 +138,6 @@ const Index = () => {
 
 export default Index;
 
-// Index.middleware = {
-//     auth: true,
-// };
+Index.middleware = {
+    auth: true,
+};
