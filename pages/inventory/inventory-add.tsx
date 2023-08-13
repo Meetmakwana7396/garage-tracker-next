@@ -12,7 +12,7 @@ const InventoryAdd = () => {
             <div className="space-y-10">
                 {/* Page Title */}
                 <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b">
-                    <h2 className="sm:text-5xl text-4xl tracking-wide text-gray-400 font-semibold leading-none">
+                    <h2 className="sm:text-5xl text-4xl tracking-wide font-semibold leading-none">
                         Add - Inventory Item
                     </h2>
                     <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">

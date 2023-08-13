@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }: any) {
                             background: '#e7515a',
                         },
                         iconTheme: {
-                            primary: 'black',
+                            primary: 'white',
                             secondary: '#e7515a',
                         },
                     },
