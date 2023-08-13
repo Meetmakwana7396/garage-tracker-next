@@ -300,8 +300,8 @@ const InventoryIndex = () => {
     );
 };
 
-// Index.middleware = {
-//     auth: true,
-// };
-
 export default InventoryIndex;
+
+InventoryIndex.middleware = {
+    auth: true,
+};
