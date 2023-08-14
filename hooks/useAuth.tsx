@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { getCookie, setCookie } from '@/libs/cookie';
 import { fetchUser as getUser, setLogout } from '@/store/authSlice';
 import { useCallback } from 'react';
-import { IAuthForgotPassword, IAuthLogin, IAuthRegister, IAuthResetPassword, IVerifyOtp } from '@/types/auth';
+import { IAuthForgotPassword, IAuthLogin, IAuthResetPassword } from '@/types/auth';
 import { IRootState } from '@/store/store';
 
 export const useAuth = () => {

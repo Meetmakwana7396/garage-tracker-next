@@ -30,87 +30,84 @@ const AddUser = () => {
     });
 
     const formHandler = (values: ICreateUser) => {
-        console.log(values);
+        // console.log(values);
     };
 
     return (
         <div>
-            <h2 className="font-semibold text-2xl">Add user</h2>
+            <h1 className="mb-5 text-lg font-bold">Basic Information</h1>
 
-            <form className="space-y-5 mt-8" onSubmit={handleSubmit(formHandler)}>
-                <div className={clsx(errors && errors.firstName && 'has-error')}>
-                    <label className="form-label">
-                        First name
-                    </label>
-                    <input
-                        {...register('firstName')}
-                        type="text"
-                        className="form-input"
-                        placeholder="First name..."
-                    />
-                </div>
+            <form className="space-y-5" onSubmit={handleSubmit(formHandler)}>
+                <div className="grid grid-cols-2 gap-4">
+                    <div className={clsx(errors && errors.firstName && 'has-error')}>
+                        <label className="form-label">First name</label>
+                        <input
+                            {...register('firstName')}
+                            type="text"
+                            className="form-input"
+                            placeholder="First name..."
+                        />
+                    </div>
 
-                <div className={clsx(errors && errors.lastName && 'has-error')}>
-                    <label className="form-label">
-                        Last name
-                    </label>
-                    <input
-                        {...register('lastName')}
-                        type="text"
-                        className="form-input"
-                        placeholder="Last name..."
-                    />
-                </div>
+                    <div className={clsx(errors && errors.lastName && 'has-error')}>
+                        <label className="form-label">Last name</label>
+                        <input
+                            {...register('lastName')}
+                            type="text"
+                            className="form-input"
+                            placeholder="Last name..."
+                        />
+                    </div>
 
-                <div className={clsx(errors && errors.email && 'has-error')}>
-                    <label className="form-label">
-                        Email
-                    </label>
-                    <input
-                        {...register('email')}
-                        id="email"
-                        type="text"
-                        className="form-input"
-                        placeholder="Email address..."
-                    />
-                </div>
+                    <div className={clsx(errors && errors.email && 'has-error', 'col-span-2')}>
+                        <label className="form-label">Email</label>
+                        <input
+                            {...register('email')}
+                            id="email"
+                            type="text"
+                            className="form-input"
+                            placeholder="Email address..."
+                        />
+                    </div>
 
-                <div className={clsx(errors && errors.userStatus && 'has-error')}>
-                    <label className="form-label">
-                        Status
-                    </label>
-                    <input
-                        {...register('userStatus')}
-                        type="text"
-                        className="form-input"
-                        placeholder="User status..."
-                    />
-                </div>
+                    <div className={clsx(errors && errors.userStatus && 'has-error')}>
+                        <label className="form-label">Status</label>
+                        <select
+                            {...register('userStatus')}
+                            className="form-select"
+                            placeholder="User status..."
+                        >
+                            <option value="one">one</option>
+                            <option value="one">one</option>
+                            <option value="one">one</option>
+                        </select>
+                    </div>
 
-                <div className={clsx(errors && errors.firstName && 'has-error')}>
-                    <label className="form-label" htmlFor="email">
-                        Role
-                    </label>
-                    <input
-                        {...register('firstName')}
-                        id="firstName"
-                        type="text"
-                        className="form-input"
-                        placeholder="Role..."
-                    />
-                </div>
+                    <div className={clsx(errors && errors.firstName && 'has-error')}>
+                        <label className="form-label" htmlFor="email">
+                            Role
+                        </label>
+                        <input
+                            {...register('firstName')}
+                            id="firstName"
+                            type="text"
+                            className="form-input"
+                            placeholder="Role..."
+                        />
+                    </div>
 
-                <div className={clsx(errors && errors.firstName && 'has-error')}>
-                    <label className="form-label" htmlFor="email">
-                        First name
-                    </label>
-                    <input
-                        {...register('firstName')}
-                        id="firstName"
-                        type="text"
-                        className="form-input"
-                        placeholder="First name..."
-                    />
+                    <div className={clsx(errors && errors.firstName && 'has-error')}>
+                        <label className="form-label" htmlFor="email">
+                            First name
+                        </label>
+                        <input
+                            {...register('firstName')}
+                            id="firstName"
+                            type="text"
+                            className="form-input"
+                            placeholder="First name..."
+                        />
+                    </div>
                 </div>
             </form>
         </div>

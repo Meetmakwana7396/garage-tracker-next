@@ -39,7 +39,7 @@ const InventoryAdd = () => {
                     </div>
                 </div>
 
-                <form className="mb-5 rounded-md border shadow bg-white p-4 dark:border-[#191e3a] dark:bg-black">
+                <form className="mb-5 rounded-md border shadow bg-transparent p-4 dark:border-[#191e3a]">
                     <h1 className="mb-5 text-lg font-bold">Basic Information</h1>
                     <div className="grid gap-5 grid-cols-1 sm:grid-cols-2">
                         <div>
@@ -120,14 +120,12 @@ const InventoryAdd = () => {
 
                         <div className="sm:col-span-2">
                             <label className="form-label">Additional Notes</label>
-                            <div className="h-36 rounded border-2 border-dashed relative">
-                                <p className="z-20 text-gray-500 w-fit text-xl">
-                                    Click to insert image
-                                </p>
+                            <div className="h-36 rounded border-2 border-dashed relative dark:border-black-more-light">
+                                <p className="z-20 text-gray-500 w-fit text-xl">Click to insert image</p>
                             </div>
                         </div>
                     </div>
-                    <div className="py-3 z-20 sm:col-span-2 w-full bg-white text-right">
+                    <div className="py-3 z-20 sm:col-span-2 w-full bg-white text-right dark:bg-transparent">
                         <FieldButton type="submit" className="btn btn-primary">
                             Save
                         </FieldButton>
@@ -158,7 +156,7 @@ const InventoryAdd = () => {
                             />
                         </div>
                     </div>
-                    <div className="py-3 z-20 sm:col-span-2 w-full bg-white text-right">
+                    <div className="py-3 z-20 sm:col-span-2 w-full bg-white text-right dark:bg-transparent">
                         <FieldButton type="submit" className="btn btn-primary">
                             Save
                         </FieldButton>

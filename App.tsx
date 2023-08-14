@@ -8,12 +8,11 @@ import {
     toggleAnimation,
     toggleNavbar,
     toggleSemidark,
-    toggleSidebar,
-} from '@/store/authSlice';
+} from '@/store/siteViewSlice';
 import { IRootState } from './store/store';
 
 function App({ children }: any) {
-    const themeConfig = useSelector((state: IRootState) => state.auth);
+    const themeConfig = useSelector((state: IRootState) => state.site);
     const dispatch = useDispatch();
 
     useEffect(() => {

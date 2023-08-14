@@ -3,22 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 import Image from 'next/image';
-import { toggleSidebar } from '@/store/authSlice';
 import IconLogout from '../Icon/IconLogout';
 import IconUser from '../Icon/IconUser';
 import Pop from '../Essentials/Pop';
 import IconMenu from '../Icon/IconMenu';
+import { toggleSidebar, toggleTheme } from '@/store/siteViewSlice';
+import IconSun from '../Icon/IconSun';
+import IconMoon from '../Icon/IconMoon';
 
 const Header = (props: any) => {
-    const themeConfig = useSelector((state: IRootState) => state.auth);
+    const themeConfig = useSelector((state: IRootState) => state.site);
     const { logout } = useAuth();
     const dispatch = useDispatch();
-    const { user, sidebar } = useSelector((state: IRootState) => state.auth);
+    const { sidebar, isDarkMode } = useSelector((state: IRootState) => state.site);
 
     return (
         <header className={themeConfig?.semidark && themeConfig?.menu === 'horizontal' ? 'dark' : ''}>
             <div>
-                <div className="relative flex w-fill justify-between items-center bg-transparent px-5 py-2.5 dark:bg-black">
+                <div className="relative flex w-fill justify-between items-center bg-transparent px-5 py-2.5">
                     <div className="flex items-center gap-3">
                         {
                             <span
@@ -31,7 +33,18 @@ const Header = (props: any) => {
                             </span>
                         }
                     </div>
-                    <div className="flex items-center space-x-1.5 ml-auto dark:text-[#d0d2d6] lg:space-x-2">
+                    <div className="flex items-center gap-2 ml-auto dark:text-[#d0d2d6] lg:space-x-2">
+                        <div className="dark:text-dark cursor-pointer">
+                            {isDarkMode ? (
+                                <span onClick={() => dispatch(toggleTheme('light'))}>
+                                    <IconSun className="hover:bg-white/5 rounded-full w-8 h-8 p-1" />
+                                </span>
+                            ) : (
+                                <span onClick={() => dispatch(toggleTheme('dark'))}>
+                                    <IconMoon className="hover:bg-white/5 rounded-full w-8 h-8 p-1" />
+                                </span>
+                            )}
+                        </div>
                         <div className="dropdown flex shrink-0">
                             <Pop
                                 button={
@@ -53,7 +66,6 @@ const Header = (props: any) => {
                                         <IconUser className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2" />
                                         Profile
                                     </Link>
-
 
                                     <button
                                         className="text-danger w-full flex items-center border-t px-3 py-2 border-white-light dark:border-white-light/10 hover:bg-danger hover:text-white"

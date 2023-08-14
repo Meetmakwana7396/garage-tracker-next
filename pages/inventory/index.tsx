@@ -90,7 +90,7 @@ const InventoryIndex = () => {
             </Head>
             <div className="space-y-10">
                 {/* Table filters  */}
-                <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b">
+                <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b dark:border-black-more-light">
                     <h2 className="text-5xl tracking-wide font-semibold leading-none">Inventory</h2>
                     <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
                         <Link className="btn btn-primary h-fit" href="/inventory/inventory-add">
@@ -104,11 +104,11 @@ const InventoryIndex = () => {
                     {/* Filters */}
                     <div className="flex justify-between mb-3">
                         {/* Layout Switch  */}
-                        <div className=" flex rounded border overflow-hidden p-1">
+                        <div className=" flex rounded border dark:border-transparent dark:bg-black-light overflow-hidden p-1">
                             <div
                                 className={clsx(
                                     'py-2 px-2 rounded-[2px] cursor-pointer text-gray-500',
-                                    layout === 'card' && 'bg-supporting'
+                                    layout === 'card' && 'bg-supporting dark:bg-black'
                                 )}
                                 onClick={() => setLayout('card')}
                             >
@@ -117,7 +117,7 @@ const InventoryIndex = () => {
                             <div
                                 className={clsx(
                                     'p-2 rounded-[2px] cursor-pointer text-gray-500',
-                                    layout === 'table' && 'bg-supporting'
+                                    layout === 'table' && 'bg-supporting dark:bg-black'
                                 )}
                                 onClick={() => setLayout('table')}
                             >
