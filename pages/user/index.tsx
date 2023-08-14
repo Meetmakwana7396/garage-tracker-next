@@ -2,7 +2,6 @@ import IconSearch from '@/components/Icon/IconSearch';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Fragment, useRef, useState } from 'react';
-import 'tippy.js/dist/tippy.css';
 import TabBlock from '@/components/Layout/TabBlock';
 import Th from '@/components/Table/Th';
 import Pagination from '@/components/Essentials/Pagination';
@@ -15,6 +14,9 @@ import UserRow from '@/components/User/UserRow';
 import { useRouter } from 'next/router';
 import Loading from '@/components/Essentials/Loading';
 import Image from 'next/image';
+import 'tippy.js/dist/tippy.css';
+import Sheet from '@/components/Essentials/Sheet';
+import AddUser from '@/components/User/AddUser';
 
 const defaultFilters = {
     per_page: 10,
@@ -31,7 +33,8 @@ const fetchUserList = async (url: any, filters: any) => {
     } catch (error) {}
 };
 
-const InventoryIndex = () => {
+const UserIndex = () => {
+    const addUserModal = useRef<any>(null);
     const [counts, setCounts] = useState(null);
     const [tabs, setTabs] = useState('all');
     const [filters, setFilters] = useState(defaultFilters);
@@ -202,21 +205,28 @@ const InventoryIndex = () => {
                             />
                             <h2 className="text-3xl font-semibold">No users are added yet</h2>
                             <span className="text-gray-500 text-xl">Add few users to get started</span>
-                            <Link className="btn mx-auto btn-primary w-fit" href="/inventory/inventory-add">
+                            <button
+                                className="btn mx-auto btn-primary w-fit"
+                                onClick={() => addUserModal.current.open()}
+                            >
                                 Add user
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 )}
 
                 {isLoading && <Loading />}
+
+                <Sheet ref={addUserModal}>
+                    <AddUser />
+                </Sheet>
             </div>
         </Fragment>
     );
 };
 
-export default InventoryIndex;
+export default UserIndex;
 
-InventoryIndex.middleware = {
+UserIndex.middleware = {
     auth: true,
 };
