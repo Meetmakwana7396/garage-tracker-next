@@ -11,7 +11,7 @@ const InventoryAdd = () => {
             </Head>
             <div className="space-y-10">
                 {/* Page Title */}
-                <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b">
+                <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b dark:border-[#1e2a3e]">
                     <h2 className="sm:text-5xl text-4xl tracking-wide font-semibold leading-none">
                         Add - Inventory Item
                     </h2>
@@ -39,129 +39,132 @@ const InventoryAdd = () => {
                     </div>
                 </div>
 
-                <form className="mb-5 rounded-md border shadow bg-transparent p-4 dark:border-[#191e3a]">
-                    <h1 className="mb-5 text-lg font-bold">Basic Information</h1>
-                    <div className="grid gap-5 grid-cols-1 sm:grid-cols-2">
-                        <div>
-                            <label className="form-label">Product Name</label>
-                            <input
-                                name="product_name"
-                                type="text"
-                                className="form-input"
-                                placeholder="Product name..."
-                            />
-                        </div>
+                <div className="grid grid-cols-2 gap-6">
+                    <form className="mb-5 rounded-md border shadow bg-transparent p-4 dark:border-[#191e3a] h-fit">
+                        <h1 className="mb-5 text-lg font-bold">Basic Information</h1>
+                        <div className="grid gap-5 grid-cols-1 sm:grid-cols-2">
+                            <div>
+                                <label className="form-label">Product Name</label>
+                                <input
+                                    name="product_name"
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="Product name..."
+                                />
+                            </div>
 
-                        <div>
-                            <label className="form-label">Product Number</label>
-                            <input
-                                name="product_number"
-                                type="text"
-                                className="form-input"
-                                placeholder="Ex. P202300XX"
-                            />
-                        </div>
+                            <div>
+                                <label className="form-label">Product Number</label>
+                                <input
+                                    name="product_number"
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="Ex. P202300XX"
+                                />
+                            </div>
 
-                        <div>
-                            <label className="form-label">Car Model</label>
-                            <input
-                                name="car_model"
-                                type="text"
-                                className="form-input disabled:opacity-60 disabled:bg-black/20"
-                                placeholder="Ex. Suzuki abc xli"
-                                // disabled
-                            />
-                        </div>
+                            <div>
+                                <label className="form-label">Car Model</label>
+                                <input
+                                    name="car_model"
+                                    type="text"
+                                    className="form-input disabled:opacity-60 disabled:bg-black/20"
+                                    placeholder="Ex. Suzuki abc xli"
+                                    // disabled
+                                />
+                            </div>
 
-                        <div>
-                            <label className="form-label">Available Stock</label>
-                            <input
-                                name="car_model"
-                                type="number"
-                                className="form-input disabled:opacity-60 disabled:bg-black/20"
-                                placeholder="Enter available stock in number..."
-                                // disabled
-                                min={0}
-                            />
-                        </div>
+                            <div>
+                                <label className="form-label">Available Stock</label>
+                                <input
+                                    name="car_model"
+                                    type="number"
+                                    className="form-input disabled:opacity-60 disabled:bg-black/20"
+                                    placeholder="Enter available stock in number..."
+                                    // disabled
+                                    min={0}
+                                />
+                            </div>
 
-                        <div>
-                            <label className="form-label">Minimum Stock Level</label>
-                            <input
-                                name="car_model"
-                                type="number"
-                                className="form-input disabled:opacity-60 disabled:bg-black/20"
-                                placeholder="Enter minimum stock level in number..."
-                                // disabled
-                                min={0}
-                            />
-                        </div>
+                            <div>
+                                <label className="form-label">Minimum Stock Level</label>
+                                <input
+                                    name="car_model"
+                                    type="number"
+                                    className="form-input disabled:opacity-60 disabled:bg-black/20"
+                                    placeholder="Enter minimum stock level in number..."
+                                    // disabled
+                                    min={0}
+                                />
+                            </div>
 
-                        <div>
-                            <label className="form-label">Purchase Date</label>
-                            <input
-                                name="car_model"
-                                type="date"
-                                className="form-input disabled:opacity-60 disabled:bg-black/20 picker"
-                                placeholder="Enter price in number..."
-                                // onClick={(e) => e.target.focus()} // disabled
-                            />
-                        </div>
+                            <div>
+                                <label className="form-label">Purchase Date</label>
+                                <input
+                                    name="car_model"
+                                    type="date"
+                                    className="form-input disabled:opacity-60 disabled:bg-black/20 picker"
+                                    placeholder="Enter price in number..."
+                                    // onClick={(e) => e.target.focus()} // disabled
+                                />
+                            </div>
 
-                        <div className="sm:col-span-2">
-                            <label className="form-label">Additional Notes</label>
-                            <textarea
-                                name="car_model"
-                                rows={10}
-                                className="form-input disabled:opacity-60 disabled:bg-black/20 picker"
-                                placeholder="Additional notes about product..."
-                            />
-                        </div>
+                            <div className="sm:col-span-2">
+                                <label className="form-label">Additional Notes</label>
+                                <textarea
+                                    name="car_model"
+                                    rows={10}
+                                    className="form-input disabled:opacity-60 disabled:bg-black/20 picker"
+                                    placeholder="Additional notes about product..."
+                                />
+                            </div>
 
-                        <div className="sm:col-span-2">
-                            <label className="form-label">Additional Notes</label>
-                            <div className="h-36 rounded border-2 border-dashed relative dark:border-black-more-light">
-                                <p className="z-20 text-gray-500 w-fit text-xl">Click to insert image</p>
+                            <div className="sm:col-span-2">
+                                <label className="form-label">Additional Notes</label>
+                                <div className="h-36 rounded border-2 border-dashed relative dark:border-black-more-light">
+                                    <p className="z-20 text-gray-500 w-fit text-xl">Click to insert image</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="py-3 z-20 sm:col-span-2 w-full bg-white text-right dark:bg-transparent">
-                        <FieldButton type="submit" className="btn btn-primary">
-                            Save
-                        </FieldButton>
-                    </div>
-                    {/* <button>Hello</button> */}
-                </form>
-
-                <form className="mb-5 rounded-md border shadow bg-white p-4 dark:border-[#191e3a] dark:bg-black">
-                    <h1 className="mb-5 text-lg font-bold">Supplier Information</h1>
-                    <div className="grid gap-5 sm:grid-cols-2">
-                        <div>
-                            <label className="form-label">Supplier Name</label>
-                            <input
-                                name="product_name"
-                                type="text"
-                                className="form-input"
-                                placeholder="Supplier Name..."
-                            />
+                        <div className="mt-4 z-20 sm:col-span-2 w-full bg-white text-right dark:bg-transparent flex justify-between">
+                            <FieldButton type="submit" className="btn btn-primary">
+                                Save
+                            </FieldButton>
                         </div>
+                        {/* <button>Hello</button> */}
+                    </form>
 
-                        <div>
-                            <label className="form-label">Supplier Phone Number</label>
-                            <input
-                                name="product_name"
-                                type="text"
-                                className="form-input"
-                                placeholder="Supplier phone number..."
-                            />
+                    <form className="mb-5 rounded-md border shadow bg-transparent p-4 dark:border-[#191e3a] h-fit">
+                        <h1 className="mb-5 text-lg font-bold">Supplier Information</h1>
+                        <div className="grid gap-5 sm:grid-cols-2">
+                            <div>
+                                <label className="form-label">Supplier Name</label>
+                                <input
+                                    name="product_name"
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="Supplier Name..."
+                                />
+                            </div>
+
+                            <div>
+                                <label className="form-label">Supplier Phone Number</label>
+                                <input
+                                    name="product_name"
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="Supplier phone number..."
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className="py-3 z-20 sm:col-span-2 w-full bg-white text-right dark:bg-transparent">
-                        <FieldButton type="submit" className="btn btn-primary">
-                            Save
-                        </FieldButton>
-                    </div>
-                </form>
+                        <div className="mt-4 z-20 sm:col-span-2 w-full bg-white text-right dark:bg-transparent flex justify-between">
+                            <button>Cancel</button>
+                            <FieldButton type="submit" className="btn btn-primary">
+                                Save
+                            </FieldButton>
+                        </div>
+                    </form>
+                </div>
             </div>
         </Fragment>
     );
