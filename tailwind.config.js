@@ -59,7 +59,7 @@ module.exports = {
                 black: {
                     DEFAULT: '#0e1726',
                     light: '#101a2c',
-                    'more-light': '#142239',
+                    'more-light': '#1e2a3e',
                 },
                 white: {
                     DEFAULT: '#ffffff',

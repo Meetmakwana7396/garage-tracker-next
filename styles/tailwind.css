@@ -192,6 +192,10 @@
         @apply cursor-not-allowed opacity-60;
     }
 
+    .btn-ghost {
+        @apply dark:hover:bg-white/10 dark:hover:text-white border-0 text-white-dark hover:text-black hover:bg-black/10;
+    }
+
     .btn-primary {
         @apply border-primary bg-primary text-white shadow-primary/60;
     }
@@ -277,7 +281,7 @@
     .form-textarea,
     .form-select,
     .form-multiselect {
-        @apply w-full rounded border border-white-light bg-white px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-transparent dark:text-white-dark dark:focus:border-primary;
+        @apply w-full rounded border border-white-light bg-white px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-black-more-light dark:bg-transparent dark:text-white-dark dark:focus:border-primary dark:autofill:shadow-[inset_0_0_0px_1000px_rgb(23,38,60)] dark:autofill:text-white;
     }
 
     .form-input-lg,
@@ -442,11 +446,11 @@
         @apply overflow-auto;
     }
     table {
-        @apply w-full !border-collapse;
+        @apply w-full !border-collapse border dark:border-black-more-light;
     }
     table thead tr,
     table tfoot tr {
-        @apply border-b;
+        @apply border-b dark:border-black-more-light;
     }
     table thead tr th,
     table tfoot tr th,
@@ -455,7 +459,7 @@
     }
     table thead tr th,
     table tfoot tr th {
-        @apply text-black;
+        @apply text-black dark:text-white-dark;
     }
     table tbody tr {
         @apply;
@@ -653,7 +657,7 @@ pre.hljs {
 }
 
 .action-icon {
-    @apply w-5 h-5 cursor-pointer text-gray-400/70 hover:text-black;
+    @apply w-5 h-5 cursor-pointer text-gray-400/70 hover:text-black dark:text-white-dark/50 dark:hover:text-white-dark;
 }
 
 /* Speciality Status  */

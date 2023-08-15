@@ -34,12 +34,12 @@ axios.interceptors.response.use(
         }
 
         if (error?.response?.data?.error) {
-            toast.error(error.response.data.error);
+            toast.error(error.response.data.message[0]);
         }
 
-        if (error?.response?.status !== 401 && error?.response?.data?.message) {
-            toast.error(error.response.data.message);
-        }
+        // if (error?.response?.status !== 401 && error?.response?.data?.message) {
+        //     toast.error(error.response.data.message[0]);
+        // }
 
         return Promise.reject(error);
     }

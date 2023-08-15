@@ -43,8 +43,8 @@ const UserIndex = () => {
 
     const {
         data: UserList,
-        error,
         isLoading,
+        mutate,
     } = useSWRImmutable(['/users', filters], ([url, filters]) => fetchUserList(url, { params: filters }));
 
     return (
@@ -54,13 +54,16 @@ const UserIndex = () => {
             </Head>
             <div className="space-y-10">
                 {/* Page Title*/}
-                <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b">
+                <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b dark:border-black-more-light">
                     <h2 className="text-5xl tracking-wide font-semibold leading-none">Users</h2>
                     <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
                         {!!UserList?.data?.length && (
-                            <Link className="btn btn-primary h-fit" href="/inventory/inventory-add">
+                            <button
+                                className="btn mx-auto btn-primary w-fit"
+                                onClick={() => addUserModal.current.open()}
+                            >
                                 Add user
-                            </Link>
+                            </button>
                         )}
                     </div>
                 </div>
@@ -70,11 +73,11 @@ const UserIndex = () => {
                     <div className="container max-w-[1600px]">
                         {/* Filters */}
                         <div className="flex justify-between mb-5">
-                            <div className=" flex rounded border overflow-hidden p-1">
+                            <div className=" flex rounded border dark:border-transparent dark:bg-black-light overflow-hidden p-1">
                                 <div
                                     className={clsx(
                                         'py-2 px-2 rounded-[2px] cursor-pointer text-gray-500',
-                                        layout === 'card' && 'bg-supporting'
+                                        layout === 'card' && 'bg-supporting dark:bg-black'
                                     )}
                                     onClick={() => setLayout('card')}
                                 >
@@ -83,7 +86,7 @@ const UserIndex = () => {
                                 <div
                                     className={clsx(
                                         'p-2 rounded-[2px] cursor-pointer text-gray-500',
-                                        layout === 'table' && 'bg-supporting'
+                                        layout === 'table' && 'bg-supporting dark:bg-black'
                                     )}
                                     onClick={() => setLayout('table')}
                                 >
@@ -108,8 +111,8 @@ const UserIndex = () => {
                         </div>
 
                         {/* Status Tabs  */}
-                        <div className="overflow-auto w-full border border-b-0">
-                            <ul className="flex whitespace-nowrap gap-2 dark:border-[#191e3a] sm:flex">
+                        <div className="overflow-auto w-full border border-b-0 dark:border-black-more-light">
+                            <ul className="flex whitespace-nowrap gap-2 sm:flex dark:border-black-more-light">
                                 <TabBlock
                                     onClick={() => {
                                         // setFilters({ ...filters, status: '' });
@@ -150,9 +153,9 @@ const UserIndex = () => {
                         </div>
 
                         {/* Table  */}
-                        <div className="overflow-hidden border p-0">
+                        <div className="overflow-hidden p-0 mb-5">
                             <div className="table-responsive">
-                                <table className={`table-hover ${isLoading && 'opacity-50 pointer-events-none'}`}>
+                                <table className={`table-hover  ${isLoading && 'opacity-50 pointer-events-none'}`}>
                                     <thead>
                                         <tr>
                                             <Th
@@ -186,7 +189,9 @@ const UserIndex = () => {
                                     </thead>
                                     <tbody>
                                         {UserList?.data?.length > 0 &&
-                                            UserList.data.map((user: any) => <UserRow data={user} key={user.id} />)}
+                                            UserList.data.map((user: any) => (
+                                                <UserRow data={user} key={user.id} refresh={mutate} />
+                                            ))}
                                     </tbody>
                                 </table>
                             </div>
@@ -218,7 +223,12 @@ const UserIndex = () => {
                 {isLoading && <Loading />}
 
                 <Sheet ref={addUserModal}>
-                    <AddUser />
+                    <AddUser
+                        refresh={() => {
+                            mutate();
+                            addUserModal.current.close();
+                        }}
+                    />
                 </Sheet>
             </div>
         </Fragment>

@@ -148,8 +148,8 @@ const InventoryIndex = () => {
                     {/* Status Tabs  */}
                     {layout === 'table' ? (
                         <>
-                            <div className="overflow-auto w-full border border-b-0">
-                                <ul className="flex whitespace-nowrap gap-2 dark:border-[#191e3a] sm:flex">
+                            <div className="overflow-auto w-full border border-b-0 dark:border-black-more-light">
+                                <ul className="flex whitespace-nowrap gap-2 dark:border-black-more-light sm:flex">
                                     <TabBlock
                                         onClick={() => {
                                             setParams({ ...params, status: '' });
@@ -189,7 +189,7 @@ const InventoryIndex = () => {
                                 </ul>
                             </div>
                             {/* Table  */}
-                            <div className="overflow-hidden border p-0">
+                            <div className="overflow-hidden p-0">
                                 <div className="table-responsive">
                                     <table className={`table-hover ${isLoading && 'opacity-50 pointer-events-none'}`}>
                                         <thead>
@@ -267,7 +267,7 @@ const InventoryIndex = () => {
                                                                         <Link href={`/attorney/${data?.id}`}>
                                                                             <Tippy content="View Details">
                                                                                 <span>
-                                                                                    <IconEye className="action-icon text-secondary" />
+                                                                                    <IconEye className="action-icon "/>
                                                                                 </span>
                                                                             </Tippy>
                                                                         </Link>

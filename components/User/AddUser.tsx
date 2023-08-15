@@ -1,18 +1,24 @@
 import clsx from 'clsx';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import PasswordField from '../Field/PasswordField';
+import FieldButton from '../Field/FieldButton';
+import axios from '@/libs/axios';
 
+interface Props {
+    refresh: () => void;
+}
 interface ICreateUser {
     firstName: string;
     lastName: string;
     email: string;
-    role: string;
+    role_id: string;
     userStatus: string;
     password: string;
-    newPassword: string;
+    confirmPassword: string;
 }
 
-const AddUser = () => {
+const AddUser = ({ refresh }: Props) => {
     const {
         register,
         handleSubmit,
@@ -22,22 +28,35 @@ const AddUser = () => {
             firstName: '',
             lastName: '',
             email: '',
-            role: '',
+            role_id: 'bc48e865-4108-447f-9393-56eed36418e4',
             userStatus: '',
             password: '',
-            newPassword: '',
+            confirmPassword: '',
         },
     });
 
-    const formHandler = (values: ICreateUser) => {
-        // console.log(values);
+    const formHandler = async (values: ICreateUser) => {
+        try {
+            const fd = {
+                firstName: values.firstName,
+                lastName: values.lastName,
+                email: values.email,
+                role_id: values.role_id,
+                userStatus: values.userStatus,
+                password: values.password,
+            };
+            await axios.post('/users/create', fd);
+            refresh();
+
+        } catch (error) {}
     };
 
     return (
         <div>
-            <h1 className="mb-5 text-lg font-bold">Basic Information</h1>
-
+            <h1 className="mb-5 text-xl font-bold">Add User</h1>
             <form className="space-y-5" onSubmit={handleSubmit(formHandler)}>
+                <h1 className="mb-5 text-lg font-semibold">Basic Information</h1>
+
                 <div className="grid grid-cols-2 gap-4">
                     <div className={clsx(errors && errors.firstName && 'has-error')}>
                         <label className="form-label">First name</label>
@@ -72,42 +91,45 @@ const AddUser = () => {
 
                     <div className={clsx(errors && errors.userStatus && 'has-error')}>
                         <label className="form-label">Status</label>
-                        <select
-                            {...register('userStatus')}
-                            className="form-select"
-                            placeholder="User status..."
-                        >
-                            <option value="one">one</option>
-                            <option value="one">one</option>
-                            <option value="one">one</option>
+                        <select {...register('userStatus')} className="form-select" placeholder="User status...">
+                            <option value="IN_REVIEW">IN_REVIEW</option>
+                            <option value="APPROVED">APPROVED</option>
+                            <option value="ACTIVE">ACTIVE</option>
+                            <option value="INACTIVE">INACTIVE</option>
                         </select>
                     </div>
 
                     <div className={clsx(errors && errors.firstName && 'has-error')}>
-                        <label className="form-label" htmlFor="email">
-                            Role
-                        </label>
+                        <label className="form-label">Role</label>
                         <input
-                            {...register('firstName')}
+                            {...register('role_id')}
                             id="firstName"
                             type="text"
                             className="form-input"
                             placeholder="Role..."
                         />
                     </div>
+                </div>
 
-                    <div className={clsx(errors && errors.firstName && 'has-error')}>
-                        <label className="form-label" htmlFor="email">
-                            First name
-                        </label>
-                        <input
-                            {...register('firstName')}
-                            id="firstName"
-                            type="text"
-                            className="form-input"
-                            placeholder="First name..."
+                <div className="!mt-10 space-y-5">
+                    <h1 className="mb-5 text-lg font-semibold">Create Password</h1>
+                    <div className={clsx(errors && errors.password && 'has-error')}>
+                        <label className="form-label">Password</label>
+                        <PasswordField register={{ ...register('password') }} placeholder="Enter password..." />
+                    </div>
+                    <div className={clsx(errors && errors.confirmPassword && 'has-error')}>
+                        <label className="form-label">Confirm password</label>
+                        <PasswordField
+                            register={{ ...register('confirmPassword') }}
+                            placeholder="Confirm password..."
                         />
                     </div>
+                </div>
+                <div className="flex justify-start gap-4 !mt-7">
+                    <FieldButton type="submit" loading={isSubmitting} className="btn btn-primary">
+                        Submit
+                    </FieldButton>
+                    <button className="btn btn-ghost">Cancel</button>
                 </div>
             </form>
         </div>

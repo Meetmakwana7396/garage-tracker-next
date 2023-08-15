@@ -9,12 +9,14 @@ import axios from '@/libs/axios';
 
 interface IUserRow {
     data: any;
+    refresh: () => void;
 }
 
-const UserRow = ({ data }: IUserRow) => {
+const UserRow = ({ data, refresh }: IUserRow) => {
     const deleteUser = async () => {
         try {
             await axios.delete(`/users/${data.id}`);
+            refresh();
         } catch (error) {}
     };
     return (

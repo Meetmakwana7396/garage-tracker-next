@@ -34,7 +34,7 @@ const Header = (props: any) => {
                         }
                     </div>
                     <div className="flex items-center gap-2 ml-auto dark:text-[#d0d2d6] lg:space-x-2">
-                        <div className="dark:text-dark cursor-pointer">
+                        <div className="dark:text-white-dark cursor-pointer">
                             {isDarkMode ? (
                                 <span onClick={() => dispatch(toggleTheme('light'))}>
                                     <IconSun className="hover:bg-white/5 rounded-full w-8 h-8 p-1" />
