@@ -1,6 +1,6 @@
-import helper from '@/libs/helper';
+import { useHelper } from '@/hooks/useHelper';
 import { useRouter } from 'next/router';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 
 interface IPagination {
     meta: any;
@@ -8,8 +8,7 @@ interface IPagination {
 }
 
 const Pagination: FC<IPagination> = ({ meta, setFilters }) => {
-    const router = useRouter();
-    const { asPath } = router;
+    const { perPageOption } = useHelper();
     const [page, setPage] = useState<number>();
     return (
         <>
@@ -44,7 +43,7 @@ const Pagination: FC<IPagination> = ({ meta, setFilters }) => {
                         className="form-select w-fit pr-7"
                         onChange={(e) => setFilters((prev: any) => ({ ...prev, per_page: e.target.value }))}
                     >
-                        {helper.perPageOption.map((option) => {
+                        {perPageOption.map((option) => {
                             return (
                                 <option key={option} value={option}>
                                     {option}

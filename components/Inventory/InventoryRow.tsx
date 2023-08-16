@@ -1,34 +1,21 @@
+import React from 'react';
 import IconReload from '../Icon/IconReload';
-import IconEdit from '../Icon/IconEdit';
 import Tippy from '@tippyjs/react';
+import IconEdit from '../Icon/IconEdit';
 import IconEye from '../Icon/IconEye';
 import Link from 'next/link';
-import IconTrash from '../Icon/IconTrash';
-import axios from '@/libs/axios';
 import { useHelper } from '@/hooks/useHelper';
+import 'tippy.js/dist/tippy.css';
 
-interface IUserRow {
-    data: any;
-    refresh: () => void;
-}
-
-const UserRow = ({ data, refresh }: IUserRow) => {
-    const { formatDate } = useHelper();
-
-    const deleteUser = async () => {
-        try {
-            await axios.delete(`/users/${data.id}`);
-            refresh();
-        } catch (error) {}
-    };
-
+const InventoryRow = ({ data }: any) => {
+    const { getAttorneyStatus, formatDate } = useHelper();
     return (
         <tr key={data.id}>
             <td>
-                <div className="whitespace-nowrap">{data.id}</div>
+                <div className="whitespace-nowrap">{data.Id}</div>
             </td>
             <td>
-                <div className="whitespace-nowrap">{data.firstName}</div>
+                <div className="whitespace-nowrap">{data.name}</div>
             </td>
 
             <td>
@@ -39,10 +26,10 @@ const UserRow = ({ data, refresh }: IUserRow) => {
             </td>
             <td>
                 <div
-                    className={`status capitalize status-${(data?.status).toLowerCase()}`}
+                    className={`status capitalize status-${getAttorneyStatus(data?.status)}`}
                     // className="status status-approved"
                 >
-                    {data?.status}
+                    {getAttorneyStatus(data?.status)}
                 </div>
             </td>
 
@@ -50,18 +37,17 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                 <Link href={`/attorney/${data?.id}`}>
                     <Tippy content="View Details">
                         <span>
-                            <IconEye className="action-icon text-secondary" />
+                            <IconEye className="action-icon " />
                         </span>
                     </Tippy>
                 </Link>
-                <Tippy content="Edit User">
-                    <span>
+                <Tippy content="Edit Details">
+                    <span
+                    // onClick={() => {
+                    //     editAttorneyModal.current.open(data?.id);
+                    // }}
+                    >
                         <IconEdit className="action-icon text-secondary" />
-                    </span>
-                </Tippy>
-                <Tippy content="Delete User">
-                    <span onClick={deleteUser}>
-                        <IconTrash className="action-icon hover:text-danger text-secondary" />
                     </span>
                 </Tippy>
 
@@ -77,4 +63,4 @@ const UserRow = ({ data, refresh }: IUserRow) => {
     );
 };
 
-export default UserRow;
+export default InventoryRow;

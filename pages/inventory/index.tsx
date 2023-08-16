@@ -1,22 +1,15 @@
 import IconSearch from '@/components/Icon/IconSearch';
-import axios from '@/libs/axios';
-import helper from '@/libs/helper';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Fragment, useRef, useState } from 'react';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
 import TabBlock from '@/components/Layout/TabBlock';
 import Th from '@/components/Table/Th';
-import IconEye from '@/components/Icon/IconEye';
-import IconEdit from '@/components/Icon/IconEdit';
-import IconReload from '@/components/Icon/IconReload';
 import TableLoader from '@/components/Essentials/TableLoader';
-import Pagination from '@/components/Essentials/Pagination';
 import clsx from 'clsx';
 import IconCard from '@/components/Icon/IconCard';
 import IconList from '@/components/Icon/IconList';
 import InventoryCard from '@/components/Inventory/InventoryCard';
+import InventoryRow from '@/components/Inventory/InventoryRow';
 
 const defaultParams = {
     per_page: '10',
@@ -59,7 +52,6 @@ const dummyData = [
 ];
 
 const InventoryIndex = () => {
-    const editAttorneyModal = useRef<any>();
     const [inventory, setInventory] = useState<any>(dummyData);
     const [meta, setMeta] = useState<any>(null);
     const [counts, setCounts] = useState<any>(null);
@@ -67,21 +59,6 @@ const InventoryIndex = () => {
     const [params, setParams] = useState(defaultParams);
     const [isLoading, setIsLoading] = useState(false);
     const [layout, setLayout] = useState('card');
-
-    const prevNextPage = async (url: string) => {
-        try {
-            setIsLoading(true);
-            if (url) {
-                const { data } = await axios.get(`/admin/attorneys${url}`);
-                setInventory(data.data.data);
-                setMeta(data.data.meta);
-            }
-        } catch {
-            setInventory(null);
-            setMeta(null);
-        }
-        setIsLoading(false);
-    };
 
     return (
         <Fragment>
@@ -225,77 +202,12 @@ const InventoryIndex = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {inventory ? (
+                                            {!isLoading ? (
                                                 <>
                                                     {inventory.length > 0 ? (
-                                                        inventory.map((data: any) => {
-                                                            return (
-                                                                <tr key={data.id}>
-                                                                    <td>
-                                                                        <div className="whitespace-nowrap">
-                                                                            {data.Id}
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div className="whitespace-nowrap">
-                                                                            {data.name}
-                                                                        </div>
-                                                                    </td>
-
-                                                                    <td>
-                                                                        <div className="whitespace-nowrap">
-                                                                            {data.email}
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div className="whitespace-nowrap">
-                                                                            {helper.formatDate(data.created_at)}
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div
-                                                                            className={`status capitalize status-${helper.getAttorneyStatus(
-                                                                                data?.status
-                                                                            )}`}
-                                                                            // className="status status-approved"
-                                                                        >
-                                                                            {helper.getAttorneyStatus(data?.status)}
-                                                                        </div>
-                                                                    </td>
-
-                                                                    <td className="max-w-xs flex gap-2">
-                                                                        <Link href={`/attorney/${data?.id}`}>
-                                                                            <Tippy content="View Details">
-                                                                                <span>
-                                                                                    <IconEye className="action-icon "/>
-                                                                                </span>
-                                                                            </Tippy>
-                                                                        </Link>
-                                                                        <Tippy content="Edit Details">
-                                                                            <span
-                                                                                onClick={() => {
-                                                                                    setTimeout(() => {
-                                                                                        editAttorneyModal.current.open(
-                                                                                            data?.id
-                                                                                        );
-                                                                                    });
-                                                                                }}
-                                                                            >
-                                                                                <IconEdit className="action-icon text-secondary" />
-                                                                            </span>
-                                                                        </Tippy>
-
-                                                                        {data?.status === 4 && (
-                                                                            <Tippy content="Restore Expert">
-                                                                                <span>
-                                                                                    <IconReload className="action-icon text-secondary" />
-                                                                                </span>
-                                                                            </Tippy>
-                                                                        )}
-                                                                    </td>
-                                                                </tr>
-                                                            );
-                                                        })
+                                                        inventory.map((item: any) => (
+                                                            <InventoryRow key={item.id} data={item} />
+                                                        ))
                                                     ) : (
                                                         <tr className="pointer-events-none">
                                                             <td colSpan={6} className="p-8">

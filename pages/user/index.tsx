@@ -39,7 +39,6 @@ const UserIndex = () => {
     const [tabs, setTabs] = useState('all');
     const [filters, setFilters] = useState(defaultFilters);
     const [layout, setLayout] = useState('card');
-    const router = useRouter();
 
     const {
         data: UserList,
