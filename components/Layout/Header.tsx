@@ -37,11 +37,11 @@ const Header = (props: any) => {
                         <div className="dark:text-white-dark cursor-pointer">
                             {isDarkMode ? (
                                 <span onClick={() => dispatch(toggleTheme('light'))}>
-                                    <IconSun className="hover:bg-white/5 rounded-full w-8 h-8 p-1" />
+                                    <IconSun className=" rounded-full w-8 h-8 p-1 hover:bg-white/20 hover:text-white" />
                                 </span>
                             ) : (
                                 <span onClick={() => dispatch(toggleTheme('dark'))}>
-                                    <IconMoon className="hover:bg-white/5 rounded-full w-8 h-8 p-1" />
+                                    <IconMoon className="text-white-dark rounded-full hover:bg-black/20 hover:text-black w-8 h-8 p-1" />
                                 </span>
                             )}
                         </div>

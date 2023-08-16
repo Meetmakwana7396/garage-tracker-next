@@ -4,9 +4,12 @@ import { useForm } from 'react-hook-form';
 import PasswordField from '../Field/PasswordField';
 import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
+import { useHelper } from '@/hooks/useHelper';
+import { Select, SelectItem } from '../Essentials/Select';
 
 interface Props {
     refresh: () => void;
+    close: () => void;
 }
 interface ICreateUser {
     firstName: string;
@@ -18,7 +21,8 @@ interface ICreateUser {
     confirmPassword: string;
 }
 
-const AddUser = ({ refresh }: Props) => {
+const AddUser = ({ refresh, close }: Props) => {
+    const { userStatus } = useHelper();
     const {
         register,
         handleSubmit,
@@ -47,17 +51,16 @@ const AddUser = ({ refresh }: Props) => {
             };
             await axios.post('/users/create', fd);
             refresh();
-
         } catch (error) {}
     };
 
     return (
         <div>
             <h1 className="mb-5 text-xl font-bold">Add User</h1>
-            <form className="space-y-5" onSubmit={handleSubmit(formHandler)}>
+            <form className="styled-form space-y-5" onSubmit={handleSubmit(formHandler)}>
                 <h1 className="mb-5 text-lg font-semibold">Basic Information</h1>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className={clsx(errors && errors.firstName && 'has-error')}>
                         <label className="form-label">First name</label>
                         <input
@@ -78,7 +81,7 @@ const AddUser = ({ refresh }: Props) => {
                         />
                     </div>
 
-                    <div className={clsx(errors && errors.email && 'has-error', 'col-span-2')}>
+                    <div className={clsx(errors && errors.email && 'has-error', 'sm:col-span-2')}>
                         <label className="form-label">Email</label>
                         <input
                             {...register('email')}
@@ -92,10 +95,12 @@ const AddUser = ({ refresh }: Props) => {
                     <div className={clsx(errors && errors.userStatus && 'has-error')}>
                         <label className="form-label">Status</label>
                         <select {...register('userStatus')} className="form-select" placeholder="User status...">
-                            <option value="IN_REVIEW">IN_REVIEW</option>
-                            <option value="APPROVED">APPROVED</option>
-                            <option value="ACTIVE">ACTIVE</option>
-                            <option value="INACTIVE">INACTIVE</option>
+                            <option value="">Select user status...</option>
+                            {userStatus.map((status, index) => (
+                                <option key={index} value={status}>
+                                    {status}
+                                </option>
+                            ))}
                         </select>
                     </div>
 
@@ -125,11 +130,14 @@ const AddUser = ({ refresh }: Props) => {
                         />
                     </div>
                 </div>
-                <div className="flex justify-start gap-4 !mt-7">
+
+                <div className="modal-button-bar">
                     <FieldButton type="submit" loading={isSubmitting} className="btn btn-primary">
                         Submit
                     </FieldButton>
-                    <button className="btn btn-ghost">Cancel</button>
+                    <button className="btn btn-ghost" onClick={close}>
+                        Cancel
+                    </button>
                 </div>
             </form>
         </div>

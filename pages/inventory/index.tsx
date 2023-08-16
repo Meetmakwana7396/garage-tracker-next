@@ -67,8 +67,8 @@ const InventoryIndex = () => {
             </Head>
             <div className="space-y-10">
                 {/* Table filters  */}
-                <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b dark:border-black-more-light">
-                    <h2 className="text-5xl tracking-wide font-semibold leading-none">Inventory</h2>
+                <div className="page-heading-bar">
+                    <h2 className="page-heading">Inventory</h2>
                     <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
                         <Link className="btn btn-primary h-fit" href="/inventory/inventory-add">
                             Add Item
@@ -101,6 +101,7 @@ const InventoryIndex = () => {
                                 <IconList className="w-4 h-4" />
                             </div>
                         </div>
+
                         <div className="relative">
                             <input
                                 type="text"
@@ -108,11 +109,6 @@ const InventoryIndex = () => {
                                 placeholder="Search..."
                                 value={params.filter}
                                 onChange={(e) => setParams({ ...params, filter: e.target.value })}
-                                // onKeyDown={(e) => {
-                                //     if (e.key === 'Enter') {
-                                //         getAttorneys('1');
-                                //     }
-                                // }}
                             />
                             <button
                                 type="button"
@@ -165,6 +161,7 @@ const InventoryIndex = () => {
                                     />
                                 </ul>
                             </div>
+
                             {/* Table  */}
                             <div className="overflow-hidden p-0">
                                 <div className="table-responsive">

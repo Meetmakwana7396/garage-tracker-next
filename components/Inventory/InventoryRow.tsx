@@ -42,11 +42,7 @@ const InventoryRow = ({ data }: any) => {
                     </Tippy>
                 </Link>
                 <Tippy content="Edit Details">
-                    <span
-                    // onClick={() => {
-                    //     editAttorneyModal.current.open(data?.id);
-                    // }}
-                    >
+                    <span>
                         <IconEdit className="action-icon text-secondary" />
                     </span>
                 </Tippy>

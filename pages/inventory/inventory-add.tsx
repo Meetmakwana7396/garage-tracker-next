@@ -11,8 +11,8 @@ const InventoryAdd = () => {
             </Head>
             <div className="space-y-10">
                 {/* Page Title */}
-                <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b dark:border-black-more-light">
-                    <h2 className="sm:text-5xl text-4xl tracking-wide font-semibold leading-none">
+                <div className="page-heading-bar">
+                    <h2 className="page-heading">
                         Add - Inventory Item
                     </h2>
                     <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
@@ -39,8 +39,8 @@ const InventoryAdd = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6">
-                    <form className="mb-5 rounded-md border shadow bg-transparent p-4 dark:border-[#191e3a] h-fit">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <form className="styled-form">
                         <h1 className="mb-5 text-lg font-bold">Basic Information</h1>
                         <div className="grid gap-5 grid-cols-1 sm:grid-cols-2">
                             <div>
@@ -134,7 +134,7 @@ const InventoryAdd = () => {
                         {/* <button>Hello</button> */}
                     </form>
 
-                    <form className="mb-5 rounded-md border shadow bg-transparent p-4 dark:border-[#191e3a] h-fit">
+                    <form className="styled-form">
                         <h1 className="mb-5 text-lg font-bold">Supplier Information</h1>
                         <div className="grid gap-5 sm:grid-cols-2">
                             <div>
@@ -158,7 +158,6 @@ const InventoryAdd = () => {
                             </div>
                         </div>
                         <div className="mt-4 z-20 sm:col-span-2 w-full bg-white text-right dark:bg-transparent flex justify-between">
-                            <button>Cancel</button>
                             <FieldButton type="submit" className="btn btn-primary">
                                 Save
                             </FieldButton>

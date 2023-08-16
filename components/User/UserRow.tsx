@@ -61,7 +61,7 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                 </Tippy>
                 <Tippy content="Delete User">
                     <span onClick={deleteUser}>
-                        <IconTrash className="action-icon hover:text-danger text-secondary" />
+                        <IconTrash className="action-icon hover:!text-danger" />
                     </span>
                 </Tippy>
 

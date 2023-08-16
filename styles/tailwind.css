@@ -284,6 +284,14 @@
         @apply w-full rounded border border-white-light bg-white px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-black-more-light dark:bg-transparent dark:text-white-dark dark:focus:border-primary dark:autofill:shadow-[inset_0_0_0px_1000px_rgb(23,38,60)] dark:autofill:text-white;
     }
 
+    input:-webkit-autofill {
+        -webkit-text-fill-color: #888ea8;
+    }
+
+    select option {
+        @apply dark:bg-black;
+    }
+
     .form-input-lg,
     .form-textarea-lg,
     .form-select-lg,
@@ -657,7 +665,7 @@ pre.hljs {
 }
 
 .action-icon {
-    @apply w-5 h-5 cursor-pointer text-gray-400/70 hover:text-black dark:text-white-dark/50 dark:hover:text-white-dark;
+    @apply w-5 h-5 cursor-pointer text-gray-400/70 hover:text-primary dark:hover:text-primary dark:text-white-dark/50;
 }
 
 /* Speciality Status  */
@@ -690,15 +698,18 @@ pre.hljs {
     @apply bg-primary;
 }
 
-/* invoice Status  */
-
-.status-paid {
-    @apply bg-primary;
-}
-.status-unpaid {
-    @apply bg-slate-500;
+.modal-button-bar {
+    @apply flex justify-start gap-4 !mt-7 sticky bottom-0 bg-white py-4 dark:bg-black;
 }
 
-.details-block {
-    @apply bg-white p-4 rounded-md border;
+.styled-form {
+    @apply mb-5 rounded-md border shadow bg-transparent px-6 py-8 dark:border-black-more-light h-fit;
+}
+
+.page-heading-bar {
+    @apply flex items-end pb-3 justify-between gap-4 border-b dark:border-black-more-light;
+}
+
+.page-heading {
+    @apply text-5xl tracking-wide font-semibold leading-none;
 }

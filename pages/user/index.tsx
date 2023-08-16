@@ -1,6 +1,5 @@
 import IconSearch from '@/components/Icon/IconSearch';
 import Head from 'next/head';
-import Link from 'next/link';
 import { Fragment, useRef, useState } from 'react';
 import TabBlock from '@/components/Layout/TabBlock';
 import Th from '@/components/Table/Th';
@@ -11,7 +10,6 @@ import IconList from '@/components/Icon/IconList';
 import useSWRImmutable from 'swr/immutable';
 import axios from '@/libs/axios';
 import UserRow from '@/components/User/UserRow';
-import { useRouter } from 'next/router';
 import Loading from '@/components/Essentials/Loading';
 import Image from 'next/image';
 import 'tippy.js/dist/tippy.css';
@@ -53,9 +51,9 @@ const UserIndex = () => {
             </Head>
             <div className="space-y-10">
                 {/* Page Title*/}
-                <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b dark:border-black-more-light">
-                    <h2 className="text-5xl tracking-wide font-semibold leading-none">Users</h2>
-                    <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
+                <div className="page-heading-bar">
+                    <h2 className="page-heading">Users</h2>
+                    <div>
                         {!!UserList?.data?.length && (
                             <button
                                 className="btn mx-auto btn-primary w-fit"
@@ -227,6 +225,7 @@ const UserIndex = () => {
                             mutate();
                             addUserModal.current.close();
                         }}
+                        close={() => addUserModal.current.close()}
                     />
                 </Sheet>
             </div>

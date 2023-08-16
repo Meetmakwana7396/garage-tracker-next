@@ -1,6 +1,8 @@
 export const useHelper = () => {
     const perPageOption = [10, 25, 50, 100];
 
+    const userStatus = ['IN_REVIEW', 'ACTIVE', 'INACTIVE', 'APPROVED'];
+
     const attorneyStatus = [
         { key: '1', value: 'pending' },
         { key: '2', value: 'approved' },
@@ -26,6 +28,7 @@ export const useHelper = () => {
 
     return {
         perPageOption,
+        userStatus,
         getAttorneyStatus,
         isEmpty,
         formatDate,

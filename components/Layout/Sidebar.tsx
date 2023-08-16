@@ -26,7 +26,7 @@ const Sidebar = () => {
     return (
         <div className={semidark ? 'dark' : ''}>
             <nav
-                className={`sidebar fixed top-0 bottom-0 z-[51] h-full min-h-screen w-64 sm:w-56 border-r dark:shadow-3xl dark:border-0 transition-all duration-300 ${
+                className={`sidebar fixed top-0 bottom-0 z-[51] h-full min-h-screen w-64 sm:w-56 border-r dark:border-black-more-light dark:shadow-3xl transition-all duration-300 ${
                     semidark ? 'text-white-dark' : ''
                 }`}
             >
