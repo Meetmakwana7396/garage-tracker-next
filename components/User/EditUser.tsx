@@ -1,16 +1,16 @@
 import clsx from 'clsx';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import PasswordField from '../Field/PasswordField';
 import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
 import { useHelper } from '@/hooks/useHelper';
 
 interface Props {
+    data: any;
     refresh: () => void;
     close: () => void;
 }
-interface ICreateUser {
+interface IEditUser {
     firstName: string;
     lastName: string;
     email: string;
@@ -20,42 +20,41 @@ interface ICreateUser {
     confirmPassword: string;
 }
 
-const AddUser = ({ refresh, close }: Props) => {
+const EditUser = ({ data, refresh, close }: Props) => {
     const { userStatus } = useHelper();
     const {
         register,
         handleSubmit,
         formState: { isSubmitting, errors },
-    } = useForm<ICreateUser>({
+    } = useForm<IEditUser>({
         defaultValues: {
-            firstName: '',
-            lastName: '',
-            email: '',
+            firstName: data?.firstName || '',
+            lastName: data?.lastName || '',
+            email: data?.email || '',
             role_id: 'bc48e865-4108-447f-9393-56eed36418e4',
-            userStatus: '',
-            password: '',
-            confirmPassword: '',
+            userStatus: data?.userStatus || '',
+            password: data?.password || '',
+            confirmPassword: data?.confirmPassword || '',
         },
     });
 
-    const formHandler = async (values: ICreateUser) => {
+    const formHandler = async (values: IEditUser) => {
         try {
             const fd = {
+                id: data?.id,
                 firstName: values.firstName,
                 lastName: values.lastName,
-                email: values.email,
                 role_id: values.role_id,
                 userStatus: values.userStatus,
-                password: values.password,
             };
-            await axios.post('/users/create', fd);
+            await axios.post('/users/update', fd);
             refresh();
         } catch (error) {}
     };
 
     return (
         <div>
-            <h1 className="mb-5 text-xl font-bold">Add user</h1>
+            <h1 className="mb-5 text-xl font-bold">Edit user</h1>
             <form className="styled-form space-y-5" onSubmit={handleSubmit(formHandler)}>
                 <h1 className="mb-5 text-lg font-semibold">Basic Information</h1>
 
@@ -115,21 +114,6 @@ const AddUser = ({ refresh, close }: Props) => {
                     </div>
                 </div>
 
-                <div className="!mt-10 space-y-5">
-                    <h1 className="mb-5 text-lg font-semibold">Create Password</h1>
-                    <div className={clsx(errors && errors.password && 'has-error')}>
-                        <label className="form-label">Password</label>
-                        <PasswordField register={{ ...register('password') }} placeholder="Enter password..." />
-                    </div>
-                    <div className={clsx(errors && errors.confirmPassword && 'has-error')}>
-                        <label className="form-label">Confirm password</label>
-                        <PasswordField
-                            register={{ ...register('confirmPassword') }}
-                            placeholder="Confirm password..."
-                        />
-                    </div>
-                </div>
-
                 <div className="modal-button-bar">
                     <FieldButton type="submit" loading={isSubmitting} className="btn btn-primary">
                         Submit
@@ -143,4 +127,4 @@ const AddUser = ({ refresh, close }: Props) => {
     );
 };
 
-export default AddUser;
+export default EditUser;

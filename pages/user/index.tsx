@@ -219,7 +219,7 @@ const UserIndex = () => {
 
                 {isLoading && <Loading />}
 
-                <Sheet ref={addUserModal}>
+                <Sheet ref={addUserModal} width='600px'>
                     <AddUser
                         refresh={() => {
                             mutate();

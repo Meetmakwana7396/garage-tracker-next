@@ -12,31 +12,8 @@ const InventoryAdd = () => {
             <div className="space-y-10">
                 {/* Page Title */}
                 <div className="page-heading-bar">
-                    <h2 className="page-heading">
-                        Add - Inventory Item
-                    </h2>
-                    <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
-                        <div className="relative">
-                            <input
-                                type="text"
-                                className="form-input pr-10"
-                                placeholder="Search..."
-                                // value={params.filter}
-                                // onChange={(e) => setParams({ ...params, filter: e.target.value })}
-                                // onKeyDown={(e) => {
-                                //     if (e.key === 'Enter') {
-                                //         getAttorneys('1');
-                                //     }
-                                // }}
-                            />
-                            <button
-                                type="button"
-                                className="text-black-dark absolute top-0 right-0 my-auto inline-flex h-10 w-10 items-center justify-center hover:opacity-70"
-                            >
-                                <IconSearch />
-                            </button>
-                        </div>
-                    </div>
+                    <h2 className="page-heading">Add - Inventory Item</h2>
+                    <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3"></div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

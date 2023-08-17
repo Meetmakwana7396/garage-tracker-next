@@ -665,37 +665,30 @@ pre.hljs {
 }
 
 .action-icon {
-    @apply w-5 h-5 cursor-pointer text-gray-400/70 hover:text-primary dark:hover:text-primary dark:text-white-dark/50;
+    @apply w-5 h-5 cursor-pointer text-gray-400 hover:text-primary dark:hover:text-primary dark:text-gray-600;
 }
 
 /* Speciality Status  */
 .status {
     @apply relative w-fit rounded-full px-2 py-0.5 text-xs text-center font-semibold text-white bg-black;
 }
+
+.status-primary,
 .status-active {
-    @apply bg-[#3CABFF];
-}
-.status-pending {
-    @apply bg-[#7D828A];
-}
-
-.status-deleted {
-    @apply bg-[#FF5733] text-white;
-}
-.status-approved {
-    @apply bg-success;
-}
-
-.status-completed {
-    @apply bg-success;
-}
-
-.status-issued {
-    @apply bg-slate-500;
-}
-
-.status-inprogress {
     @apply bg-primary;
+}
+
+.status-success ,.status-approved{
+    @apply bg-success;
+}
+
+.status-secondary,
+.status-in_review {
+    @apply bg-gray-500;
+}
+
+.status-danger, .status-inactive {
+    @apply bg-danger;
 }
 
 .modal-button-bar {
@@ -703,7 +696,7 @@ pre.hljs {
 }
 
 .styled-form {
-    @apply mb-5 rounded-md border shadow bg-transparent px-6 py-8 dark:border-black-more-light h-fit;
+    @apply rounded-md border shadow bg-transparent px-6 py-8 dark:border-black-more-light h-fit;
 }
 
 .page-heading-bar {
