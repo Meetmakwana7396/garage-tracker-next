@@ -26,10 +26,10 @@ const InventoryRow = ({ data }: any) => {
             </td>
             <td>
                 <div
-                    className={`status capitalize status-${getAttorneyStatus(data?.status)}`}
+                    className={`status capitalize status-active`}
                     // className="status status-approved"
                 >
-                    {getAttorneyStatus(data?.status)}
+                    ACTIVE
                 </div>
             </td>
 

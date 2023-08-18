@@ -8,7 +8,7 @@ import NextNProgress from 'nextjs-progressbar';
 export default function App({ Component, pageProps }: any) {
     return (
         <Provider store={store}>
-            <NextNProgress color="#0096FF" options={{ showSpinner: false }} />
+            <NextNProgress color="#0096FF" height={1} options={{ showSpinner: false }} />
             <Site layout={Component?.layout || 'default'} middleware={Component?.middleware}>
                 <Component {...pageProps} />
             </Site>

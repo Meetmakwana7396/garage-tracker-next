@@ -69,11 +69,6 @@ const InventoryIndex = () => {
                 {/* Table filters  */}
                 <div className="page-heading-bar">
                     <h2 className="page-heading">Inventory</h2>
-                    <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
-                        <Link className="btn btn-primary h-fit" href="/inventory/inventory-add">
-                            Add Item
-                        </Link>
-                    </div>
                 </div>
 
                 {/* Data Section  */}
@@ -85,7 +80,7 @@ const InventoryIndex = () => {
                             <div
                                 className={clsx(
                                     'py-2 px-2 rounded-[2px] cursor-pointer text-gray-500',
-                                    layout === 'card' && 'bg-supporting dark:bg-black'
+                                    layout === 'card' && 'text-white bg-primary'
                                 )}
                                 onClick={() => setLayout('card')}
                             >
@@ -94,28 +89,32 @@ const InventoryIndex = () => {
                             <div
                                 className={clsx(
                                     'p-2 rounded-[2px] cursor-pointer text-gray-500',
-                                    layout === 'table' && 'bg-supporting dark:bg-black'
+                                    layout === 'table' && 'text-white bg-primary'
                                 )}
                                 onClick={() => setLayout('table')}
                             >
                                 <IconList className="w-4 h-4" />
                             </div>
                         </div>
-
-                        <div className="relative">
-                            <input
-                                type="text"
-                                className="form-input pr-10"
-                                placeholder="Search..."
-                                value={params.filter}
-                                onChange={(e) => setParams({ ...params, filter: e.target.value })}
-                            />
-                            <button
-                                type="button"
-                                className="text-black-dark absolute top-0 right-0 my-auto inline-flex h-10 w-10 items-center justify-center hover:opacity-70"
-                            >
-                                <IconSearch />
-                            </button>
+                        <div className="flex gap-4">
+                            <div className="relative">
+                                <input
+                                    type="text"
+                                    className="form-input pr-10"
+                                    placeholder="Search..."
+                                    value={params.filter}
+                                    onChange={(e) => setParams({ ...params, filter: e.target.value })}
+                                />
+                                <button
+                                    type="button"
+                                    className="text-black-dark absolute top-0 right-0 my-auto inline-flex h-10 w-10 items-center justify-center hover:opacity-70"
+                                >
+                                    <IconSearch />
+                                </button>
+                            </div>
+                            <Link className="btn btn-primary h-fit" href="/inventory/inventory-add">
+                                Add Item
+                            </Link>
                         </div>
                     </div>
                     {/* Status Tabs  */}
