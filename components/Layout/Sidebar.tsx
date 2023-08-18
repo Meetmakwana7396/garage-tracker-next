@@ -9,6 +9,7 @@ import IconInventory from '../Icon/IconInventory';
 import NavLink from '../Essentials/Navlink';
 import IconUser from '../Icon/IconUser';
 import { toggleSidebar } from '@/store/siteViewSlice';
+import IconRole from '../Icon/IconRole';
 
 const Sidebar = () => {
     const dispatch = useDispatch();
@@ -70,6 +71,11 @@ const Sidebar = () => {
                             <li>
                                 <NavLink href="/user" icon={<IconUser />} active={isActive('/user')}>
                                     User
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink href="/role" icon={<IconRole />} active={isActive('/role')}>
+                                    Role
                                 </NavLink>
                             </li>
                         </ul>
