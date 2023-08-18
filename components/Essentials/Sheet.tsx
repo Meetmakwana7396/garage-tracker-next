@@ -1,6 +1,5 @@
 import { forwardRef, ReactNode, Ref, useImperativeHandle, useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import IconClose from '../Icon/IconClose';
 
 interface SheetProps {
     children: ReactNode;
@@ -42,17 +41,17 @@ const Sheet = forwardRef(({ children, width, button }: SheetProps, ref: Ref<Shee
                         onOpenAutoFocus={(e) => {
                             e.preventDefault();
                         }}
-                        className="w-full h-screen absolute overflow-y-auto ease-in-out right-0 transition-transform bg-white shadow-lg p-6 outline-none animate-in slide-in-from-right duration-200"
+                        className="w-full h-screen absolute overflow-y-auto ease-in-out right-0 transition-transform bg-white shadow-lg p-6 pb-0 outline-none animate-in slide-in-from-right duration-200 dark:bg-black dark:text-white-dark"
                         style={{ maxWidth: width || '432px' }}
                     >
                         <div>{children}</div>
                         <Dialog.Close asChild>
                             <button
-                                className="outline-none btn absolute top-4 right-4 bg-gray-300 p-2 rounded-full"
+                                className="outline-none btn absolute top-4 right-4 bg-gray-300 p-2 rounded-full dark:bg-black-light dark:border-none"
                                 aria-label="Close"
                             >
                                 {/* <IconClose className="text-black w-5 h-5" /> */}
-                                <span className='text-sm'>Esc</span>
+                                <span className="text-sm">Esc</span>
                             </button>
                         </Dialog.Close>
                     </Dialog.Content>

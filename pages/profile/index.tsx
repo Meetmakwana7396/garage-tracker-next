@@ -1,5 +1,4 @@
 import FieldButton from '@/components/Field/FieldButton';
-import Header from '@/components/Layout/Header';
 import axios from '@/libs/axios';
 import { fetchUser, setUser } from '@/store/authSlice';
 import { IRootState } from '@/store/store';

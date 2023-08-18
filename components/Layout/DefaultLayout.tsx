@@ -1,5 +1,4 @@
 import App from '@/App';
-import { toggleSidebar } from '@/store/authSlice';
 import { useRouter } from 'next/router';
 import { ReactNode, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +6,7 @@ import Sidebar from './Sidebar';
 import Footer from './Footer';
 import { IRootState } from '@/store/store';
 import Header from './Header';
+import { toggleSidebar } from '@/store/siteViewSlice';
 interface DefaultLayoutProps {
     children: ReactNode;
 }
@@ -14,7 +14,7 @@ interface DefaultLayoutProps {
 const DefaultLayout = ({ children }: DefaultLayoutProps) => {
     const router = useRouter();
     const [showTopButton, setShowTopButton] = useState(false);
-    const themeConfig = useSelector((state: IRootState) => state.auth);
+    const themeConfig = useSelector((state: IRootState) => state.site);
     const [animation, setAnimation] = useState(themeConfig?.animation);
     const dispatch = useDispatch();
 

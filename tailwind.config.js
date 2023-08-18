@@ -58,8 +58,8 @@ module.exports = {
                 },
                 black: {
                     DEFAULT: '#0e1726',
-                    light: '#e3e4eb',
-                    'dark-light': 'rgba(14,23,38,.15)',
+                    light: '#101a2c',
+                    'more-light': '#1e2a3e',
                 },
                 white: {
                     DEFAULT: '#ffffff',
@@ -74,7 +74,7 @@ module.exports = {
                 4.5: '18px',
             },
             boxShadow: {
-                '3xl': '0 2px 2px rgb(224 230 237 / 46%), 1px 6px 7px rgb(224 230 237 / 46%)',
+                '3xl': 'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',
             },
             typography: ({ theme }) => ({
                 DEFAULT: {

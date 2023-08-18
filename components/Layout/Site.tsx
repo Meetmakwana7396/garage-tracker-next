@@ -14,7 +14,7 @@ interface SiteProps {
     };
 }
 
-const Site = ({ children, middleware, layout }: SiteProps) => {
+const Site = ({ children, middleware, layout = 'default' }: SiteProps) => {
     const { fetchUser } = useAuth();
 
     useEffect(() => {

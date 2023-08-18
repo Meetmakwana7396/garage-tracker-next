@@ -39,7 +39,7 @@ const Login = () => {
                 <title>Garage Tracker Login</title>
             </Head>
             <div
-                className="flex min-h-screen items-center justify-center bg-cover bg-center bg-[#000000]/5 bg-blend-overlay"
+                className="flex min-h-screen items-center justify-center bg-cover bg-center dark:text-white-dark bg-[#000000]/5 bg-blend-overlay"
                 style={{ backgroundImage: 'url(/assets/images/bg-poster.jpg)' }}
             >
                 <div>
@@ -70,7 +70,10 @@ const Login = () => {
                                     Password
                                 </label>
 
-                                <PasswordField register={{ ...register('password') }} />
+                                <PasswordField
+                                    register={{ ...register('password') }}
+                                    placeholder="Enter password..."
+                                />
                             </div>
 
                             <div className="text-right">
