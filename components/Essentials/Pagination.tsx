@@ -13,7 +13,7 @@ const Pagination: FC<IPagination> = ({ meta, setFilters }) => {
     return (
         <>
             <div className="flex gap-2 sm:items-center">
-                {meta?.last_page > 1 && (
+                {/* {meta?.last_page > 1 && ( */}
                     <div className="flex gap-2">
                         <div className="">
                             <button
@@ -36,7 +36,7 @@ const Pagination: FC<IPagination> = ({ meta, setFilters }) => {
                             </button>
                         </div>
                     </div>
-                )}
+                {/* )} */}
                 <div className="ml-auto flex flex-col items-end gap-2 sm:flex-row sm:items-center">
                     <select
                         value={meta?.per_page}

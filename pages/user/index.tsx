@@ -53,57 +53,37 @@ const UserIndex = () => {
                 {/* Page Title*/}
                 <div className="page-heading-bar">
                     <h2 className="page-heading">Users</h2>
-                    <div>
-                        {!!UserList?.data?.length && (
-                            <button
-                                className="btn mx-auto btn-primary w-fit"
-                                onClick={() => addUserModal.current.open()}
-                            >
-                                Add user
-                            </button>
-                        )}
-                    </div>
                 </div>
 
                 {/* Data Section  */}
                 {!!UserList?.data?.length ? (
                     <div className="container max-w-[1600px]">
                         {/* Filters */}
-                        <div className="flex justify-between mb-5">
-                            <div className=" flex rounded border dark:border-transparent dark:bg-black-light overflow-hidden p-1">
-                                <div
-                                    className={clsx(
-                                        'py-2 px-2 rounded-[2px] cursor-pointer text-gray-500',
-                                        layout === 'card' && 'bg-supporting dark:bg-black'
-                                    )}
-                                    onClick={() => setLayout('card')}
-                                >
-                                    <IconCard className="w-4 h-4" />
+                        <div className="flex justify-end mb-5">
+                            <div className="flex gap-4">
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        className="form-input"
+                                        placeholder="Search..."
+                                        value={filters.filter}
+                                        onChange={(e) => setFilters({ ...filters, filter: e.target.value })}
+                                    />
+                                    <button
+                                        type="button"
+                                        className="text-black-dark absolute top-0 right-0 my-auto inline-flex h-10 w-10 items-center justify-center hover:opacity-70"
+                                    >
+                                        <IconSearch />
+                                    </button>
                                 </div>
-                                <div
-                                    className={clsx(
-                                        'p-2 rounded-[2px] cursor-pointer text-gray-500',
-                                        layout === 'table' && 'bg-supporting dark:bg-black'
-                                    )}
-                                    onClick={() => setLayout('table')}
-                                >
-                                    <IconList className="w-4 h-4" />
-                                </div>
-                            </div>
-                            <div className="relative">
-                                <input
-                                    type="text"
-                                    className="form-input pr-10"
-                                    placeholder="Search..."
-                                    value={filters.filter}
-                                    onChange={(e) => setFilters({ ...filters, filter: e.target.value })}
-                                />
-                                <button
-                                    type="button"
-                                    className="text-black-dark absolute top-0 right-0 my-auto inline-flex h-10 w-10 items-center justify-center hover:opacity-70"
-                                >
-                                    <IconSearch />
-                                </button>
+                                {!!UserList?.data?.length && (
+                                    <button
+                                        className="btn mx-auto btn-primary w-fit"
+                                        onClick={() => addUserModal.current.open()}
+                                    >
+                                        Add user
+                                    </button>
+                                )}
                             </div>
                         </div>
 
@@ -219,7 +199,7 @@ const UserIndex = () => {
 
                 {isLoading && <Loading />}
 
-                <Sheet ref={addUserModal} width='600px'>
+                <Sheet ref={addUserModal} width="600px">
                     <AddUser
                         refresh={() => {
                             mutate();

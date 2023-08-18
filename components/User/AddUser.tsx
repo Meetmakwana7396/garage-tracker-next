@@ -5,6 +5,7 @@ import PasswordField from '../Field/PasswordField';
 import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
 import { useHelper } from '@/hooks/useHelper';
+import toast from '@/libs/toast';
 
 interface Props {
     refresh: () => void;
@@ -40,16 +41,20 @@ const AddUser = ({ refresh, close }: Props) => {
 
     const formHandler = async (values: ICreateUser) => {
         try {
-            const fd = {
-                firstName: values.firstName,
-                lastName: values.lastName,
-                email: values.email,
-                role_id: values.role_id,
-                userStatus: values.userStatus,
-                password: values.password,
-            };
-            await axios.post('/users/create', fd);
-            refresh();
+            if (values.password === values.confirmPassword) {
+                const fd = {
+                    firstName: values.firstName,
+                    lastName: values.lastName,
+                    email: values.email,
+                    role_id: values.role_id,
+                    userStatus: values.userStatus,
+                    password: values.password,
+                };
+                await axios.post('/users/create', fd);
+                refresh();
+            }else{
+                toast.error('Password does not match.')
+            }
         } catch (error) {}
     };
 

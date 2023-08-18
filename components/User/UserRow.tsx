@@ -21,8 +21,10 @@ const UserRow = ({ data, refresh }: IUserRow) => {
 
     const deleteUser = async () => {
         try {
-            await axios.delete(`/users/${data.id}`);
-            refresh();
+            if (confirm('Please confirm you action.')) {
+                await axios.delete(`/users/${data.id}`);
+                refresh();
+            }
         } catch (error) {}
     };
 
@@ -55,13 +57,13 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                     <Link href={`/attorney/${data?.id}`}>
                         <Tippy content="View Details">
                             <span>
-                                <IconEye className="action-icon text-secondary" />
+                                <IconEye className="action-icon " />
                             </span>
                         </Tippy>
                     </Link>
                     <Tippy content="Edit User">
                         <span onClick={() => editUserRef?.current?.open()}>
-                            <IconEdit className="action-icon text-secondary" />
+                            <IconEdit className="action-icon " />
                         </span>
                     </Tippy>
                     <Tippy content="Delete User">
@@ -80,7 +82,7 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                 </td>
             </tr>
             <Sheet ref={editUserRef} width="600px">
-                <EditUser data={data} refresh={refresh} close={editUserRef?.current?.close()} />
+                <EditUser data={data} refresh={refresh} close={() => editUserRef?.current?.close()} />
             </Sheet>
         </>
     );

@@ -11,7 +11,7 @@ const TabBlock = ({ name, onClick, isActive, count }: any) => {
             >
                 <p>
                     {name}
-                    <span className="inline-block ml-1 px-[5px] text-xs rounded-full bg-warning text-black">
+                    <span className="inline-block ml-1 px-[5px] text-xs rounded-full bg-[#BDEE63]/80 text-black">
                         {count || 0}
                     </span>
                 </p>

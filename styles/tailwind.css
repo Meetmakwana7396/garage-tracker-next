@@ -8,11 +8,11 @@
     }
 
     body {
-        @apply font-inter antialiased;
+        @apply font-inter antialiased scrollbar-thumb-gray-300 scrollbar-track-gray-400 scrollbar-thumb-rounded-full scrollbar-thin;
     }
 
     body.dark {
-        @apply bg-[#02091a];
+        @apply bg-[#02091a] scrollbar-thumb-gray-700 scrollbar-track-gray-900;
     }
 
     /* Panel */
@@ -670,7 +670,7 @@ pre.hljs {
 
 /* Speciality Status  */
 .status {
-    @apply relative w-fit rounded-full px-2 py-0.5 text-xs text-center font-semibold text-white bg-black;
+    @apply relative w-fit rounded-full px-2 py-0.5 text-xs text-center font-semibold text-white dark:text-black bg-black;
 }
 
 .status-primary,
@@ -678,7 +678,8 @@ pre.hljs {
     @apply bg-primary;
 }
 
-.status-success ,.status-approved{
+.status-success,
+.status-approved {
     @apply bg-success;
 }
 
@@ -687,7 +688,8 @@ pre.hljs {
     @apply bg-gray-500;
 }
 
-.status-danger, .status-inactive {
+.status-danger,
+.status-inactive {
     @apply bg-danger;
 }
 
