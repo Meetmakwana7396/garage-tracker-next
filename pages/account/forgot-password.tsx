@@ -38,7 +38,7 @@ const ForgotPassword = () => {
                 <title>Verify Email</title>
             </Head>
             <div
-                className="flex min-h-screen items-center justify-center bg-center bg-cover bg-[#000000]/5 bg-blend-overlay"
+                className="flex min-h-screen items-center justify-center bg-center bg-cover dark:text-white-dark bg-[#000000]/5 bg-blend-overlay"
                 style={{ backgroundImage: 'url(/assets/images/bg-poster.jpg)' }}
             >
                 <div className="">
@@ -60,11 +60,7 @@ const ForgotPassword = () => {
                                     placeholder="Enter Email"
                                 />
                             </div>
-                            <FieldButton
-                                loading={isSubmitting}
-                                type="submit"
-                                className="btn-primary btn-lg w-full"
-                            >
+                            <FieldButton loading={isSubmitting} type="submit" className="btn-primary btn-lg w-full">
                                 Send
                             </FieldButton>
                             <p className="text-lightblack text-sm">

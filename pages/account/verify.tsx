@@ -13,9 +13,9 @@ export default function Verify() {
         } catch (error) {}
     };
     return (
-        <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden py-6 sm:py-12 bg-white">
+        <div className="relative flex min-h-screen flex-col dark:bg-black items-center justify-center overflow-hidden py-6 sm:py-12 bg-white">
             <form className="max-w-xl px-5 text-center space-y-6" onSubmit={handleSubmit(formHandler)}>
-                <h2 className="mb-2 text-[42px] font-bold text-black">Check your inbox</h2>
+                <h2 className="mb-2 text-[42px] font-bold text-black dark:text-white-dark">Check your inbox</h2>
                 <p className="mb-2 text-lg text-gray-500">
                     We are glad, that you’re with us ? We’ve sent you a verification link to the email address{' '}
                     <span className="font-medium text-primary">{router?.query?.email}</span>

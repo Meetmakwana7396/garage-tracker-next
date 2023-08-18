@@ -12,7 +12,7 @@
     }
 
     body.dark {
-        @apply bg-[#060818];
+        @apply bg-[#02091a];
     }
 
     /* Panel */
@@ -192,6 +192,10 @@
         @apply cursor-not-allowed opacity-60;
     }
 
+    .btn-ghost {
+        @apply dark:hover:bg-white/10 dark:hover:text-white border-0 text-white-dark hover:text-black hover:bg-black/10;
+    }
+
     .btn-primary {
         @apply border-primary bg-primary text-white shadow-primary/60;
     }
@@ -277,7 +281,15 @@
     .form-textarea,
     .form-select,
     .form-multiselect {
-        @apply w-full rounded border border-white-light bg-white px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-[#121e32] dark:text-white-dark dark:focus:border-primary;
+        @apply w-full rounded border border-white-light bg-white px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-black-more-light dark:bg-transparent dark:text-white-dark dark:focus:border-primary dark:autofill:shadow-[inset_0_0_0px_1000px_rgb(23,38,60)] dark:autofill:text-white;
+    }
+
+    input:-webkit-autofill {
+        -webkit-text-fill-color: #888ea8;
+    }
+
+    select option {
+        @apply dark:bg-black;
     }
 
     .form-input-lg,
@@ -442,11 +454,11 @@
         @apply overflow-auto;
     }
     table {
-        @apply w-full !border-collapse;
+        @apply w-full !border-collapse border dark:border-black-more-light;
     }
     table thead tr,
     table tfoot tr {
-        @apply border-b;
+        @apply border-b dark:border-black-more-light;
     }
     table thead tr th,
     table tfoot tr th,
@@ -455,7 +467,7 @@
     }
     table thead tr th,
     table tfoot tr th {
-        @apply text-black;
+        @apply text-black dark:text-white-dark;
     }
     table tbody tr {
         @apply;
@@ -653,51 +665,44 @@ pre.hljs {
 }
 
 .action-icon {
-    @apply w-5 h-5 cursor-pointer text-gray-400/70 hover:text-black;
+    @apply w-5 h-5 cursor-pointer text-gray-400 hover:text-primary dark:hover:text-primary dark:text-gray-600;
 }
 
 /* Speciality Status  */
 .status {
     @apply relative w-fit rounded-full px-2 py-0.5 text-xs text-center font-semibold text-white bg-black;
 }
+
+.status-primary,
 .status-active {
     @apply bg-primary;
 }
-.status-pending {
-    @apply bg-slate-500;
-}
-.status-rejected {
-    @apply bg-[#FF5733];
-}
-.status-approved {
+
+.status-success ,.status-approved{
     @apply bg-success;
 }
 
-.status-completed {
-    @apply bg-success;
+.status-secondary,
+.status-in_review {
+    @apply bg-gray-500;
 }
 
-.status-issued {
-    @apply bg-slate-500;
+.status-danger, .status-inactive {
+    @apply bg-danger;
 }
 
-.status-inprogress {
-    @apply bg-primary;
+.modal-button-bar {
+    @apply flex justify-start gap-4 !mt-7 sticky bottom-0 bg-white py-4 dark:bg-black;
 }
 
-.status-deleted {
-    @apply bg-black text-white;
+.styled-form {
+    @apply rounded-md border shadow bg-transparent px-6 py-8 dark:border-black-more-light h-fit;
 }
 
-/* invoice Status  */
-
-.status-paid {
-    @apply bg-primary;
-}
-.status-unpaid {
-    @apply bg-slate-500;
+.page-heading-bar {
+    @apply flex items-end pb-3 justify-between gap-4 border-b dark:border-black-more-light;
 }
 
-.details-block {
-    @apply bg-white p-4 rounded-md border;
+.page-heading {
+    @apply text-5xl tracking-wide font-semibold leading-none;
 }

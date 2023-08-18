@@ -1,22 +1,15 @@
 import IconSearch from '@/components/Icon/IconSearch';
-import axios from '@/libs/axios';
-import helper from '@/libs/helper';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Fragment, useRef, useState } from 'react';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
 import TabBlock from '@/components/Layout/TabBlock';
 import Th from '@/components/Table/Th';
-import IconEye from '@/components/Icon/IconEye';
-import IconEdit from '@/components/Icon/IconEdit';
-import IconReload from '@/components/Icon/IconReload';
 import TableLoader from '@/components/Essentials/TableLoader';
-import Pagination from '@/components/Essentials/Pagination';
 import clsx from 'clsx';
 import IconCard from '@/components/Icon/IconCard';
 import IconList from '@/components/Icon/IconList';
 import InventoryCard from '@/components/Inventory/InventoryCard';
+import InventoryRow from '@/components/Inventory/InventoryRow';
 
 const defaultParams = {
     per_page: '10',
@@ -59,7 +52,6 @@ const dummyData = [
 ];
 
 const InventoryIndex = () => {
-    const editAttorneyModal = useRef<any>();
     const [inventory, setInventory] = useState<any>(dummyData);
     const [meta, setMeta] = useState<any>(null);
     const [counts, setCounts] = useState<any>(null);
@@ -68,21 +60,6 @@ const InventoryIndex = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [layout, setLayout] = useState('card');
 
-    const prevNextPage = async (url: string) => {
-        try {
-            setIsLoading(true);
-            if (url) {
-                const { data } = await axios.get(`/admin/attorneys${url}`);
-                setInventory(data.data.data);
-                setMeta(data.data.meta);
-            }
-        } catch {
-            setInventory(null);
-            setMeta(null);
-        }
-        setIsLoading(false);
-    };
-
     return (
         <Fragment>
             <Head>
@@ -90,8 +67,8 @@ const InventoryIndex = () => {
             </Head>
             <div className="space-y-10">
                 {/* Table filters  */}
-                <div className="flex flex-wrap items-center pb-3 justify-between gap-4 border-b">
-                    <h2 className="text-5xl tracking-wide font-semibold leading-none">Inventory</h2>
+                <div className="page-heading-bar">
+                    <h2 className="page-heading">Inventory</h2>
                     <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
                         <Link className="btn btn-primary h-fit" href="/inventory/inventory-add">
                             Add Item
@@ -104,11 +81,11 @@ const InventoryIndex = () => {
                     {/* Filters */}
                     <div className="flex justify-between mb-3">
                         {/* Layout Switch  */}
-                        <div className=" flex rounded border overflow-hidden p-1">
+                        <div className=" flex rounded border dark:border-transparent dark:bg-black-light overflow-hidden p-1">
                             <div
                                 className={clsx(
                                     'py-2 px-2 rounded-[2px] cursor-pointer text-gray-500',
-                                    layout === 'card' && 'bg-supporting'
+                                    layout === 'card' && 'bg-supporting dark:bg-black'
                                 )}
                                 onClick={() => setLayout('card')}
                             >
@@ -117,13 +94,14 @@ const InventoryIndex = () => {
                             <div
                                 className={clsx(
                                     'p-2 rounded-[2px] cursor-pointer text-gray-500',
-                                    layout === 'table' && 'bg-supporting'
+                                    layout === 'table' && 'bg-supporting dark:bg-black'
                                 )}
                                 onClick={() => setLayout('table')}
                             >
                                 <IconList className="w-4 h-4" />
                             </div>
                         </div>
+
                         <div className="relative">
                             <input
                                 type="text"
@@ -131,11 +109,6 @@ const InventoryIndex = () => {
                                 placeholder="Search..."
                                 value={params.filter}
                                 onChange={(e) => setParams({ ...params, filter: e.target.value })}
-                                // onKeyDown={(e) => {
-                                //     if (e.key === 'Enter') {
-                                //         getAttorneys('1');
-                                //     }
-                                // }}
                             />
                             <button
                                 type="button"
@@ -148,8 +121,8 @@ const InventoryIndex = () => {
                     {/* Status Tabs  */}
                     {layout === 'table' ? (
                         <>
-                            <div className="overflow-auto w-full border border-b-0">
-                                <ul className="flex whitespace-nowrap gap-2 dark:border-[#191e3a] sm:flex">
+                            <div className="overflow-auto w-full border border-b-0 dark:border-black-more-light">
+                                <ul className="flex whitespace-nowrap gap-2 dark:border-black-more-light sm:flex">
                                     <TabBlock
                                         onClick={() => {
                                             setParams({ ...params, status: '' });
@@ -188,8 +161,9 @@ const InventoryIndex = () => {
                                     />
                                 </ul>
                             </div>
+
                             {/* Table  */}
-                            <div className="overflow-hidden border p-0">
+                            <div className="overflow-hidden p-0">
                                 <div className="table-responsive">
                                     <table className={`table-hover ${isLoading && 'opacity-50 pointer-events-none'}`}>
                                         <thead>
@@ -225,77 +199,12 @@ const InventoryIndex = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {inventory ? (
+                                            {!isLoading ? (
                                                 <>
                                                     {inventory.length > 0 ? (
-                                                        inventory.map((data: any) => {
-                                                            return (
-                                                                <tr key={data.id}>
-                                                                    <td>
-                                                                        <div className="whitespace-nowrap">
-                                                                            {data.Id}
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div className="whitespace-nowrap">
-                                                                            {data.name}
-                                                                        </div>
-                                                                    </td>
-
-                                                                    <td>
-                                                                        <div className="whitespace-nowrap">
-                                                                            {data.email}
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div className="whitespace-nowrap">
-                                                                            {helper.formatDate(data.created_at)}
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div
-                                                                            className={`status capitalize status-${helper.getAttorneyStatus(
-                                                                                data?.status
-                                                                            )}`}
-                                                                            // className="status status-approved"
-                                                                        >
-                                                                            {helper.getAttorneyStatus(data?.status)}
-                                                                        </div>
-                                                                    </td>
-
-                                                                    <td className="max-w-xs flex gap-2">
-                                                                        <Link href={`/attorney/${data?.id}`}>
-                                                                            <Tippy content="View Details">
-                                                                                <span>
-                                                                                    <IconEye className="action-icon text-secondary" />
-                                                                                </span>
-                                                                            </Tippy>
-                                                                        </Link>
-                                                                        <Tippy content="Edit Details">
-                                                                            <span
-                                                                                onClick={() => {
-                                                                                    setTimeout(() => {
-                                                                                        editAttorneyModal.current.open(
-                                                                                            data?.id
-                                                                                        );
-                                                                                    });
-                                                                                }}
-                                                                            >
-                                                                                <IconEdit className="action-icon text-secondary" />
-                                                                            </span>
-                                                                        </Tippy>
-
-                                                                        {data?.status === 4 && (
-                                                                            <Tippy content="Restore Expert">
-                                                                                <span>
-                                                                                    <IconReload className="action-icon text-secondary" />
-                                                                                </span>
-                                                                            </Tippy>
-                                                                        )}
-                                                                    </td>
-                                                                </tr>
-                                                            );
-                                                        })
+                                                        inventory.map((item: any) => (
+                                                            <InventoryRow key={item.id} data={item} />
+                                                        ))
                                                     ) : (
                                                         <tr className="pointer-events-none">
                                                             <td colSpan={6} className="p-8">
@@ -324,12 +233,7 @@ const InventoryIndex = () => {
                     )}
                 </div>
 
-                <Pagination
-                    meta={meta}
-                    prevNextPage={prevNextPage}
-                    page={(value) => setParams({ ...params, per_page: value })}
-                    goToPage={(value) => console.log(value)}
-                />
+                {/* <Pagination meta={meta} /> */}
             </div>
         </Fragment>
     );

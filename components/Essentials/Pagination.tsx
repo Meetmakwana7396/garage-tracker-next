@@ -1,28 +1,15 @@
-import helper from '@/libs/helper';
-import { FC, useEffect, useState } from 'react';
+import { useHelper } from '@/hooks/useHelper';
+import { useRouter } from 'next/router';
+import { FC, useState } from 'react';
 
 interface IPagination {
     meta: any;
-    prevNextPage?: (arg: string) => void;
-    page: (arg: string) => void;
-    goToPage: (arg: string) => void;
-    prevNextPage1?: (arg: number) => void;
+    setFilters: (value: any) => void;
 }
 
-const Pagination: FC<IPagination> = ({ meta, prevNextPage, page, goToPage, prevNextPage1 }) => {
-    const [perPage, setPerPage] = useState<string>('100');
-    const [pageNo, setPageNo] = useState(meta?.current_page || '1');
-
-    useEffect(() => {
-        setPageNo(pageNo && pageNo < 1 ? 1 : pageNo > meta?.last_page ? meta?.last_page : pageNo);
-    }, [pageNo, meta?.last_page]);
-
-    useEffect(() => {
-        setPageNo(meta?.current_page || '1');
-        setPerPage(meta?.per_page || '100');
-    }, [meta]);
-
-
+const Pagination: FC<IPagination> = ({ meta, setFilters }) => {
+    const { perPageOption } = useHelper();
+    const [page, setPage] = useState<number>();
     return (
         <>
             <div className="flex gap-2 sm:items-center">
@@ -33,25 +20,17 @@ const Pagination: FC<IPagination> = ({ meta, prevNextPage, page, goToPage, prevN
                                 type="button"
                                 className="btn btn-primary"
                                 disabled={meta?.current_page === meta?.first_page}
-                                onClick={() => {
-                                    prevNextPage1
-                                        ? prevNextPage1(pageNo > 1 ? pageNo - 1 : 1)
-                                        : prevNextPage(meta?.previous_page_url);
-                                }}
+                                onClick={() => setFilters((prev: any) => ({ ...prev, page: meta.current_page - 1 }))}
                             >
                                 Previous
                             </button>
                         </div>
-                        <div className="">
+                        <div>
                             <button
                                 type="button"
                                 className="btn btn-primary"
                                 disabled={meta?.current_page === meta?.last_page}
-                                onClick={() => {
-                                    prevNextPage1
-                                        ? prevNextPage1(pageNo < meta?.last_page ? pageNo + 1 : meta?.last_page)
-                                        : prevNextPage(meta?.next_page_url);
-                                }}
+                                onClick={() => setFilters((prev: any) => ({ ...prev, page: meta.current_page + 1 }))}
                             >
                                 Next
                             </button>
@@ -60,14 +39,11 @@ const Pagination: FC<IPagination> = ({ meta, prevNextPage, page, goToPage, prevN
                 )}
                 <div className="ml-auto flex flex-col items-end gap-2 sm:flex-row sm:items-center">
                     <select
-                        value={perPage}
+                        value={meta?.per_page}
                         className="form-select w-fit pr-7"
-                        onChange={(e) => {
-                            setPerPage(e.target.value);
-                            page(e.target.value);
-                        }}
+                        onChange={(e) => setFilters((prev: any) => ({ ...prev, per_page: e.target.value }))}
                     >
-                        {helper.perPageOption.map((option) => {
+                        {perPageOption.map((option) => {
                             return (
                                 <option key={option} value={option}>
                                     {option}
@@ -82,20 +58,19 @@ const Pagination: FC<IPagination> = ({ meta, prevNextPage, page, goToPage, prevN
                                 <input
                                     type="number"
                                     className="form-input max-w-[60px] rounded-r-none"
-                                    value={pageNo}
                                     onChange={(e) => {
-                                        e.target.value !== '0' ? setPageNo(parseInt(e.target.value)) : '';
+                                        e.target.value !== '0' ? setPage(Number(e.target.value)) : '';
                                     }}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter') {
-                                            goToPage(pageNo.toString());
+                                            setFilters((prev: any) => ({ ...prev, page: page }));
                                         }
                                     }}
                                 />
                                 <button
                                     type="button"
                                     className="btn btn-primary rounded-l-none"
-                                    onClick={() => goToPage(pageNo.toString())}
+                                    onClick={() => setFilters((prev: any) => ({ ...prev, page: page }))}
                                 >
                                     Go
                                 </button>
