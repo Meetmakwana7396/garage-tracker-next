@@ -706,5 +706,5 @@ pre.hljs {
 }
 
 .page-heading {
-    @apply text-5xl tracking-wide font-semibold leading-none;
+    @apply text-5xl font-bold leading-none;
 }
