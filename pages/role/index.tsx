@@ -38,7 +38,7 @@ const RoleIndex = () => {
         data: UserList,
         isLoading,
         mutate,
-    } = useSWRImmutable(['/users', filters], ([url, filters]) => fetchUserList(url, { params: filters }));
+    } = useSWRImmutable(['/roles', filters], ([url, filters]) => fetchUserList(url, { params: filters }));
 
     return (
         <Fragment>
@@ -48,7 +48,7 @@ const RoleIndex = () => {
             <div className="space-y-10">
                 {/* Page Title*/}
                 <div className="page-heading-bar">
-                    <h2 className="page-heading">Users</h2>
+                    <h2 className="page-heading">Roles</h2>
                 </div>
 
                 {/* Data Section  */}
@@ -77,7 +77,7 @@ const RoleIndex = () => {
                                         className="btn mx-auto btn-primary w-fit"
                                         onClick={() => addUserModal.current.open()}
                                     >
-                                        Add user
+                                        Add new role
                                     </button>
                                 )}
                             </div>
@@ -135,27 +135,29 @@ const RoleIndex = () => {
                                                 isActive={filters?.order_field === 'id'}
                                                 isAscending={filters.order === 'asc'}
                                             >
-                                                User Id
+                                                Role Id
                                             </Th>
                                             <Th
-                                                isActive={filters?.order_field === 'first_name'}
+                                                isActive={filters?.order_field === 'name'}
                                                 isAscending={filters.order === 'asc'}
                                             >
                                                 Name
                                             </Th>
 
-                                            <Th noSorting>Email</Th>
-                                            <Th
-                                                isActive={filters?.order_field === 'created_at'}
-                                                isAscending={filters.order === 'asc'}
-                                            >
-                                                Created At
-                                            </Th>
+                                            <Th noSorting>Slug</Th>
+
                                             <Th
                                                 isActive={filters?.order_field === 'status'}
                                                 isAscending={filters.order === 'asc'}
                                             >
                                                 Status
+                                            </Th>
+
+                                            <Th
+                                                isActive={filters?.order_field === 'status'}
+                                                isAscending={filters.order === 'asc'}
+                                            >
+                                                Created By
                                             </Th>
                                             <Th noSorting>Action</Th>
                                         </tr>
@@ -175,19 +177,19 @@ const RoleIndex = () => {
                     <div className="h-[calc(100vh-220px)] flex items-center justify-center text-center">
                         <div className="space-y-5">
                             <Image
-                                src="/assets/images/empty.jpg"
+                                src="/assets/images/empty.svg"
                                 height={100}
                                 width={200}
                                 className="h-44 mx-auto w-44"
                                 alt="no data found"
                             />
-                            <h2 className="text-3xl font-semibold">No users are added yet</h2>
-                            <span className="text-gray-500 text-xl">Add few users to get started</span>
+                            <h2 className="text-3xl font-semibold">No roles are added yet</h2>
+                            <span className="text-gray-500 text-xl">Add few roles to get started</span>
                             <button
                                 className="btn mx-auto btn-primary w-fit"
                                 onClick={() => addUserModal.current.open()}
                             >
-                                Add user
+                                Add new role
                             </button>
                         </div>
                     </div>

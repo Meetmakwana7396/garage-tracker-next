@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import React from 'react';
+import { useHelper } from '@/hooks/useHelper';
 import { useForm } from 'react-hook-form';
 import PasswordField from '../Field/PasswordField';
 import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
-import { useHelper } from '@/hooks/useHelper';
 import toast from '@/libs/toast';
 import IconUserPlus from '../Icon/IconUserPlus';
 
@@ -12,7 +12,7 @@ interface Props {
     refresh: () => void;
     close: () => void;
 }
-interface ICreateUser {
+interface ICreateRole {
     firstName: string;
     lastName: string;
     email: string;
@@ -22,13 +22,13 @@ interface ICreateUser {
     confirmPassword: string;
 }
 
-const AddUser = ({ refresh, close }: Props) => {
+const AddRole = ({ refresh, close }: Props) => {
     const { userStatus } = useHelper();
     const {
         register,
         handleSubmit,
         formState: { isSubmitting, errors },
-    } = useForm<ICreateUser>({
+    } = useForm<ICreateRole>({
         defaultValues: {
             firstName: '',
             lastName: '',
@@ -40,7 +40,7 @@ const AddUser = ({ refresh, close }: Props) => {
         },
     });
 
-    const formHandler = async (values: ICreateUser) => {
+    const formHandler = async (values: ICreateRole) => {
         try {
             if (values.password === values.confirmPassword) {
                 const fd = {
@@ -154,4 +154,4 @@ const AddUser = ({ refresh, close }: Props) => {
     );
 };
 
-export default AddUser;
+export default AddRole;

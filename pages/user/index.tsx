@@ -174,7 +174,7 @@ const UserIndex = () => {
                                                 <div className="h-[calc(100vh-220px)] flex items-center justify-center text-center">
                                                     <div className="space-y-5">
                                                         <Image
-                                                            src="/assets/images/empty.jpg"
+                                                            src="/assets/images/empty.svg"
                                                             height={100}
                                                             width={200}
                                                             className="h-44 mx-auto w-44"
