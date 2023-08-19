@@ -74,7 +74,7 @@ const UserIndex = () => {
                                     <IconSearch />
                                 </button>
                             </div>
-                            {!!!UserList && UserList?.data?.length && (
+                            {!!UserList && UserList?.data?.length && (
                                 <button
                                     className="btn mx-auto btn-primary w-fit"
                                     onClick={() => addUserModal.current.open()}
