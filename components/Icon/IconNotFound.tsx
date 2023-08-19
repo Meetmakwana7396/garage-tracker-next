@@ -10,7 +10,7 @@ const IconMoveLeft = ({ className }: IIcon) => {
             xmlns="http://www.w3.org/2000/svg"
             version="1.1"
             xmlnsXlink="http://www.w3.org/1999/xlink"
-            xmlns:svgjs="http://svgjs.com/svgjs"
+            // xmlns:svgjs="http://svgjs.com/svgjs"
         >
             <defs id="SvgjsDefs1055"></defs>
             <g id="SvgjsG1056">

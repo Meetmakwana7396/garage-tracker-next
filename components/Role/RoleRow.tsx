@@ -7,8 +7,8 @@ import IconTrash from '../Icon/IconTrash';
 import axios from '@/libs/axios';
 import { useHelper } from '@/hooks/useHelper';
 import Sheet from '../Essentials/Sheet';
-import EditUser from './EditUser';
 import { useRef } from 'react';
+import EditUser from '../User/EditUser';
 
 interface IUserRow {
     data: any;
