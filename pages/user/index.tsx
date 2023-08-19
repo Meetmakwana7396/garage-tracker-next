@@ -84,6 +84,7 @@ const UserIndex = () => {
                             )}
                         </div>
                     </div>
+
                     {/* Status Tabs  */}
                     {!!UserList && (
                         <>
@@ -165,7 +166,7 @@ const UserIndex = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {UserList?.data?.length > 0 ? (
+                                            {UserList.data.length > 0 ? (
                                                 UserList.data.map((user: any) => (
                                                     <UserRow data={user} key={user.id} refresh={mutate} />
                                                 ))
