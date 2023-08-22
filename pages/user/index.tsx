@@ -7,12 +7,12 @@ import Pagination from '@/components/Essentials/Pagination';
 import useSWRImmutable from 'swr/immutable';
 import axios from '@/libs/axios';
 import UserRow from '@/components/User/UserRow';
-import Image from 'next/image';
 import 'tippy.js/dist/tippy.css';
 import Sheet from '@/components/Essentials/Sheet';
 import AddUser from '@/components/User/AddUser';
 import clsx from 'clsx';
 import debounce from 'debounce';
+import NoDataFound from '@/components/Essentials/NoDataFound';
 
 const defaultFilters = {
     per_page: 10,
@@ -20,6 +20,7 @@ const defaultFilters = {
     order_field: 'id',
     search: '',
     page: 1,
+    status: '',
 };
 
 const fetchUserList = async (url: any, params: any) => {
@@ -40,6 +41,10 @@ const UserIndex = () => {
         isLoading,
         mutate,
     } = useSWRImmutable(['/users', filters], ([url, filters]) => fetchUserList(url, { params: filters }));
+
+    const manageSorting = (field: string) => {
+        setFilters((prev: any) => ({ ...prev, order_field: field, order: prev.order === 'ASC' ? 'DESC' : 'ASC' }));
+    };
 
     return (
         <Fragment>
@@ -74,25 +79,22 @@ const UserIndex = () => {
                                     <IconSearch />
                                 </button>
                             </div>
-                            {!!UserList && UserList?.data?.length && (
-                                <button
-                                    className="btn mx-auto btn-primary w-fit"
-                                    onClick={() => addUserModal.current.open()}
-                                >
-                                    Add user
-                                </button>
-                            )}
+                            <button
+                                className="btn mx-auto btn-primary w-fit"
+                                onClick={() => addUserModal.current.open()}
+                            >
+                                Add user
+                            </button>
                         </div>
                     </div>
-
-                    {/* Status Tabs  */}
-                    {!!UserList && (
+                    {!!UserList && !!UserList.data.length && (
                         <>
+                            {/* Status Tabs  */}
                             <div className="overflow-auto w-full border border-b-0 dark:border-black-more-light">
                                 <ul className="flex whitespace-nowrap gap-2 sm:flex dark:border-black-more-light">
                                     <TabBlock
                                         onClick={() => {
-                                            // setFilters({ ...filters, status: '' });
+                                            setFilters({ ...filters, status: '' });
                                             setTabs('all');
                                         }}
                                         isActive={tabs === 'all'}
@@ -101,30 +103,39 @@ const UserIndex = () => {
                                     />
                                     <TabBlock
                                         onClick={() => {
-                                            // setFilters({ ...filters, status: '2' });
-                                            setTabs('approved');
+                                            setFilters({ ...filters, status: 'IN_REVIEW' });
+                                            setTabs('IN_REVIEW');
                                         }}
-                                        isActive={tabs === 'approved'}
+                                        isActive={tabs === 'IN_REVIEW'}
                                         count={counts && counts[2]}
-                                        name="Approved"
+                                        name="IN_REVIEW"
                                     />
                                     <TabBlock
                                         onClick={() => {
-                                            // setFilters({ ...filters, status: '1' });
-                                            setTabs('pending');
+                                            setFilters({ ...filters, status: 'APPROVED' });
+                                            setTabs('APPROVED');
                                         }}
-                                        isActive={tabs === 'pending'}
+                                        isActive={tabs === 'APPROVED'}
                                         count={counts && counts[1]}
-                                        name="Pending"
+                                        name="APPROVED"
                                     />
                                     <TabBlock
                                         onClick={() => {
-                                            // setFilters({ ...filters, status: '4' });
-                                            setTabs('deleted');
+                                            setFilters({ ...filters, status: 'ACTIVE' });
+                                            setTabs('ACTIVE');
                                         }}
-                                        isActive={tabs === 'deleted'}
+                                        isActive={tabs === 'ACTIVE'}
                                         count={counts && counts[4]}
-                                        name="Rejected"
+                                        name="ACTIVE"
+                                    />
+                                    <TabBlock
+                                        onClick={() => {
+                                            setFilters({ ...filters, status: 'INACTIVE' });
+                                            setTabs('INACTIVE');
+                                        }}
+                                        isActive={tabs === 'INACTIVE'}
+                                        count={counts && counts[4]}
+                                        name="INACTIVE"
                                     />
                                 </ul>
                             </div>
@@ -138,13 +149,16 @@ const UserIndex = () => {
                                             <tr>
                                                 <Th
                                                     isActive={filters?.order_field === 'id'}
-                                                    isAscending={filters.order === 'asc'}
+                                                    isAscending={filters.order === 'ASC'}
+                                                    onClick={() => manageSorting('id')}
                                                 >
                                                     User Id
                                                 </Th>
                                                 <Th
                                                     isActive={filters?.order_field === 'first_name'}
                                                     isAscending={filters.order === 'asc'}
+                                                    onClick={() => manageSorting('id')}
+
                                                 >
                                                     Name
                                                 </Th>
@@ -166,35 +180,10 @@ const UserIndex = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {UserList.data.length > 0 ? (
+                                            {UserList.data.length > 0 &&
                                                 UserList.data.map((user: any) => (
                                                     <UserRow data={user} key={user.id} refresh={mutate} />
-                                                ))
-                                            ) : (
-                                                <div className="h-[calc(100vh-220px)] flex items-center justify-center text-center">
-                                                    <div className="space-y-5">
-                                                        <Image
-                                                            src="/assets/images/empty.jpg"
-                                                            height={100}
-                                                            width={200}
-                                                            className="h-44 mx-auto w-44"
-                                                            alt="no data found"
-                                                        />
-                                                        <h2 className="text-3xl font-semibold">
-                                                            No users are added yet
-                                                        </h2>
-                                                        <span className="text-gray-500 text-xl">
-                                                            Add few users to get started
-                                                        </span>
-                                                        <button
-                                                            className="btn mx-auto btn-primary w-fit"
-                                                            onClick={() => addUserModal.current.open()}
-                                                        >
-                                                            Add user
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            )}
+                                                ))}
                                         </tbody>
                                     </table>
                                 </div>
@@ -203,6 +192,8 @@ const UserIndex = () => {
                         </>
                     )}
                 </div>
+
+                {!!UserList && !!!UserList.data.length && <NoDataFound />}
 
                 {/* {!UserList && <Loading />} */}
 
