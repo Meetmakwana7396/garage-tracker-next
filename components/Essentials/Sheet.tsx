@@ -36,7 +36,7 @@ const Sheet = forwardRef(({ children, width, button }: SheetProps, ref: Ref<Shee
         <Dialog.Root open={open} onOpenChange={setOpen}>
             {button && <Dialog.Trigger asChild>{button}</Dialog.Trigger>}
             <Dialog.Portal>
-                <Dialog.Overlay className="bg-black/50 fixed inset-0 z-[60] transition-all duration-300 data-[state=closed]:animate-out data-[state=open]:fade-in data-[state=closed]:fade-out">
+                <Dialog.Overlay className="bg-black/50 fixed inset-0 z-[9999] transition-all duration-300 data-[state=closed]:animate-out data-[state=open]:fade-in data-[state=closed]:fade-out">
                     <Dialog.Content
                         onOpenAutoFocus={(e) => {
                             e.preventDefault();
