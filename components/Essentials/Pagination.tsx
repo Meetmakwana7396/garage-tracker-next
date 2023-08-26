@@ -59,7 +59,7 @@ const Pagination: FC<IPagination> = ({ meta, setFilters }) => {
                                     type="number"
                                     className="form-input max-w-[60px] rounded-r-none"
                                     onChange={(e) => {
-                                        e.target.value !== '0' ? setPage(Number(e.target.value)) : '';
+                                        Number(e.target.value) > 0 && setPage(Number(e.target.value));
                                     }}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter') {

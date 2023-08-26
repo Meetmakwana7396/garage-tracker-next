@@ -13,11 +13,8 @@ interface Props {
 interface IEditUser {
     firstName: string;
     lastName: string;
-    email: string;
     role_id: string;
     status: string;
-    password: string;
-    confirmPassword: string;
 }
 
 const EditUser = ({ data, refresh, close }: Props) => {
@@ -30,11 +27,8 @@ const EditUser = ({ data, refresh, close }: Props) => {
         defaultValues: {
             firstName: data?.firstName || '',
             lastName: data?.lastName || '',
-            email: data?.email || '',
             role_id: 'bc48e865-4108-447f-9393-56eed36418e4',
             status: data?.status || '',
-            password: data?.password || '',
-            confirmPassword: data?.confirmPassword || '',
         },
     });
 
@@ -49,6 +43,7 @@ const EditUser = ({ data, refresh, close }: Props) => {
             };
             await axios.post('/users/update', fd);
             refresh();
+            close();
         } catch (error) {}
     };
 
@@ -76,17 +71,6 @@ const EditUser = ({ data, refresh, close }: Props) => {
                             type="text"
                             className="form-input"
                             placeholder="Last name..."
-                        />
-                    </div>
-
-                    <div className={clsx(errors && errors.email && 'has-error', 'sm:col-span-2')}>
-                        <label className="form-label">Email</label>
-                        <input
-                            {...register('email')}
-                            id="email"
-                            type="text"
-                            className="form-input"
-                            placeholder="Email address..."
                         />
                     </div>
 

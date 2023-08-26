@@ -156,9 +156,8 @@ const UserIndex = () => {
                                                 </Th>
                                                 <Th
                                                     isActive={filters?.order_field === 'firstName'}
-                                                    isAscending={filters.order === 'asc'}
+                                                    isAscending={filters.order === 'ASC'}
                                                     onClick={() => manageSorting('firstName')}
-
                                                 >
                                                     Name
                                                 </Th>
@@ -166,15 +165,14 @@ const UserIndex = () => {
                                                 <Th noSorting>Email</Th>
                                                 <Th
                                                     isActive={filters?.order_field === 'createdAt'}
-                                                    isAscending={filters.order === 'asc'}
+                                                    isAscending={filters.order === 'ASC'}
                                                     onClick={() => manageSorting('createdAt')}
-
                                                 >
                                                     Created At
                                                 </Th>
                                                 <Th
                                                     isActive={filters?.order_field === 'status'}
-                                                    isAscending={filters.order === 'asc'}
+                                                    isAscending={filters.order === 'ASC'}
                                                     onClick={() => manageSorting('status')}
                                                 >
                                                     Status

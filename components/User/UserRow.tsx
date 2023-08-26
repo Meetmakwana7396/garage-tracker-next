@@ -54,7 +54,7 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                 </td>
 
                 <td className="max-w-xs flex gap-2">
-                    <Link href={`/attorney/${data?.id}`}>
+                    <Link href={`/user/${data?.id}`}>
                         <Tippy content="View Details">
                             <span>
                                 <IconEye className="action-icon " />
