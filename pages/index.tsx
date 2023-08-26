@@ -52,7 +52,7 @@ const Index = () => {
                                           allCounts?.attorneyData[3]
                                         : 0}
                                 </p>
-                                <p className="font-bold text-md"> Attorneys</p>
+                                <p className="font-bold text-md">Stock</p>
                             </div>
                         </div>
                     </Link>

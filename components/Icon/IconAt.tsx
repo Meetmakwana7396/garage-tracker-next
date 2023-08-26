@@ -1,7 +1,7 @@
 import { IIcon } from '@/types/auth';
 import clsx from 'clsx';
 
-const IconNotFound = ({ className }: IIcon) => {
+const IconAt = ({ className }: IIcon) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -13,12 +13,12 @@ const IconNotFound = ({ className }: IIcon) => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={clsx('lucide lucide-ban', className)}
+            className={clsx('lucide lucide-at-sign', className)}
         >
-            <circle cx="12" cy="12" r="10" />
-            <path d="m4.9 4.9 14.2 14.2" />
+            <circle cx="12" cy="12" r="4" />
+            <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
         </svg>
     );
 };
 
-export default IconNotFound;
+export default IconAt;

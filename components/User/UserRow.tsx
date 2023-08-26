@@ -21,7 +21,7 @@ const UserRow = ({ data, refresh }: IUserRow) => {
 
     const deleteUser = async () => {
         try {
-            if (confirm('Please confirm you action.')) {
+            if (confirm('Please confirm your action.')) {
                 await axios.delete(`/users/${data.id}`);
                 refresh();
             }
@@ -42,7 +42,7 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                     <div className="whitespace-nowrap">{data.email}</div>
                 </td>
                 <td>
-                    <div className="whitespace-nowrap">{formatDate(data.created_at)}</div>
+                    <div className="whitespace-nowrap">{formatDate(data.createdAt)}</div>
                 </td>
                 <td>
                     <div
@@ -54,7 +54,7 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                 </td>
 
                 <td className="max-w-xs flex gap-2">
-                    <Link href={`/attorney/${data?.id}`}>
+                    <Link href={`/user/${data?.id}`}>
                         <Tippy content="View Details">
                             <span>
                                 <IconEye className="action-icon " />

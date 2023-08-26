@@ -3,7 +3,7 @@ import React from 'react';
 
 const InventoryCard = () => {
     return (
-        <div className="border bg-supporting rounded overflow-hidden p-4 hover:-translate-y-2 transition-all duration-300 hover:shadow-3xl cursor-pointer dark:bg-black dark:border-none">
+        <div className="border bg-supporting rounded overflow-hidden p-4 transition-all duration-300 hover:shadow-3xl cursor-pointer dark:bg-black dark:border-none">
             <Image
                 src="/assets/images/sample.jpg"
                 width={200}

@@ -17,7 +17,7 @@ interface ICreateUser {
     lastName: string;
     email: string;
     role_id: string;
-    userStatus: string;
+    status: string;
     password: string;
     confirmPassword: string;
 }
@@ -34,7 +34,7 @@ const AddUser = ({ refresh, close }: Props) => {
             lastName: '',
             email: '',
             role_id: 'bc48e865-4108-447f-9393-56eed36418e4',
-            userStatus: '',
+            status: '',
             password: '',
             confirmPassword: '',
         },
@@ -48,7 +48,7 @@ const AddUser = ({ refresh, close }: Props) => {
                     lastName: values.lastName,
                     email: values.email,
                     role_id: values.role_id,
-                    userStatus: values.userStatus,
+                    status: values.status,
                     password: values.password,
                 };
                 await axios.post('/users/create', fd);
@@ -102,9 +102,9 @@ const AddUser = ({ refresh, close }: Props) => {
                         />
                     </div>
 
-                    <div className={clsx(errors && errors.userStatus && 'has-error')}>
+                    <div className={clsx(errors && errors.status && 'has-error')}>
                         <label className="form-label">Status</label>
-                        <select {...register('userStatus')} className="form-select" placeholder="User status...">
+                        <select {...register('status')} className="form-select" placeholder="User status...">
                             <option value="">Select user status...</option>
                             {userStatus.map((status, index) => (
                                 <option key={index} value={status}>
