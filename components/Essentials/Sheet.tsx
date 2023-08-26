@@ -41,7 +41,7 @@ const Sheet = forwardRef(({ children, width, button }: SheetProps, ref: Ref<Shee
                         onOpenAutoFocus={(e) => {
                             e.preventDefault();
                         }}
-                        className="w-full h-screen absolute overflow-y-auto ease-in-out right-0 transition-transform bg-white shadow-lg p-6 pb-0 outline-none animate-in slide-in-from-right duration-200 dark:bg-black dark:text-white-dark"
+                        className="w-full h-screen absolute overflow-y-auto ease-in-out right-0 transition-transform bg-white shadow-lg p-6 pb-0 border-l dark:border-black-more-light outline-none animate-in slide-in-from-right duration-200 dark:bg-black dark:text-white-dark"
                         style={{ maxWidth: width || '432px' }}
                     >
                         <div>{children}</div>
