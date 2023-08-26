@@ -185,6 +185,7 @@ const UserIndex = () => {
                                                 UserList.data.map((user: any) => (
                                                     <UserRow data={user} key={user.id} refresh={mutate} />
                                                 ))}
+
                                         </tbody>
                                     </table>
                                 </div>

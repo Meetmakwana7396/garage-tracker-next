@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import React from 'react';
+import { useHelper } from '@/hooks/useHelper';
 import { useForm } from 'react-hook-form';
 import PasswordField from '../Field/PasswordField';
 import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
-import { useHelper } from '@/hooks/useHelper';
 import toast from '@/libs/toast';
 import IconUserPlus from '../Icon/IconUserPlus';
 
@@ -12,35 +12,35 @@ interface Props {
     refresh: () => void;
     close: () => void;
 }
-interface ICreateUser {
+interface ICreateRole {
     firstName: string;
     lastName: string;
     email: string;
     role_id: string;
-    status: string;
+    userStatus: string;
     password: string;
     confirmPassword: string;
 }
 
-const AddUser = ({ refresh, close }: Props) => {
+const AddRole = ({ refresh, close }: Props) => {
     const { userStatus } = useHelper();
     const {
         register,
         handleSubmit,
         formState: { isSubmitting, errors },
-    } = useForm<ICreateUser>({
+    } = useForm<ICreateRole>({
         defaultValues: {
             firstName: '',
             lastName: '',
             email: '',
             role_id: 'bc48e865-4108-447f-9393-56eed36418e4',
-            status: '',
+            userStatus: '',
             password: '',
             confirmPassword: '',
         },
     });
 
-    const formHandler = async (values: ICreateUser) => {
+    const formHandler = async (values: ICreateRole) => {
         try {
             if (values.password === values.confirmPassword) {
                 const fd = {
@@ -48,7 +48,7 @@ const AddUser = ({ refresh, close }: Props) => {
                     lastName: values.lastName,
                     email: values.email,
                     role_id: values.role_id,
-                    status: values.status,
+                    userStatus: values.userStatus,
                     password: values.password,
                 };
                 await axios.post('/users/create', fd);
@@ -102,9 +102,9 @@ const AddUser = ({ refresh, close }: Props) => {
                         />
                     </div>
 
-                    <div className={clsx(errors && errors.status && 'has-error')}>
+                    <div className={clsx(errors && errors.userStatus && 'has-error')}>
                         <label className="form-label">Status</label>
-                        <select {...register('status')} className="form-select" placeholder="User status...">
+                        <select {...register('userStatus')} className="form-select" placeholder="User status...">
                             <option value="">Select user status...</option>
                             {userStatus.map((status, index) => (
                                 <option key={index} value={status}>
@@ -154,4 +154,4 @@ const AddUser = ({ refresh, close }: Props) => {
     );
 };
 
-export default AddUser;
+export default AddRole;
