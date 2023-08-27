@@ -10,7 +10,7 @@ const Pop = ({ width, button, children }: any) => (
         <Popover.Portal>
             <Popover.Content
                 className={clsx(
-                    'rounded shadow-3xl bg-white will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade overflow-hidden',
+                    'rounded shadow-3xl z-[999] border shadow bg-white will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade overflow-hidden',
                     width ? width : 'w-fit'
                 )}
                 sideOffset={5}

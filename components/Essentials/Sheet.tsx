@@ -36,12 +36,12 @@ const Sheet = forwardRef(({ children, width, button }: SheetProps, ref: Ref<Shee
         <Dialog.Root open={open} onOpenChange={setOpen}>
             {button && <Dialog.Trigger asChild>{button}</Dialog.Trigger>}
             <Dialog.Portal>
-                <Dialog.Overlay className="bg-black/50 fixed inset-0 z-[60] transition-all duration-300 data-[state=closed]:animate-out data-[state=open]:fade-in data-[state=closed]:fade-out">
+                <Dialog.Overlay className="bg-black/50 fixed inset-0 z-[9999] transition-all duration-300 data-[state=closed]:animate-out data-[state=open]:fade-in data-[state=closed]:fade-out">
                     <Dialog.Content
                         onOpenAutoFocus={(e) => {
                             e.preventDefault();
                         }}
-                        className="w-full h-screen absolute overflow-y-auto ease-in-out right-0 transition-transform bg-white shadow-lg p-6 pb-0 outline-none animate-in slide-in-from-right duration-200 dark:bg-black dark:text-white-dark"
+                        className="w-full h-screen absolute overflow-y-auto ease-in-out right-0 transition-transform bg-white shadow-lg p-6 pb-0 border-l dark:border-black-more-light outline-none animate-in slide-in-from-right duration-200 dark:bg-black dark:text-white-dark"
                         style={{ maxWidth: width || '432px' }}
                     >
                         <div>{children}</div>

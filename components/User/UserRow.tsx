@@ -21,8 +21,10 @@ const UserRow = ({ data, refresh }: IUserRow) => {
 
     const deleteUser = async () => {
         try {
-            await axios.delete(`/users/${data.id}`);
-            refresh();
+            if (confirm('Please confirm your action.')) {
+                await axios.delete(`/users/${data.id}`);
+                refresh();
+            }
         } catch (error) {}
     };
 
@@ -40,7 +42,7 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                     <div className="whitespace-nowrap">{data.email}</div>
                 </td>
                 <td>
-                    <div className="whitespace-nowrap">{formatDate(data.created_at)}</div>
+                    <div className="whitespace-nowrap">{formatDate(data.createdAt)}</div>
                 </td>
                 <td>
                     <div
@@ -52,16 +54,16 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                 </td>
 
                 <td className="max-w-xs flex gap-2">
-                    <Link href={`/attorney/${data?.id}`}>
+                    <Link href={`/user/${data?.id}`}>
                         <Tippy content="View Details">
                             <span>
-                                <IconEye className="action-icon text-secondary" />
+                                <IconEye className="action-icon " />
                             </span>
                         </Tippy>
                     </Link>
                     <Tippy content="Edit User">
                         <span onClick={() => editUserRef?.current?.open()}>
-                            <IconEdit className="action-icon text-secondary" />
+                            <IconEdit className="action-icon " />
                         </span>
                     </Tippy>
                     <Tippy content="Delete User">
@@ -80,7 +82,7 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                 </td>
             </tr>
             <Sheet ref={editUserRef} width="600px">
-                <EditUser data={data} refresh={refresh} close={editUserRef?.current?.close()} />
+                <EditUser data={data} refresh={refresh} close={() => editUserRef?.current?.close()} />
             </Sheet>
         </>
     );

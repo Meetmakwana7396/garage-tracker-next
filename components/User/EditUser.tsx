@@ -13,11 +13,8 @@ interface Props {
 interface IEditUser {
     firstName: string;
     lastName: string;
-    email: string;
     role_id: string;
-    userStatus: string;
-    password: string;
-    confirmPassword: string;
+    status: string;
 }
 
 const EditUser = ({ data, refresh, close }: Props) => {
@@ -30,11 +27,8 @@ const EditUser = ({ data, refresh, close }: Props) => {
         defaultValues: {
             firstName: data?.firstName || '',
             lastName: data?.lastName || '',
-            email: data?.email || '',
             role_id: 'bc48e865-4108-447f-9393-56eed36418e4',
-            userStatus: data?.userStatus || '',
-            password: data?.password || '',
-            confirmPassword: data?.confirmPassword || '',
+            status: data?.status || '',
         },
     });
 
@@ -45,10 +39,11 @@ const EditUser = ({ data, refresh, close }: Props) => {
                 firstName: values.firstName,
                 lastName: values.lastName,
                 role_id: values.role_id,
-                userStatus: values.userStatus,
+                status: values.status,
             };
             await axios.post('/users/update', fd);
             refresh();
+            close();
         } catch (error) {}
     };
 
@@ -79,20 +74,9 @@ const EditUser = ({ data, refresh, close }: Props) => {
                         />
                     </div>
 
-                    <div className={clsx(errors && errors.email && 'has-error', 'sm:col-span-2')}>
-                        <label className="form-label">Email</label>
-                        <input
-                            {...register('email')}
-                            id="email"
-                            type="text"
-                            className="form-input"
-                            placeholder="Email address..."
-                        />
-                    </div>
-
-                    <div className={clsx(errors && errors.userStatus && 'has-error')}>
+                    <div className={clsx(errors && errors.status && 'has-error')}>
                         <label className="form-label">Status</label>
-                        <select {...register('userStatus')} className="form-select" placeholder="User status...">
+                        <select {...register('status')} className="form-select" placeholder="User status...">
                             <option value="">Select user status...</option>
                             {userStatus.map((status, index) => (
                                 <option key={index} value={status}>

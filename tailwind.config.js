@@ -16,7 +16,7 @@ module.exports = {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: '#0096FF',
+                    DEFAULT: '#1376E2',
                     light: '#eaf1ff',
                     'dark-light': 'rgba(67,97,238,.15)',
                 },
@@ -31,7 +31,7 @@ module.exports = {
                     'dark-light': 'rgba(0,171,85,.15)',
                 },
                 danger: {
-                    DEFAULT: '#e7515a',
+                    DEFAULT: '#E4484D',
                     light: '#fff5f5',
                     'dark-light': 'rgba(231,81,90,.15)',
                 },
@@ -73,9 +73,7 @@ module.exports = {
             spacing: {
                 4.5: '18px',
             },
-            boxShadow: {
-                '3xl': 'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',
-            },
+
             typography: ({ theme }) => ({
                 DEFAULT: {
                     css: {
@@ -99,6 +97,7 @@ module.exports = {
         require('@tailwindcss/forms')({
             strategy: 'class',
         }),
+        require('tailwind-scrollbar')({ nocompatible: true }),
         require('@tailwindcss/typography'),
         require('tailwindcss-animate'),
     ],

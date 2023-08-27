@@ -8,30 +8,32 @@ import NextNProgress from 'nextjs-progressbar';
 export default function App({ Component, pageProps }: any) {
     return (
         <Provider store={store}>
-            <NextNProgress color="#0096FF" options={{ showSpinner: false }} />
+            <NextNProgress color="#0096FF" height={1} options={{ showSpinner: false }} />
             <Site layout={Component?.layout || 'default'} middleware={Component?.middleware}>
                 <Component {...pageProps} />
             </Site>
             <Toaster
                 toastOptions={{
                     duration: 5000,
-                    style: { maxWidth: 'none', borderRadius: '4px', color: 'white' },
+                    style: { maxWidth: 'none', borderRadius: '4px', color: 'black' },
                     success: {
                         iconTheme: {
-                            primary: 'white',
-                            secondary: '#00ab55',
+                            primary: 'green',
+                            secondary: 'white',
                         },
                         style: {
-                            background: 'green',
+                            border: '1px solid green',
+                            backgroundColor: '#A9DFBF',
                         },
                     },
                     error: {
                         style: {
-                            background: '#e7515a',
+                            border: '1px solid #e7515a',
+                            background: '#F5B7B1',
                         },
                         iconTheme: {
-                            primary: 'white',
-                            secondary: '#e7515a',
+                            primary: '#e7515a',
+                            secondary: 'white',
                         },
                     },
                 }}
