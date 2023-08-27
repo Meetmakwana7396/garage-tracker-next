@@ -104,19 +104,19 @@ const UserIndex = () => {
                                     />
                                     <TabBlock
                                         onClick={() => {
-                                            setFilters({ ...filters, status: 'IN_REVIEW' });
+                                            setFilters({ ...filters, status: 'ACTIVE' });
                                             setTabs('ACTIVE');
                                         }}
-                                        isActive={tabs === 'IN_REVIEW'}
+                                        isActive={tabs === 'ACTIVE'}
                                         count={counts && counts[2]}
                                         name="ACTIVE"
                                     />
                                     <TabBlock
                                         onClick={() => {
-                                            setFilters({ ...filters, status: 'APPROVED' });
+                                            setFilters({ ...filters, status: 'INACTIVE' });
                                             setTabs('INACTIVE');
                                         }}
-                                        isActive={tabs === 'APPROVED'}
+                                        isActive={tabs === 'INACTIVE'}
                                         count={counts && counts[1]}
                                         name="INACTIVE"
                                     />
@@ -147,6 +147,7 @@ const UserIndex = () => {
                                                 </Th>
 
                                                 <Th noSorting>Created At</Th>
+
                                                 <Th
                                                     isActive={filters?.order_field === 'status'}
                                                     isAscending={filters.order === 'ASC'}

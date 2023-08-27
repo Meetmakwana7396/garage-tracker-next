@@ -37,7 +37,9 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
                 <td>
                     <div className="whitespace-nowrap">{data.name}</div>
                 </td>
-
+                <td>
+                    <div className="whitespace-nowrap">{formatDate(data.createdAt)}</div>
+                </td>
                 <td>
                     <div
                         className={`status capitalize status-${data.status.toLowerCase()}`}
@@ -47,7 +49,6 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
                     </div>
                 </td>
 
-
                 <td className="max-w-xs flex gap-2">
                     <Link href={`/attorney/${data?.id}`}>
                         <Tippy content="View Details">
@@ -56,6 +57,7 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
                             </span>
                         </Tippy>
                     </Link>
+
                     <Tippy content="Edit User">
                         <span onClick={() => editRoleRef?.current?.open()}>
                             <IconEdit className="action-icon " />
