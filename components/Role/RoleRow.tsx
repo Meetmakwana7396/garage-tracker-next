@@ -10,12 +10,12 @@ import Sheet from '../Essentials/Sheet';
 import { useRef } from 'react';
 import EditUser from '../User/EditUser';
 
-interface IUserRow {
+interface IRoleRow {
     data: any;
     refresh: () => void;
 }
 
-const UserRow = ({ data, refresh }: IUserRow) => {
+const RoleRow = ({ data, refresh }: IRoleRow) => {
     const editRoleRef = useRef<any>();
     const { formatDate } = useHelper();
 
@@ -39,10 +39,6 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                 </td>
 
                 <td>
-                    <div className="whitespace-nowrap">{data.slug}</div>
-                </td>
-
-                <td>
                     <div
                         className={`status capitalize status-${data.status.toLowerCase()}`}
                         // className="status status-approved"
@@ -51,9 +47,6 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                     </div>
                 </td>
 
-                <td>
-                    <div className="whitespace-nowrap">{formatDate(data.createdByObject.firstName)}</div>
-                </td>
 
                 <td className="max-w-xs flex gap-2">
                     <Link href={`/attorney/${data?.id}`}>
@@ -90,4 +83,4 @@ const UserRow = ({ data, refresh }: IUserRow) => {
     );
 };
 
-export default UserRow;
+export default RoleRow;
