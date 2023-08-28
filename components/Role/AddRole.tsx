@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
 import IconRole from '../Icon/IconRole';
+import { Switch } from '@radix-ui/react-switch';
+import SwitchDemo from '../Essentials/Switch';
 
 interface Props {
     refresh: () => void;
@@ -47,13 +49,13 @@ const AddRole = ({ refresh, close }: Props) => {
                 Add role
             </h1>
             <form className="styled-form space-y-5" onSubmit={handleSubmit(formHandler)}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className={clsx('col-span-2', errors && errors.name && 'has-error')}>
+                <div className="grid grid-cols-1 gap-4">
+                    <div className={clsx(errors && errors.name && 'has-error')}>
                         <label className="form-label">Role name</label>
                         <input {...register('name')} type="text" className="form-input" placeholder="Name..." />
                     </div>
 
-                    <div className={clsx('col-span-2',errors && errors.role && 'has-error')}>
+                    <div className={clsx(errors && errors.role && 'has-error')}>
                         <label className="form-label">Status</label>
                         <select {...register('role')} className="form-select" placeholder="User status...">
                             <option value="">Select user status...</option>
@@ -63,6 +65,7 @@ const AddRole = ({ refresh, close }: Props) => {
                                 </option>
                             ))}
                         </select>
+                        <SwitchDemo />
                     </div>
                 </div>
 

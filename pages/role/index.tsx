@@ -31,6 +31,15 @@ const fetchRoles = async (url: any, params: any) => {
     } catch (error) {}
 };
 
+const fetchPermissions = async (url: string) => {
+    try {
+        const { data } = await axios.get(url);
+        console.log(data,"permissions");
+
+        return data.data;
+    } catch (error) {}
+};
+
 const UserIndex = () => {
     const addUserModal = useRef<any>(null);
     const [counts, setCounts] = useState(null);
@@ -43,12 +52,13 @@ const UserIndex = () => {
         mutate,
     } = useSWRImmutable(['/roles', filters], ([url, filters]) => fetchRoles(url, { params: filters }));
 
+    const { data: Permissions } = useSWRImmutable(['/features/permissions'], ([url]) => fetchRoles(url));
+
     const manageSorting = (field: string) => {
         setFilters((prev: any) => ({ ...prev, order_field: field, order: prev.order === 'ASC' ? 'DESC' : 'ASC' }));
     };
 
     return (
-
         <Fragment>
             <Head>
                 <title>User | GT</title>
