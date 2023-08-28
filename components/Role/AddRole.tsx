@@ -65,7 +65,7 @@ const AddRole = ({ refresh, close }: Props) => {
                                 </option>
                             ))}
                         </select>
-                        <SwitchDemo />
+                        <SwitchDemo checked={false} />
                     </div>
                 </div>
 
