@@ -2,11 +2,9 @@ import clsx from 'clsx';
 import React from 'react';
 import { useHelper } from '@/hooks/useHelper';
 import { useForm } from 'react-hook-form';
-import PasswordField from '../Field/PasswordField';
 import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
-import toast from '@/libs/toast';
-import IconUserPlus from '../Icon/IconUserPlus';
+import IconRole from '../Icon/IconRole';
 
 interface Props {
     refresh: () => void;
@@ -14,6 +12,7 @@ interface Props {
 }
 interface ICreateRole {
     name: string;
+    role: string;
 }
 
 const AddRole = ({ refresh, close }: Props) => {
@@ -25,6 +24,7 @@ const AddRole = ({ refresh, close }: Props) => {
     } = useForm<ICreateRole>({
         defaultValues: {
             name: '',
+            role: '',
         },
     });
 
@@ -42,17 +42,27 @@ const AddRole = ({ refresh, close }: Props) => {
         <div>
             <h1 className="mb-5 text-xl font-bold items-center flex gap-3">
                 <span className="p-1 rounded text-white bg-primary">
-                    <IconUserPlus className="w-5 h-5" />
+                    <IconRole className="w-5 h-5" />
                 </span>
-                Add user
+                Add role
             </h1>
             <form className="styled-form space-y-5" onSubmit={handleSubmit(formHandler)}>
-                <h1 className="mb-5 text-lg font-semibold">Basic Information</h1>
-
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className={clsx(errors && errors.name && 'has-error')}>
-                        <label className="form-label">First name</label>
+                    <div className={clsx('col-span-2', errors && errors.name && 'has-error')}>
+                        <label className="form-label">Role name</label>
                         <input {...register('name')} type="text" className="form-input" placeholder="Name..." />
+                    </div>
+
+                    <div className={clsx('col-span-2',errors && errors.role && 'has-error')}>
+                        <label className="form-label">Status</label>
+                        <select {...register('role')} className="form-select" placeholder="User status...">
+                            <option value="">Select user status...</option>
+                            {userStatus.map((status, index) => (
+                                <option key={index} value={status}>
+                                    {status}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                 </div>
 

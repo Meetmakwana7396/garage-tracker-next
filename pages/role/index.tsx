@@ -13,6 +13,7 @@ import clsx from 'clsx';
 import debounce from 'debounce';
 import NoDataFound from '@/components/Essentials/NoDataFound';
 import RoleRow from '@/components/Role/RoleRow';
+import AddRole from '@/components/Role/AddRole';
 
 const defaultFilters = {
     per_page: 10,
@@ -177,7 +178,7 @@ const UserIndex = () => {
                 {/* {!Roles && <Loading />} */}
 
                 <Sheet ref={addUserModal} width="600px">
-                    <AddUser
+                    <AddRole
                         refresh={() => {
                             mutate();
                             addUserModal.current.close();
