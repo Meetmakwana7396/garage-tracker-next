@@ -1,24 +1,43 @@
 import clsx from 'clsx';
-import React from 'react';
-import { useHelper } from '@/hooks/useHelper';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
 import IconRole from '../Icon/IconRole';
-import { Switch } from '@radix-ui/react-switch';
-import SwitchDemo from '../Essentials/Switch';
+import RolePermissionBox from './RolePermissionBox';
+import { IPermission } from '@/types/role';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 interface Props {
     refresh: () => void;
     close: () => void;
+    permissions: IPermission[];
 }
 interface ICreateRole {
     name: string;
-    role: string;
 }
 
-const AddRole = ({ refresh, close }: Props) => {
-    const { userStatus } = useHelper();
+const AddRole = ({ refresh, close, permissions }: Props) => {
+    const [permissionArray, setPermissionArray] = useState<string[]>([]);
+
+    const validationSchema = yup.object().shape({
+        name: yup.string().trim().required(),
+    });
+
+    const handlePermissionSelection = (id: string) => {
+        const isPermissionExisting = permissionArray.some((permission) => permission === id);
+
+        if (isPermissionExisting) {
+            // Remove the existing permission
+            const updatedArray = permissionArray.filter((permission) => permission !== id);
+            setPermissionArray(updatedArray);
+        } else {
+            // Add the new permission
+            setPermissionArray([...permissionArray, id]);
+        }
+    };
+
     const {
         register,
         handleSubmit,
@@ -26,17 +45,19 @@ const AddRole = ({ refresh, close }: Props) => {
     } = useForm<ICreateRole>({
         defaultValues: {
             name: '',
-            role: '',
         },
+        resolver: yupResolver(validationSchema),
     });
 
     const formHandler = async (values: ICreateRole) => {
         try {
             const fd = {
                 name: values.name,
+                permissions: permissionArray,
             };
             await axios.post('/roles/create', fd);
             refresh();
+            close();
         } catch (error) {}
     };
 
@@ -54,18 +75,17 @@ const AddRole = ({ refresh, close }: Props) => {
                         <label className="form-label">Role name</label>
                         <input {...register('name')} type="text" className="form-input" placeholder="Name..." />
                     </div>
-
-                    <div className={clsx(errors && errors.role && 'has-error')}>
-                        <label className="form-label">Status</label>
-                        <select {...register('role')} className="form-select" placeholder="User status...">
-                            <option value="">Select user status...</option>
-                            {userStatus.map((status, index) => (
-                                <option key={index} value={status}>
-                                    {status}
-                                </option>
+                    <div>
+                        <label className="form-label">Permissions</label>
+                        <div className="grid sm:grid-cols-2 gap-8 grid-cols-1">
+                            {permissions.map((permission: IPermission) => (
+                                <RolePermissionBox
+                                    permission={permission}
+                                    key={permission.id}
+                                    handlePermissionSelection={handlePermissionSelection}
+                                />
                             ))}
-                        </select>
-                        <SwitchDemo checked={false} />
+                        </div>
                     </div>
                 </div>
 

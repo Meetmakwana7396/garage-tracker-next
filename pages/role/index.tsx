@@ -34,8 +34,6 @@ const fetchRoles = async (url: any, params: any) => {
 const fetchPermissions = async (url: string) => {
     try {
         const { data } = await axios.get(url);
-        console.log(data,"permissions");
-
         return data.data;
     } catch (error) {}
 };
@@ -52,7 +50,7 @@ const UserIndex = () => {
         mutate,
     } = useSWRImmutable(['/roles', filters], ([url, filters]) => fetchRoles(url, { params: filters }));
 
-    const { data: Permissions } = useSWRImmutable(['/features/permissions'], ([url]) => fetchRoles(url));
+    const { data: Permissions } = useSWRImmutable(['/features/permissions'], ([url]) => fetchPermissions(url));
 
     const manageSorting = (field: string) => {
         setFilters((prev: any) => ({ ...prev, order_field: field, order: prev.order === 'ASC' ? 'DESC' : 'ASC' }));
@@ -193,6 +191,7 @@ const UserIndex = () => {
                             mutate();
                             addUserModal.current.close();
                         }}
+                        permissions={Permissions}
                         close={() => addUserModal.current.close()}
                     />
                 </Sheet>
