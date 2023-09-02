@@ -10,12 +10,15 @@ import IconMenu from '../Icon/IconMenu';
 import { toggleSidebar, toggleTheme } from '@/store/siteViewSlice';
 import IconSun from '../Icon/IconSun';
 import IconMoon from '../Icon/IconMoon';
+import PopButton from '../Essentials/PopButton';
+import { useRouter } from 'next/router';
 
 const Header = (props: any) => {
     const themeConfig = useSelector((state: IRootState) => state.site);
+    const { sidebar, isDarkMode } = useSelector((state: IRootState) => state.site);
+    const router = useRouter();
     const { logout } = useAuth();
     const dispatch = useDispatch();
-    const { sidebar, isDarkMode } = useSelector((state: IRootState) => state.site);
 
     return (
         <header className={themeConfig?.semidark && themeConfig?.menu === 'horizontal' ? 'dark' : ''}>
@@ -57,23 +60,18 @@ const Header = (props: any) => {
                             }
                             width="w-[150px]"
                         >
-                            <ul className="!py-0 font-semibold text-sm text-dark dark:text-white-dark dark:text-white-light/90">
-                                <Link
-                                    href="/profile"
-                                    className="dark:hover:text-white flex items-center text-gray-400 px-3 py-2 hover:bg-supporting dark:hover:bg-supporting/10 cursor-pointer"
-                                >
+                            <PopButton onClick={() => router.push('/profile')}>
+                                <div className="flex items-center">
                                     <IconUser className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2" />
                                     Profile
-                                </Link>
-
-                                <button
-                                    className="text-danger w-full flex items-center border-t px-3 py-2 border-white-light dark:border-white-light/10 hover:bg-danger hover:text-white"
-                                    onClick={logout}
-                                >
+                                </div>
+                            </PopButton>
+                            <PopButton onClick={logout} className="text-danger flex hover:bg-danger/20  items-center">
+                                <div className="flex">
                                     <IconLogout className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2 rotate-180" />
                                     Log Out
-                                </button>
-                            </ul>
+                                </div>
+                            </PopButton>
                         </Pop>
                     </div>
                 </div>

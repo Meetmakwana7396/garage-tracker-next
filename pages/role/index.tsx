@@ -1,19 +1,18 @@
 import IconSearch from '@/components/Icon/IconSearch';
 import Head from 'next/head';
+import Th from '@/components/Table/Th';
 import { Fragment, useRef, useState } from 'react';
 import TabBlock from '@/components/Layout/TabBlock';
-import Th from '@/components/Table/Th';
 import Pagination from '@/components/Essentials/Pagination';
 import useSWRImmutable from 'swr/immutable';
 import axios from '@/libs/axios';
-import 'tippy.js/dist/tippy.css';
 import Sheet from '@/components/Essentials/Sheet';
-import AddUser from '@/components/User/AddUser';
 import clsx from 'clsx';
 import debounce from 'debounce';
 import NoDataFound from '@/components/Essentials/NoDataFound';
 import RoleRow from '@/components/Role/RoleRow';
 import AddRole from '@/components/Role/AddRole';
+import 'tippy.js/dist/tippy.css';
 
 const defaultFilters = {
     per_page: 10,

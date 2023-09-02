@@ -10,38 +10,28 @@ interface Props {
     refresh: () => void;
     close: () => void;
 }
-interface IEditUser {
-    firstName: string;
-    lastName: string;
-    role_id: string;
-    status: string;
+interface IEditRoleName {
+    name: string;
 }
 
-const EditUser = ({ data, refresh, close }: Props) => {
-    const { userStatus } = useHelper();
+const EditRoleName = ({ data, refresh, close }: Props) => {
     const {
         register,
         handleSubmit,
         formState: { isSubmitting, errors },
-    } = useForm<IEditUser>({
+    } = useForm<IEditRoleName>({
         defaultValues: {
-            firstName: data?.firstName || '',
-            lastName: data?.lastName || '',
-            role_id: 'bc48e865-4108-447f-9393-56eed36418e4',
-            status: data?.status || '',
+            name: data?.name || '',
         },
     });
 
-    const formHandler = async (values: IEditUser) => {
+    const formHandler = async (values: IEditRoleName) => {
         try {
             const fd = {
                 id: data?.id,
-                firstName: values.firstName,
-                lastName: values.lastName,
-                role_id: values.role_id,
-                status: values.status,
+                name: values.name,
             };
-            await axios.post('/users/update', fd);
+            await axios.post('/roles/update-name', fd);
             refresh();
             close();
         } catch (error) {}
@@ -49,17 +39,12 @@ const EditUser = ({ data, refresh, close }: Props) => {
 
     return (
         <div>
-            <h1 className="mb-5 text-xl font-bold">Edit user</h1>
+            <h1 className="mb-5 text-xl font-bold">Edit role name</h1>
             <form className="styled-form space-y-5" onSubmit={handleSubmit(formHandler)}>
                 <div className="grid grid-cols-1 gap-4">
-                    <div className={clsx(errors && errors.firstName && 'has-error')}>
-                        <label className="form-label">First name</label>
-                        <input
-                            {...register('firstName')}
-                            type="text"
-                            className="form-input"
-                            placeholder="First name..."
-                        />
+                    <div className={clsx(errors && errors.name && 'has-error')}>
+                        <label className="form-label">Name</label>
+                        <input {...register('name')} type="text" className="form-input" placeholder="Role name..." />
                     </div>
                 </div>
 
@@ -76,4 +61,4 @@ const EditUser = ({ data, refresh, close }: Props) => {
     );
 };
 
-export default EditUser;
+export default EditRoleName;

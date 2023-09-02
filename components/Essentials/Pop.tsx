@@ -17,14 +17,11 @@ const Pop = ({ width, button, children }: any) => (
                 alignOffset={10}
                 avoidCollisions
                 collisionPadding={10}
+                align="start"
             >
-                {children}
-                {/* <Popover.Close
-                    className="rounded-full h-[25px] w-[25px] inline-flex items-center justify-center text-violet11 absolute top-[5px] right-[5px] hover:bg-violet4 outline-none cursor-default"
-                    aria-label="Close"
-                >
-                    <IconClose />
-                </Popover.Close> */}
+                <ul className="!p-2 font-semibold text-sm text-dark dark:text-white-dark dark:text-white-light/90">
+                    {children}
+                </ul>
             </Popover.Content>
         </Popover.Portal>
     </Popover.Root>
