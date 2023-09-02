@@ -27,13 +27,10 @@ const AddRole = ({ refresh, close, permissions }: Props) => {
 
     const handlePermissionSelection = (id: string) => {
         const isPermissionExisting = permissionArray.some((permission) => permission === id);
-
         if (isPermissionExisting) {
-            // Remove the existing permission
             const updatedArray = permissionArray.filter((permission) => permission !== id);
             setPermissionArray(updatedArray);
         } else {
-            // Add the new permission
             setPermissionArray([...permissionArray, id]);
         }
     };
@@ -61,15 +58,16 @@ const AddRole = ({ refresh, close, permissions }: Props) => {
         } catch (error) {}
     };
 
+
     return (
         <div>
-            <h1 className="mb-5 text-xl font-bold items-center flex gap-3">
+            <h1 className="mb-5 text-2xl font-bold items-center flex gap-3">
                 <span className="p-1 rounded text-white bg-primary">
                     <IconRole className="w-5 h-5" />
                 </span>
                 Add role
             </h1>
-            <form className="styled-form space-y-5" onSubmit={handleSubmit(formHandler)}>
+            <form className="styled-form border-none space-y-5 !shadow-none" onSubmit={handleSubmit(formHandler)}>
                 <div className="grid grid-cols-1 gap-4">
                     <div className={clsx(errors && errors.name && 'has-error')}>
                         <label className="form-label">Role name</label>
@@ -81,6 +79,7 @@ const AddRole = ({ refresh, close, permissions }: Props) => {
                             {permissions.map((permission: IPermission) => (
                                 <RolePermissionBox
                                     permission={permission}
+                                    permissionArray={permissionArray}
                                     key={permission.id}
                                     handlePermissionSelection={handlePermissionSelection}
                                 />

@@ -1,15 +1,22 @@
 import { IPermission } from '@/types/role';
+import clsx from 'clsx';
 
 interface IProps {
     permission: IPermission;
     handlePermissionSelection: (id: string) => void;
+    permissionArray: string[];
 }
 
-const RolePermissionBox = ({ permission, handlePermissionSelection }: IProps) => {
+const RolePermissionBox = ({ permission, handlePermissionSelection, permissionArray }: IProps) => {
     return (
-        <div className="rounded-lg border overflow-hidden dark:border-black-more-light">
+        <div
+            className={clsx(
+                'rounded-lg border overflow-hidden dark:border-black-more-light',
+                permissionArray.includes(permission.id) && 'border-2 border-primary dark:border-primary'
+            )}
+        >
             <label
-                className="p-3 font-bold flex gap-2 border-b dark:border-black-more-light bg-supporting dark:bg-black-more-light/30 items-center"
+                className="p-3 font-bold flex gap-2 border-b dark:border-black-more-light bg-supporting dark:bg-black-more-light/30 items-center cursor-pointer"
                 htmlFor={permission.id}
             >
                 <input
@@ -25,13 +32,22 @@ const RolePermissionBox = ({ permission, handlePermissionSelection }: IProps) =>
                     {permission.permissions.map((sub_permission) => (
                         <li key={sub_permission.id}>
                             <label
-                                className="gap-1 flex items-center"
+                                className={clsx(
+                                    'gap-1 flex items-center font-normal',
+                                    permissionArray.includes(sub_permission.featureId)
+                                        ? 'pointer-events-none'
+                                        : 'cursor-pointer'
+                                )}
                                 htmlFor={sub_permission.id}
                             >
                                 <input
                                     type="checkbox"
                                     className="form-checkbox"
                                     id={sub_permission.id}
+                                    checked={
+                                        permissionArray.includes(sub_permission.featureId) ||
+                                        permissionArray.includes(sub_permission.id)
+                                    }
                                     onChange={() => handlePermissionSelection(sub_permission.id)}
                                 />
                                 {sub_permission.name}

@@ -9,8 +9,9 @@ const Th = ({ children, isActive, isAscending, noSorting, onClick }: any) => {
                 !!isActive && 'text-primary dark:text-primary',
                 !noSorting && 'hover:text-primary cursor-pointer'
             )}
+            onClick={onClick}
         >
-            <div className={clsx('inline-flex group items-center')} onClick={onClick}>
+            <div className={clsx('inline-flex group items-center')}>
                 {children}
                 {!noSorting && (
                     <IconChevronDown

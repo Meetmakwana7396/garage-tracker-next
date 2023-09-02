@@ -47,7 +47,7 @@ const Sheet = forwardRef(({ children, width, button }: SheetProps, ref: Ref<Shee
                         <div>{children}</div>
                         <Dialog.Close asChild>
                             <button
-                                className="outline-none btn absolute top-4 right-4 bg-gray-300 p-2 rounded-full dark:bg-black-light dark:border-none"
+                                className="outline-none btn absolute top-4 right-4 bg-gray-300 p-2 rounded-full dark:bg-black-more-light dark:border-none"
                                 aria-label="Close"
                             >
                                 {/* <IconClose className="text-black w-5 h-5" /> */}
