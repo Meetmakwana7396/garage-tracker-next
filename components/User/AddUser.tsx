@@ -6,6 +6,7 @@ import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
 import { useHelper } from '@/hooks/useHelper';
 import toast from '@/libs/toast';
+import IconUserPlus from '../Icon/IconUserPlus';
 
 interface Props {
     refresh: () => void;
@@ -60,7 +61,12 @@ const AddUser = ({ refresh, close }: Props) => {
 
     return (
         <div>
-            <h1 className="mb-5 text-xl font-bold">Add user</h1>
+            <h1 className="mb-5 text-xl font-bold items-center flex gap-3">
+                <span className='p-1 rounded text-white bg-primary'>
+                    <IconUserPlus className='w-5 h-5' />
+                </span>
+                Add user
+            </h1>
             <form className="styled-form space-y-5" onSubmit={handleSubmit(formHandler)}>
                 <h1 className="mb-5 text-lg font-semibold">Basic Information</h1>
 

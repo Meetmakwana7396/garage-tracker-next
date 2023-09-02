@@ -60,7 +60,7 @@ const Header = (props: any) => {
                             <ul className="!py-0 font-semibold text-sm text-dark dark:text-white-dark dark:text-white-light/90">
                                 <Link
                                     href="/profile"
-                                    className="dark:hover:text-white flex items-center text-gray-400 px-3 py-2 hover:bg-supporting cursor-pointer"
+                                    className="dark:hover:text-white flex items-center text-gray-400 px-3 py-2 hover:bg-supporting dark:hover:bg-supporting/10 cursor-pointer"
                                 >
                                     <IconUser className="shrink-0 w-5 h-5 ltr:mr-2 rtl:ml-2" />
                                     Profile

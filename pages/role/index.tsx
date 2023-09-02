@@ -6,13 +6,14 @@ import Th from '@/components/Table/Th';
 import Pagination from '@/components/Essentials/Pagination';
 import useSWRImmutable from 'swr/immutable';
 import axios from '@/libs/axios';
-import UserRow from '@/components/User/UserRow';
 import 'tippy.js/dist/tippy.css';
 import Sheet from '@/components/Essentials/Sheet';
 import AddUser from '@/components/User/AddUser';
 import clsx from 'clsx';
 import debounce from 'debounce';
 import NoDataFound from '@/components/Essentials/NoDataFound';
+import RoleRow from '@/components/Role/RoleRow';
+import AddRole from '@/components/Role/AddRole';
 
 const defaultFilters = {
     per_page: 10,
@@ -23,9 +24,16 @@ const defaultFilters = {
     status: '',
 };
 
-const fetchUserList = async (url: any, params: any) => {
+const fetchRoles = async (url: any, params: any) => {
     try {
         const { data } = await axios.get(url, params);
+        return data.data;
+    } catch (error) {}
+};
+
+const fetchPermissions = async (url: string) => {
+    try {
+        const { data } = await axios.get(url);
         return data.data;
     } catch (error) {}
 };
@@ -37,10 +45,12 @@ const UserIndex = () => {
     const [filters, setFilters] = useState<any>(defaultFilters);
 
     const {
-        data: UserList,
+        data: Roles,
         isLoading,
         mutate,
-    } = useSWRImmutable(['/users', filters], ([url, filters]) => fetchUserList(url, { params: filters }));
+    } = useSWRImmutable(['/roles', filters], ([url, filters]) => fetchRoles(url, { params: filters }));
+
+    const { data: Permissions } = useSWRImmutable(['/features/permissions'], ([url]) => fetchPermissions(url));
 
     const manageSorting = (field: string) => {
         setFilters((prev: any) => ({ ...prev, order_field: field, order: prev.order === 'ASC' ? 'DESC' : 'ASC' }));
@@ -54,7 +64,7 @@ const UserIndex = () => {
             <div className="space-y-10">
                 {/* Page Title*/}
                 <div className="page-heading-bar">
-                    <h2 className="page-heading">Users</h2>
+                    <h2 className="page-heading">Roles</h2>
                 </div>
 
                 {/* Data Section  */}
@@ -83,11 +93,11 @@ const UserIndex = () => {
                                 className="btn mx-auto btn-primary w-fit"
                                 onClick={() => addUserModal.current.open()}
                             >
-                                Add user
+                                Add role
                             </button>
                         </div>
                     </div>
-                    {!!UserList && !!UserList.data.length && (
+                    {!!Roles && !!Roles.data.length && (
                         <>
                             {/* Status Tabs  */}
                             <div className="overflow-auto w-full border border-b-0 dark:border-black-more-light">
@@ -103,29 +113,11 @@ const UserIndex = () => {
                                     />
                                     <TabBlock
                                         onClick={() => {
-                                            setFilters({ ...filters, status: 'IN_REVIEW' });
-                                            setTabs('IN_REVIEW');
-                                        }}
-                                        isActive={tabs === 'IN_REVIEW'}
-                                        count={counts && counts[2]}
-                                        name="IN_REVIEW"
-                                    />
-                                    <TabBlock
-                                        onClick={() => {
-                                            setFilters({ ...filters, status: 'APPROVED' });
-                                            setTabs('APPROVED');
-                                        }}
-                                        isActive={tabs === 'APPROVED'}
-                                        count={counts && counts[1]}
-                                        name="APPROVED"
-                                    />
-                                    <TabBlock
-                                        onClick={() => {
                                             setFilters({ ...filters, status: 'ACTIVE' });
                                             setTabs('ACTIVE');
                                         }}
                                         isActive={tabs === 'ACTIVE'}
-                                        count={counts && counts[4]}
+                                        count={counts && counts[2]}
                                         name="ACTIVE"
                                     />
                                     <TabBlock
@@ -134,7 +126,7 @@ const UserIndex = () => {
                                             setTabs('INACTIVE');
                                         }}
                                         isActive={tabs === 'INACTIVE'}
-                                        count={counts && counts[4]}
+                                        count={counts && counts[1]}
                                         name="INACTIVE"
                                     />
                                 </ul>
@@ -152,24 +144,19 @@ const UserIndex = () => {
                                                     isAscending={filters.order === 'ASC'}
                                                     onClick={() => manageSorting('id')}
                                                 >
-                                                    User Id
+                                                    Role Id
                                                 </Th>
+
                                                 <Th
-                                                    isActive={filters?.order_field === 'firstName'}
+                                                    isActive={filters?.order_field === 'name'}
                                                     isAscending={filters.order === 'ASC'}
-                                                    onClick={() => manageSorting('firstName')}
+                                                    onClick={() => manageSorting('name')}
                                                 >
                                                     Name
                                                 </Th>
 
-                                                <Th noSorting>Email</Th>
-                                                <Th
-                                                    isActive={filters?.order_field === 'createdAt'}
-                                                    isAscending={filters.order === 'ASC'}
-                                                    onClick={() => manageSorting('createdAt')}
-                                                >
-                                                    Created At
-                                                </Th>
+                                                <Th noSorting>Created At</Th>
+
                                                 <Th
                                                     isActive={filters?.order_field === 'status'}
                                                     isAscending={filters.order === 'ASC'}
@@ -181,30 +168,30 @@ const UserIndex = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {UserList.data.length > 0 &&
-                                                UserList.data.map((user: any) => (
-                                                    <UserRow data={user} key={user.id} refresh={mutate} />
+                                            {Roles.data.length > 0 &&
+                                                Roles.data.map((user: any) => (
+                                                    <RoleRow data={user} key={user.id} refresh={mutate} />
                                                 ))}
-
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <Pagination meta={UserList?.meta} setFilters={setFilters} />
+                            <Pagination meta={Roles?.meta} setFilters={setFilters} />
                         </>
                     )}
                 </div>
 
-                {!!UserList && !!!UserList.data.length && <NoDataFound />}
+                {!!Roles && !!!Roles.data.length && <NoDataFound />}
 
-                {/* {!UserList && <Loading />} */}
+                {/* {!Roles && <Loading />} */}
 
                 <Sheet ref={addUserModal} width="600px">
-                    <AddUser
+                    <AddRole
                         refresh={() => {
                             mutate();
                             addUserModal.current.close();
                         }}
+                        permissions={Permissions}
                         close={() => addUserModal.current.close()}
                     />
                 </Sheet>
