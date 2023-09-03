@@ -9,22 +9,22 @@ interface Props {
     refresh: () => void;
     close: () => void;
 }
-interface IEditRoleName {
+interface IEditRolePermission {
     name: string;
 }
 
-const EditRoleName = ({ data, refresh, close }: Props) => {
+const EditRolePermission = ({ data, refresh, close }: Props) => {
     const {
         register,
         handleSubmit,
         formState: { isSubmitting, errors },
-    } = useForm<IEditRoleName>({
+    } = useForm<IEditRolePermission>({
         defaultValues: {
             name: data?.name || '',
         },
     });
 
-    const formHandler = async (values: IEditRoleName) => {
+    const formHandler = async (values: IEditRolePermission) => {
         try {
             const fd = {
                 id: data?.id,
@@ -38,11 +38,11 @@ const EditRoleName = ({ data, refresh, close }: Props) => {
 
     return (
         <div>
-            <h1 className="mb-5 text-xl font-bold">Edit role name</h1>
+            <h1 className="mb-5 text-xl font-bold">Edit role permission</h1>
             <form className="styled-form space-y-5" onSubmit={handleSubmit(formHandler)}>
                 <div className="grid grid-cols-1 gap-4">
                     <div className={clsx(errors && errors.name && 'has-error')}>
-                        <label className="form-label">Name</label>
+                        <label className="form-label">permissions</label>
                         <input {...register('name')} type="text" className="form-input" placeholder="Role name..." />
                     </div>
                 </div>
@@ -60,4 +60,4 @@ const EditRoleName = ({ data, refresh, close }: Props) => {
     );
 };
 
-export default EditRoleName;
+export default EditRolePermission;

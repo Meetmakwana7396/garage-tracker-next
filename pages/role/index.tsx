@@ -58,7 +58,7 @@ const UserIndex = () => {
     return (
         <Fragment>
             <Head>
-                <title>User | GT</title>
+                <title>Role - GT</title>
             </Head>
             <div className="space-y-10">
                 {/* Page Title*/}

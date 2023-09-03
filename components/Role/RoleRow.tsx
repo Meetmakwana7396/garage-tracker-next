@@ -12,6 +12,7 @@ import Pop from '../Essentials/Pop';
 import PopButton from '../Essentials/PopButton';
 import EditRoleName from './EditRoleName';
 import IconArrowLeftRight from '../Icon/IconAt copy';
+import EditRolePermission from './EditRolePermission';
 
 interface IRoleRow {
     data: any;
@@ -20,11 +21,12 @@ interface IRoleRow {
 
 const RoleRow = ({ data, refresh }: IRoleRow) => {
     const editRoleNameRef = useRef<any>();
+    const editRolePermissionRef = useRef<any>();
     const { formatDate } = useHelper();
 
     const changeStatus = async (status: string) => {
         try {
-            if (!confirm("Are you sure you want to change this role's status?")) {
+            if (!confirm(`This will change role's status to ${status}`)) {
                 return;
             }
             const fd = {
@@ -98,7 +100,7 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
                         width="w-[150px]"
                     >
                         <PopButton onClick={() => editRoleNameRef.current.open()}>Edit Name</PopButton>
-                        <PopButton>Edit Permissions</PopButton>
+                        <PopButton onClick={() => editRolePermissionRef.current.open()}>Edit Permissions</PopButton>
                     </Pop>
 
                     {data?.status === 4 && (
@@ -112,6 +114,9 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
             </tr>
             <Sheet ref={editRoleNameRef} width="600px">
                 <EditRoleName data={data} refresh={refresh} close={() => editRoleNameRef?.current?.close()} />
+            </Sheet>
+            <Sheet ref={editRolePermissionRef} width="600px">
+                <EditRolePermission data={data} refresh={refresh} close={() => editRoleNameRef?.current?.close()} />
             </Sheet>
         </>
     );
