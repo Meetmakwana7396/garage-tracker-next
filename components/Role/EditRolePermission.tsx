@@ -3,17 +3,19 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
+import { IPermission } from '@/types/role';
 
 interface Props {
     data: any;
     refresh: () => void;
     close: () => void;
+    userPermissions?: IPermission[];
 }
 interface IEditRolePermission {
     name: string;
 }
 
-const EditRolePermission = ({ data, refresh, close }: Props) => {
+const EditRolePermission = ({ data, refresh, close, userPermissions }: Props) => {
     const {
         register,
         handleSubmit,

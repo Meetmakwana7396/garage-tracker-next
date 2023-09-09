@@ -1,7 +1,7 @@
 import IconSearch from '@/components/Icon/IconSearch';
 import Head from 'next/head';
 import Th from '@/components/Table/Th';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import TabBlock from '@/components/Layout/TabBlock';
 import Pagination from '@/components/Essentials/Pagination';
 import useSWRImmutable from 'swr/immutable';
@@ -13,6 +13,8 @@ import NoDataFound from '@/components/Essentials/NoDataFound';
 import RoleRow from '@/components/Role/RoleRow';
 import AddRole from '@/components/Role/AddRole';
 import 'tippy.js/dist/tippy.css';
+import { useDispatch } from 'react-redux';
+import { setPermissions } from '@/store/globalSlice';
 
 const defaultFilters = {
     per_page: 10,
@@ -38,6 +40,7 @@ const fetchPermissions = async (url: string) => {
 };
 
 const UserIndex = () => {
+    const dispatch = useDispatch();
     const addUserModal = useRef<any>(null);
     const [counts, setCounts] = useState(null);
     const [tabs, setTabs] = useState('all');
@@ -54,6 +57,10 @@ const UserIndex = () => {
     const manageSorting = (field: string) => {
         setFilters((prev: any) => ({ ...prev, order_field: field, order: prev.order === 'ASC' ? 'DESC' : 'ASC' }));
     };
+
+    useEffect(() => {
+        dispatch(setPermissions(Permissions));
+    }, [dispatch, Permissions]);
 
     return (
         <Fragment>
@@ -182,8 +189,6 @@ const UserIndex = () => {
                 </div>
 
                 {!!Roles && !!!Roles.data.length && <NoDataFound />}
-
-                {/* {!Roles && <Loading />} */}
 
                 <Sheet ref={addUserModal} width="600px">
                     <AddRole

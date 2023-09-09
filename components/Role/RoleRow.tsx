@@ -3,7 +3,6 @@ import IconEdit from '../Icon/IconEdit';
 import Tippy from '@tippyjs/react';
 import IconEye from '../Icon/IconEye';
 import Link from 'next/link';
-import IconTrash from '../Icon/IconTrash';
 import axios from '@/libs/axios';
 import { useHelper } from '@/hooks/useHelper';
 import Sheet from '../Essentials/Sheet';
@@ -36,6 +35,10 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
             await axios.post('/roles/update-status', fd);
             refresh();
         } catch (error) {}
+    };
+
+    const getUserPermissions = async () => {
+
     };
 
     return (
@@ -91,7 +94,7 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
 
                     <Pop
                         button={
-                            <Tippy content="Edit User">
+                            <Tippy content="Edit Role">
                                 <span>
                                     <IconEdit className="action-icon " />
                                 </span>
@@ -116,7 +119,12 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
                 <EditRoleName data={data} refresh={refresh} close={() => editRoleNameRef?.current?.close()} />
             </Sheet>
             <Sheet ref={editRolePermissionRef} width="600px">
-                <EditRolePermission data={data} refresh={refresh} close={() => editRoleNameRef?.current?.close()} />
+                <EditRolePermission
+                    data={data}
+                    refresh={refresh}
+                    // userPermissions={}
+                    close={() => editRoleNameRef?.current?.close()}
+                />
             </Sheet>
         </>
     );

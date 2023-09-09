@@ -3,6 +3,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 interface Props {
     data: any;
@@ -14,6 +16,10 @@ interface IEditRoleName {
 }
 
 const EditRoleName = ({ data, refresh, close }: Props) => {
+    const validationSchema = yup.object().shape({
+        name: yup.string().required(),
+    });
+
     const {
         register,
         handleSubmit,
@@ -22,6 +28,7 @@ const EditRoleName = ({ data, refresh, close }: Props) => {
         defaultValues: {
             name: data?.name || '',
         },
+        resolver: yupResolver(validationSchema),
     });
 
     const formHandler = async (values: IEditRoleName) => {
