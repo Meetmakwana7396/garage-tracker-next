@@ -40,7 +40,7 @@ const Pagination: FC<IPagination> = ({ meta, setFilters }) => {
                 <div className="ml-auto flex flex-col items-end gap-2 sm:flex-row sm:items-center">
                     <select
                         value={meta?.per_page}
-                        className="form-select w-fit pr-7"
+                        className="form-select w-fit h-full pr-7"
                         onChange={(e) => setFilters((prev: any) => ({ ...prev, per_page: e.target.value }))}
                     >
                         {perPageOption.map((option) => {
@@ -75,7 +75,7 @@ const Pagination: FC<IPagination> = ({ meta, setFilters }) => {
                                     Go
                                 </button>
                             </div>
-                            <div>
+                            <div className='text-lg'>
                                 {meta?.current_page} of {meta?.last_page} page(s)
                             </div>
                         </>

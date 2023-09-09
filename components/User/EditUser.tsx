@@ -49,9 +49,8 @@ const EditUser = ({ data, refresh, close }: Props) => {
 
     return (
         <div>
-            <h1 className="mb-5 text-xl font-bold">Edit user</h1>
+            <h1 className="mb-5 text-2xl font-bold">Edit user</h1>
             <form className="styled-form space-y-5" onSubmit={handleSubmit(formHandler)}>
-                <h1 className="mb-5 text-lg font-semibold">Basic Information</h1>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className={clsx(errors && errors.firstName && 'has-error')}>

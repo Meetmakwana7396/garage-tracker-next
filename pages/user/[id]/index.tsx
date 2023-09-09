@@ -31,7 +31,7 @@ const UserDetail = () => {
 
     return (
         <div className="space-y-10">
-            <div className="container max-w-3xl break-words flex justify-center">
+            <div className="container max-w-6xl break-words flex justify-center">
                 <div className="!w-full space-y-8">
                     <CenteredPageTitle title="User Details" />
                     <div className="dark:bg-black bg-supporting rounded p-4">
@@ -41,8 +41,8 @@ const UserDetail = () => {
                                 Basic Details
                             </div>
                             <Tippy content="Edit User">
-                                <span onClick={() => editUserRef?.current?.open()}>
-                                    <IconEdit className="action-icon " />
+                                <span onClick={() => editUserRef?.current?.open()} className='p-1.5 hover:bg-black/10 dark:hover:bg-supporting/10 cursor-pointer rounded hover:text-primary'>
+                                    <IconEdit/>
                                 </span>
                             </Tippy>
                         </h2>

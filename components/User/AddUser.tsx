@@ -61,14 +61,13 @@ const AddUser = ({ refresh, close }: Props) => {
 
     return (
         <div>
-            <h1 className="mb-5 text-xl font-bold items-center flex gap-3">
+            <h1 className="mb-5 text-2xl font-bold items-center flex gap-3">
                 <span className='p-1 rounded text-white bg-primary'>
                     <IconUserPlus className='w-5 h-5' />
                 </span>
                 Add user
             </h1>
             <form className="styled-form space-y-5" onSubmit={handleSubmit(formHandler)}>
-                <h1 className="mb-5 text-lg font-semibold">Basic Information</h1>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className={clsx(errors && errors.firstName && 'has-error')}>

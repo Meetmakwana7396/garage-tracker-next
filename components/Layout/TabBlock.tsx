@@ -2,7 +2,7 @@ import React from 'react';
 
 const TabBlock = ({ name, onClick, isActive, count }: any) => {
     return (
-        <li className="inline-block">
+        <li className="inline-block text-lg">
             <button
                 onClick={onClick}
                 className={`flex gap-2 border-t-4 border-transparent p-3 hover:border-secondary dark:hover:border-black-more-light hover:text-primary ${
@@ -11,9 +11,9 @@ const TabBlock = ({ name, onClick, isActive, count }: any) => {
             >
                 <p>
                     {name}
-                    <span className="inline-block ml-1 px-[5px] text-xs rounded-full bg-[#BDEE63]/80 text-black">
+                    <div className="inline-block ml-1 w-5 h-5 text-sm rounded-full bg-[#BDEE63]/80 text-black">
                         {count || 0}
-                    </span>
+                    </div>
                 </p>
             </button>
         </li>

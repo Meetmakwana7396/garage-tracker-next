@@ -180,7 +180,7 @@
 
     /* Buttons */
     .btn {
-        @apply relative flex items-center justify-center rounded border px-5 py-2 text-sm font-semibold outline-none transition duration-300 hover:text-white hover:bg-black hover:border-black dark:hover:bg-white dark:hover:text-black;
+        @apply relative flex items-center justify-center rounded border px-5 py-2 text-lg font-semibold outline-none transition duration-300 hover:text-white hover:bg-black hover:border-black dark:hover:bg-white dark:hover:text-black;
     }
     .btn-lg {
         @apply px-7 py-2.5 text-base;
@@ -281,7 +281,7 @@
     .form-textarea,
     .form-select,
     .form-multiselect {
-        @apply w-full rounded border border-white-light bg-white px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-black-more-light dark:bg-transparent dark:text-white-dark dark:focus:border-primary dark:autofill:shadow-[inset_0_0_0px_1000px_rgb(23,38,60)] dark:autofill:text-white;
+        @apply w-full rounded border border-white-light bg-white px-4 py-2 text-lg font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-black-more-light dark:bg-transparent dark:text-white-dark dark:focus:border-primary dark:autofill:shadow-[inset_0_0_0px_1000px_rgb(23,38,60)] dark:autofill:text-white;
     }
 
     input:-webkit-autofill {
@@ -454,7 +454,7 @@
         @apply overflow-auto;
     }
     table {
-        @apply w-full !border-collapse border dark:border-black-more-light;
+        @apply w-full !border-collapse border border-t-0 dark:border-black-more-light text-lg;
     }
     table thead tr,
     table tfoot tr {
@@ -470,7 +470,7 @@
         @apply text-black dark:text-white-dark;
     }
     table tbody tr {
-        @apply;
+        @apply ;
     }
     table.table-hover tbody tr {
         @apply hover:!bg-white-light/50 dark:hover:!bg-[#1a2941]/40;
@@ -670,7 +670,7 @@ pre.hljs {
 
 /* Speciality Status  */
 .status {
-    @apply relative w-fit rounded-full z-0 px-2 py-0.5 text-xs text-center font-semibold text-white dark:text-black bg-black;
+    @apply relative w-fit rounded-full z-0 px-2 py-0.5 text-sm text-center font-semibold text-white dark:text-black bg-black;
 }
 
 .status-primary,
@@ -698,7 +698,7 @@ pre.hljs {
 }
 
 .styled-form {
-    @apply rounded-md border shadow bg-transparent px-6 py-8 dark:border-black-more-light h-fit;
+    @apply rounded-md text-lg shadow bg-transparent px-6 py-8 dark:border-black-more-light h-fit;
 }
 
 .page-heading-bar {

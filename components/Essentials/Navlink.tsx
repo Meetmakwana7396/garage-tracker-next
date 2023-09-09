@@ -16,13 +16,11 @@ const NavLink: FC<INavLink> = ({ href, icon, children, active, target, rel }) =>
         <Link href={href} target={target} rel={rel}>
             <div
                 className={clsx(
-                    'flex gap-6 py-2 px-6 items-center group',
+                    'flex gap-6 py-2 px-6 items-center group text-lg',
                     active && 'font-bold border-r-4 border-primary'
                 )}
             >
-                <span className={clsx('text-xl', !!active ? 'text-primary' : ' group-hover:text-gray-500')}>
-                    {icon}
-                </span>
+                <span className={clsx(!!active ? 'text-primary' : ' group-hover:text-gray-500')}>{icon}</span>
                 <span className={clsx(!!active ? 'text-primary' : ' group-hover:text-gray-500')}>{children}</span>
             </div>
         </Link>

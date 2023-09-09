@@ -60,21 +60,21 @@ const UserIndex = () => {
             <Head>
                 <title>Role - GT</title>
             </Head>
-            <div className="space-y-10">
+            <div className="space-y-10 container max-w-7xl">
                 {/* Page Title*/}
                 <div className="page-heading-bar">
                     <h2 className="page-heading">Roles</h2>
                 </div>
 
                 {/* Data Section  */}
-                <div className="container max-w-[1600px]">
+                <div className="max-w-[1600px]">
                     {/* Filters */}
                     <div className="flex justify-end mb-5">
                         <div className="flex gap-4">
                             <div className="relative">
                                 <input
                                     type="text"
-                                    className="form-input"
+                                    className="form-input h-full"
                                     placeholder="Search..."
                                     onChange={debounce(
                                         (e: any) => setFilters({ ...filters, search: e.target.value }),
@@ -83,7 +83,7 @@ const UserIndex = () => {
                                 />
                                 <button
                                     type="button"
-                                    className="text-black-dark absolute top-0 right-0 my-auto inline-flex h-10 w-10 items-center justify-center hover:opacity-70"
+                                    className="text-black-dark absolute right-0 inline-flex h-full px-3 items-center justify-center hover:opacity-70"
                                 >
                                     <IconSearch />
                                 </button>
@@ -96,41 +96,42 @@ const UserIndex = () => {
                             </button>
                         </div>
                     </div>
+
+                    {/* Status Tabs  */}
+                    <div className="overflow-auto w-full border dark:border-black-more-light">
+                        <ul className="flex whitespace-nowrap gap-2 sm:flex dark:border-black-more-light">
+                            <TabBlock
+                                onClick={() => {
+                                    setFilters({ ...filters, status: '' });
+                                    setTabs('all');
+                                }}
+                                isActive={tabs === 'all'}
+                                count={counts && counts[1] + counts[2] + counts[3]}
+                                name="All"
+                            />
+                            <TabBlock
+                                onClick={() => {
+                                    setFilters({ ...filters, status: 'ACTIVE' });
+                                    setTabs('ACTIVE');
+                                }}
+                                isActive={tabs === 'ACTIVE'}
+                                count={counts && counts[2]}
+                                name="ACTIVE"
+                            />
+                            <TabBlock
+                                onClick={() => {
+                                    setFilters({ ...filters, status: 'INACTIVE' });
+                                    setTabs('INACTIVE');
+                                }}
+                                isActive={tabs === 'INACTIVE'}
+                                count={counts && counts[1]}
+                                name="INACTIVE"
+                            />
+                        </ul>
+                    </div>
+                    {/* Table  */}
                     {!!Roles && !!Roles.data.length && (
                         <>
-                            {/* Status Tabs  */}
-                            <div className="overflow-auto w-full border border-b-0 dark:border-black-more-light">
-                                <ul className="flex whitespace-nowrap gap-2 sm:flex dark:border-black-more-light">
-                                    <TabBlock
-                                        onClick={() => {
-                                            setFilters({ ...filters, status: '' });
-                                            setTabs('all');
-                                        }}
-                                        isActive={tabs === 'all'}
-                                        count={counts && counts[1] + counts[2] + counts[3]}
-                                        name="All"
-                                    />
-                                    <TabBlock
-                                        onClick={() => {
-                                            setFilters({ ...filters, status: 'ACTIVE' });
-                                            setTabs('ACTIVE');
-                                        }}
-                                        isActive={tabs === 'ACTIVE'}
-                                        count={counts && counts[2]}
-                                        name="ACTIVE"
-                                    />
-                                    <TabBlock
-                                        onClick={() => {
-                                            setFilters({ ...filters, status: 'INACTIVE' });
-                                            setTabs('INACTIVE');
-                                        }}
-                                        isActive={tabs === 'INACTIVE'}
-                                        count={counts && counts[1]}
-                                        name="INACTIVE"
-                                    />
-                                </ul>
-                            </div>
-                            {/* Table  */}
                             <div className="overflow-hidden p-0 mb-5">
                                 <div className="table-responsive">
                                     <table

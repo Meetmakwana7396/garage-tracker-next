@@ -35,7 +35,7 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                     <div className="whitespace-nowrap">{data.id}</div>
                 </td>
                 <td>
-                    <div className="whitespace-nowrap">{data.firstName}</div>
+                    <div className="whitespace-nowrap max-w-[150px] truncate">{data.firstName}{' '}{data.lastName}</div>
                 </td>
 
                 <td>
