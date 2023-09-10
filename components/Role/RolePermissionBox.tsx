@@ -4,15 +4,15 @@ import clsx from 'clsx';
 interface IProps {
     permission: IPermission;
     handlePermissionSelection: (id: string) => void;
-    permissionArray: string[];
+    selectedPermissionArray: string[];
 }
 
-const RolePermissionBox = ({ permission, handlePermissionSelection, permissionArray }: IProps) => {
+const RolePermissionBox = ({ permission, handlePermissionSelection, selectedPermissionArray }: IProps) => {
     return (
         <div
             className={clsx(
                 'rounded-lg border overflow-hidden dark:border-black-more-light',
-                permissionArray.includes(permission.id) && 'border-2 border-primary dark:border-primary'
+                selectedPermissionArray.includes(permission.id) && 'border-2 border-primary dark:border-primary'
             )}
         >
             <label
@@ -34,7 +34,7 @@ const RolePermissionBox = ({ permission, handlePermissionSelection, permissionAr
                             <label
                                 className={clsx(
                                     'gap-1 flex items-center font-normal',
-                                    permissionArray.includes(sub_permission.featureId)
+                                    selectedPermissionArray.includes(sub_permission.featureId)
                                         ? 'pointer-events-none'
                                         : 'cursor-pointer'
                                 )}
@@ -45,8 +45,8 @@ const RolePermissionBox = ({ permission, handlePermissionSelection, permissionAr
                                     className="form-checkbox"
                                     id={sub_permission.id}
                                     checked={
-                                        permissionArray.includes(sub_permission.featureId) ||
-                                        permissionArray.includes(sub_permission.id)
+                                        selectedPermissionArray.includes(sub_permission.featureId) ||
+                                        selectedPermissionArray.includes(sub_permission.id)
                                     }
                                     onChange={() => handlePermissionSelection(sub_permission.id)}
                                 />

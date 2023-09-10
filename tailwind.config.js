@@ -14,9 +14,6 @@ module.exports = {
         },
 
         extend: {
-            fontSize: {
-                base: '1.5rem',
-            },
             colors: {
                 primary: {
                     DEFAULT: '#1376E2',

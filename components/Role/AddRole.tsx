@@ -79,7 +79,7 @@ const AddRole = ({ refresh, close, permissions }: Props) => {
                             {permissions.map((permission: IPermission) => (
                                 <RolePermissionBox
                                     permission={permission}
-                                    permissionArray={permissionArray}
+                                    selectedPermissionArray={permissionArray}
                                     key={permission.id}
                                     handlePermissionSelection={handlePermissionSelection}
                                 />

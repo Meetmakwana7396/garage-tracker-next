@@ -37,10 +37,6 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
         } catch (error) {}
     };
 
-    const getUserPermissions = async () => {
-
-    };
-
     return (
         <>
             <tr key={data.id}>
@@ -123,7 +119,7 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
                     data={data}
                     refresh={refresh}
                     // userPermissions={}
-                    close={() => editRoleNameRef?.current?.close()}
+                    close={() => editRolePermissionRef?.current?.close()}
                 />
             </Sheet>
         </>

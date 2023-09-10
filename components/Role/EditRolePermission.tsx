@@ -1,9 +1,11 @@
 import clsx from 'clsx';
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
 import { IPermission } from '@/types/role';
+import RolePermissionBox from './RolePermissionBox';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 interface Props {
     data: any;
@@ -16,21 +18,29 @@ interface IEditRolePermission {
 }
 
 const EditRolePermission = ({ data, refresh, close, userPermissions }: Props) => {
-    const {
-        register,
-        handleSubmit,
-        formState: { isSubmitting, errors },
-    } = useForm<IEditRolePermission>({
-        defaultValues: {
-            name: data?.name || '',
-        },
-    });
+    const { permissions } = useSelector((state: any) => state.global);
+    const [selectedPermissionArray, setSelectedPermissionArray] = useState<string[]>([]);
 
-    const formHandler = async (values: IEditRolePermission) => {
+    const handlePermissionSelection = (id: string) => {
+        const isPermissionExisting = selectedPermissionArray.some((permission) => permission === id);
+        if (isPermissionExisting) {
+            const updatedArray = selectedPermissionArray.filter((permission) => permission !== id);
+            setSelectedPermissionArray(updatedArray);
+        } else {
+            setSelectedPermissionArray([...selectedPermissionArray, id]);
+        }
+    };
+
+    useEffect(() => {
+        console.log("bro");
+
+    }, []);
+
+    const formHandler = async () => {
         try {
             const fd = {
                 id: data?.id,
-                name: values.name,
+                permissions: selectedPermissionArray,
             };
             await axios.post('/roles/update-name', fd);
             refresh();
@@ -41,16 +51,25 @@ const EditRolePermission = ({ data, refresh, close, userPermissions }: Props) =>
     return (
         <div>
             <h1 className="mb-5 text-xl font-bold">Edit role permission</h1>
-            <form className="styled-form space-y-5" onSubmit={handleSubmit(formHandler)}>
+            <form className="styled-form space-y-5" onSubmit={formHandler}>
                 <div className="grid grid-cols-1 gap-4">
-                    <div className={clsx(errors && errors.name && 'has-error')}>
-                        <label className="form-label">permissions</label>
-                        <input {...register('name')} type="text" className="form-input" placeholder="Role name..." />
+                    <div>
+                        <label className="form-label">Permissions</label>
+                        <div className="grid sm:grid-cols-2 gap-8 grid-cols-1">
+                            {permissions.map((permission: IPermission) => (
+                                <RolePermissionBox
+                                    permission={permission}
+                                    selectedPermissionArray={selectedPermissionArray}
+                                    key={permission.id}
+                                    handlePermissionSelection={handlePermissionSelection}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
 
                 <div className="modal-button-bar">
-                    <FieldButton type="submit" loading={isSubmitting} className="btn btn-primary">
+                    <FieldButton type="submit" className="btn btn-primary">
                         Submit
                     </FieldButton>
                     <button className="btn btn-ghost" onClick={close}>
