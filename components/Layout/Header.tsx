@@ -27,7 +27,7 @@ const Header = (props: any) => {
                     {
                         <span
                             onClick={() => dispatch(toggleSidebar())}
-                            className={`cursor-pointer hover:bg-black-light rounded-full rotate-180 p-2 lg:hidden ${
+                            className={`cursor-pointer hover:bg-black-supporting/10 rounded-full rotate-180 p-2 lg:hidden ${
                                 sidebar && 'lg:hidden'
                             }`}
                         >

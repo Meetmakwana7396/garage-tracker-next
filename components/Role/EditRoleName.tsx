@@ -7,7 +7,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 interface Props {
-    data: any;
+    role: any;
     refresh: () => void;
     close: () => void;
 }
@@ -15,7 +15,7 @@ interface IEditRoleName {
     name: string;
 }
 
-const EditRoleName = ({ data, refresh, close }: Props) => {
+const EditRoleName = ({ role, refresh, close }: Props) => {
     const validationSchema = yup.object().shape({
         name: yup.string().required(),
     });
@@ -26,7 +26,7 @@ const EditRoleName = ({ data, refresh, close }: Props) => {
         formState: { isSubmitting, errors },
     } = useForm<IEditRoleName>({
         defaultValues: {
-            name: data?.name || '',
+            name: role?.name || '',
         },
         resolver: yupResolver(validationSchema),
     });
@@ -34,7 +34,7 @@ const EditRoleName = ({ data, refresh, close }: Props) => {
     const formHandler = async (values: IEditRoleName) => {
         try {
             const fd = {
-                id: data?.id,
+                id: role?.id,
                 name: values.name,
             };
             await axios.post('/roles/update-name', fd);

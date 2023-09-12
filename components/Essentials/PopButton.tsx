@@ -14,7 +14,7 @@ const PopButton = ({ children, className, onClick }: IProps) => {
             onClick={onClick}
             className={clsx(
                 'p-2 text-start rounded w-full',
-                className ? className : ' hover:bg-black/10 dark:hover:bg-supporting/10 '
+                className ? className : ' hover:bg-black/10 dark:text-white-dark dark:hover:bg-black-light'
             )}
         >
             {children}

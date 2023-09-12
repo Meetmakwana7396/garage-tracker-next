@@ -105,8 +105,8 @@ const UserIndex = () => {
                     </div>
 
                     {/* Status Tabs  */}
-                    <div className="overflow-auto w-full border dark:border-black-more-light">
-                        <ul className="flex whitespace-nowrap gap-2 sm:flex dark:border-black-more-light">
+                    <div className="overflow-auto w-full border dark:border-supporting/10">
+                        <ul className="flex whitespace-nowrap gap-2 sm:flex dark:border-supporting/10">
                             <TabBlock
                                 onClick={() => {
                                     setFilters({ ...filters, status: '' });
@@ -176,8 +176,8 @@ const UserIndex = () => {
                                         </thead>
                                         <tbody>
                                             {Roles.data.length > 0 &&
-                                                Roles.data.map((user: any) => (
-                                                    <RoleRow data={user} key={user.id} refresh={mutate} />
+                                                Roles.data.map((role: any) => (
+                                                    <RoleRow role={role} key={role.id} refresh={mutate} />
                                                 ))}
                                         </tbody>
                                     </table>

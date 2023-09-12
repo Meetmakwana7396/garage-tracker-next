@@ -76,7 +76,7 @@ const InventoryIndex = () => {
                     {/* Filters */}
                     <div className="flex justify-between mb-3">
                         {/* Layout Switch  */}
-                        <div className=" flex rounded border dark:border-transparent dark:bg-black-light overflow-hidden p-1">
+                        <div className=" flex rounded border dark:border-transparent dark:bg-black-supporting/10 overflow-hidden p-1">
                             <div
                                 className={clsx(
                                     'py-2 px-2 rounded-[2px] cursor-pointer text-gray-500',
@@ -120,8 +120,8 @@ const InventoryIndex = () => {
                     {/* Status Tabs  */}
                     {layout === 'table' ? (
                         <>
-                            <div className="overflow-auto w-full border border-b-0 dark:border-black-more-light">
-                                <ul className="flex whitespace-nowrap gap-2 dark:border-black-more-light sm:flex">
+                            <div className="overflow-auto w-full border border-b-0 dark:border-supporting/10">
+                                <ul className="flex whitespace-nowrap gap-2 dark:border-supporting/10 sm:flex">
                                     <TabBlock
                                         onClick={() => {
                                             setParams({ ...params, status: '' });

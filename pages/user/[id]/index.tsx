@@ -34,14 +34,14 @@ const UserDetail = () => {
             <div className="container max-w-6xl break-words flex justify-center">
                 <div className="!w-full space-y-8">
                     <CenteredPageTitle title="User Details" />
-                    <div className="dark:bg-black bg-supporting rounded p-4">
+                    <div className="dark:bg-black-light bg-supporting rounded p-4">
                         <h2 className="text-3xl items-center flex mb-4 justify-between">
                             <div className="flex items-center gap-3">
                                 <IconFile />
                                 Basic Details
                             </div>
                             <Tippy content="Edit User">
-                                <span onClick={() => editUserRef?.current?.open()} className='p-1.5 hover:bg-black/10 dark:hover:bg-supporting/10 cursor-pointer rounded hover:text-primary'>
+                                <span onClick={() => editUserRef?.current?.open()} className='p-1.5 hover:bg-black/10 dark:hover:bg-black-light cursor-pointer rounded hover:text-primary'>
                                     <IconEdit/>
                                 </span>
                             </Tippy>

@@ -35,7 +35,9 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                     <div className="whitespace-nowrap">{data.id}</div>
                 </td>
                 <td>
-                    <div className="whitespace-nowrap max-w-[150px] truncate">{data.firstName}{' '}{data.lastName}</div>
+                    <div className="whitespace-nowrap max-w-[150px] truncate">
+                        {data.firstName} {data.lastName}
+                    </div>
                 </td>
 
                 <td>
@@ -49,7 +51,7 @@ const UserRow = ({ data, refresh }: IUserRow) => {
                         className={`status capitalize status-${(data?.status).toLowerCase()}`}
                         // className="status status-approved"
                     >
-                        {data?.status}
+                        {(data?.status).replace('_', '')}
                     </div>
                 </td>
 

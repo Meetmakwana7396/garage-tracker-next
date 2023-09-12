@@ -12,7 +12,7 @@
     }
 
     body.dark {
-        @apply bg-[#02091a] scrollbar-thumb-gray-700 scrollbar-track-gray-900;
+        @apply bg-[#000] scrollbar-thumb-gray-700 scrollbar-track-gray-900;
     }
 
     /* Panel */
@@ -281,7 +281,7 @@
     .form-textarea,
     .form-select,
     .form-multiselect {
-        @apply w-full rounded border border-white-light bg-white px-4 py-2 text-lg font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-black-more-light dark:bg-transparent dark:text-white-dark dark:focus:border-primary dark:autofill:shadow-[inset_0_0_0px_1000px_rgb(23,38,60)] dark:autofill:text-white;
+        @apply w-full rounded border border-white-light bg-white px-4 py-2 text-lg font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-supporting/10 dark:bg-transparent dark:text-white-dark dark:focus:border-primary dark:autofill:shadow-[inset_0_0_0px_1000px_rgb(23,38,60)] dark:autofill:text-white;
     }
 
     input:-webkit-autofill {
@@ -373,7 +373,7 @@
     .form-radio,
     .form-checkbox {
         @apply h-5 w-5 cursor-pointer rounded border-2 border-white-light bg-transparent text-primary !shadow-none !outline-none !ring-0 !ring-offset-0 checked:bg-[length:90%_90%] disabled:cursor-not-allowed disabled:bg-[#eee] ltr:mr-1.5 rtl:ml-1.5
-      dark:border-[#253b5c] dark:checked:border-transparent dark:disabled:bg-[#1b2e4b];
+      dark:border-supporting/20 dark:checked:border-transparent dark:disabled:bg-[#1b2e4b];
     }
 
     .form-checkbox.outline-primary:checked {
@@ -454,11 +454,11 @@
         @apply overflow-auto;
     }
     table {
-        @apply w-full !border-collapse border border-t-0 dark:border-black-more-light text-lg;
+        @apply w-full !border-collapse border border-t-0 dark:border-supporting/10 text-lg;
     }
     table thead tr,
     table tfoot tr {
-        @apply border-b dark:border-black-more-light;
+        @apply border-b dark:border-supporting/10;
     }
     table thead tr th,
     table tfoot tr th,
@@ -473,7 +473,7 @@
         @apply ;
     }
     table.table-hover tbody tr {
-        @apply hover:!bg-white-light/50 dark:hover:!bg-[#1a2941]/40;
+        @apply hover:!bg-white-light/50 dark:hover:!bg-black-light;
     }
     table.table-striped tbody tr:nth-child(odd) {
         @apply !bg-white-light/20 dark:!bg-[#1a2941]/40;
@@ -698,11 +698,11 @@ pre.hljs {
 }
 
 .styled-form {
-    @apply rounded-md text-lg shadow bg-transparent px-6 py-8 dark:border-black-more-light h-fit;
+    @apply rounded-md text-lg shadow bg-transparent px-6 py-8 dark:border-supporting/10 h-fit;
 }
 
 .page-heading-bar {
-    @apply flex items-end pb-3 bg-white z-[999] justify-between gap-4 border-b sticky top-0 dark:border-black-more-light dark:bg-[#02091a];
+    @apply flex items-end pb-3 bg-white z-[999] justify-between gap-4 border-b sticky top-0 dark:border-supporting/10 dark:bg-[#000];
 }
 
 .page-heading {

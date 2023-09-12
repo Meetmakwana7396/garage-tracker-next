@@ -8,7 +8,7 @@ const PasswordField = ({ register, ...rest }: any) => {
     return (
         <div className="relative">
             <input {...rest} {...register} type={clsx(isShow ? 'text' : 'password')} className="form-input" />
-            <span className="absolute top-2 right-2 cursor-pointer" onClick={() => setIsShow(!isShow)}>
+            <span className="absolute inline-flex items-center px-3 h-full right-0 cursor-pointer" onClick={() => setIsShow(!isShow)}>
                 {isShow ? <IconEyeCross className="w-5 h-5" /> : <IconEye className="w-5 h-5" />}
             </span>
         </div>

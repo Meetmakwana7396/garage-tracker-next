@@ -14,11 +14,11 @@ import IconArrowLeftRight from '../Icon/IconAt copy';
 import EditRolePermission from './EditRolePermission';
 
 interface IRoleRow {
-    data: any;
+    role: any;
     refresh: () => void;
 }
 
-const RoleRow = ({ data, refresh }: IRoleRow) => {
+const RoleRow = ({ role, refresh }: IRoleRow) => {
     const editRoleNameRef = useRef<any>();
     const editRolePermissionRef = useRef<any>();
     const { formatDate } = useHelper();
@@ -29,7 +29,7 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
                 return;
             }
             const fd = {
-                id: data?.id,
+                id: role?.id,
                 status: status,
             };
             await axios.post('/roles/update-status', fd);
@@ -39,19 +39,19 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
 
     return (
         <>
-            <tr key={data.id}>
+            <tr key={role.id}>
                 <td>
-                    <div className="whitespace-nowrap">{data.id}</div>
+                    <div className="whitespace-nowrap">{role.id}</div>
                 </td>
                 <td>
-                    <div className="whitespace-nowrap">{data.name}</div>
+                    <div className="whitespace-nowrap">{role.name}</div>
                 </td>
                 <td>
-                    <div className="whitespace-nowrap">{formatDate(data.createdAt)}</div>
+                    <div className="whitespace-nowrap">{formatDate(role.createdAt)}</div>
                 </td>
                 <td>
                     <div className="flex gap-2 items-center">
-                        <div className={`status capitalize status-${data.status.toLowerCase()}`}>{data.status}</div>
+                        <div className={`status capitalize status-${role.status.toLowerCase()}`}>{role.status}</div>
 
                         <Pop
                             button={
@@ -80,7 +80,7 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
                 </td>
 
                 <td className="max-w-xs flex gap-2">
-                    <Link href={`/attorney/${data?.id}`}>
+                    <Link href={`/attorney/${role?.id}`}>
                         <Tippy content="View Details">
                             <span>
                                 <IconEye className="action-icon " />
@@ -102,7 +102,7 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
                         <PopButton onClick={() => editRolePermissionRef.current.open()}>Edit Permissions</PopButton>
                     </Pop>
 
-                    {data?.status === 4 && (
+                    {role?.status === 4 && (
                         <Tippy content="Restore Expert">
                             <span>
                                 <IconReload className="action-icon text-secondary" />
@@ -112,13 +112,12 @@ const RoleRow = ({ data, refresh }: IRoleRow) => {
                 </td>
             </tr>
             <Sheet ref={editRoleNameRef} width="600px">
-                <EditRoleName data={data} refresh={refresh} close={() => editRoleNameRef?.current?.close()} />
+                <EditRoleName role={role} refresh={refresh} close={() => editRoleNameRef?.current?.close()} />
             </Sheet>
             <Sheet ref={editRolePermissionRef} width="600px">
                 <EditRolePermission
-                    data={data}
+                    role={role}
                     refresh={refresh}
-                    // userPermissions={}
                     close={() => editRolePermissionRef?.current?.close()}
                 />
             </Sheet>

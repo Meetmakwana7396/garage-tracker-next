@@ -1,23 +1,19 @@
 import clsx from 'clsx';
-import { useForm } from 'react-hook-form';
 import FieldButton from '../Field/FieldButton';
 import axios from '@/libs/axios';
 import { IPermission } from '@/types/role';
 import RolePermissionBox from './RolePermissionBox';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface Props {
-    data: any;
+    role: any;
     refresh: () => void;
     close: () => void;
     userPermissions?: IPermission[];
 }
-interface IEditRolePermission {
-    name: string;
-}
 
-const EditRolePermission = ({ data, refresh, close, userPermissions }: Props) => {
+const EditRolePermission = ({ role, refresh, close }: Props) => {
     const { permissions } = useSelector((state: any) => state.global);
     const [selectedPermissionArray, setSelectedPermissionArray] = useState<string[]>([]);
 
@@ -31,18 +27,29 @@ const EditRolePermission = ({ data, refresh, close, userPermissions }: Props) =>
         }
     };
 
+    const getRolePermissions = useCallback(async () => {
+        try {
+            const { data } = await axios.get(`roles/${role?.id}`);
+            let pre_permitted: string[] = [];
+            data?.data?.permissions.forEach((element: any) => {
+                pre_permitted.push(element.id);
+            });
+            setSelectedPermissionArray(pre_permitted);
+        } catch (error) {}
+    }, [role]);
+
     useEffect(() => {
-        console.log("bro");
+        getRolePermissions();
+    }, [getRolePermissions]);
 
-    }, []);
-
-    const formHandler = async () => {
+    const formHandler = async (e: any) => {
+        e.preventDefault();
         try {
             const fd = {
-                id: data?.id,
+                id: role?.id,
                 permissions: selectedPermissionArray,
             };
-            await axios.post('/roles/update-name', fd);
+            await axios.post('/roles/update-permissions', fd);
             refresh();
             close();
         } catch (error) {}

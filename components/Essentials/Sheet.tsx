@@ -36,18 +36,18 @@ const Sheet = forwardRef(({ children, width, button }: SheetProps, ref: Ref<Shee
         <Dialog.Root open={open} onOpenChange={setOpen}>
             {button && <Dialog.Trigger asChild>{button}</Dialog.Trigger>}
             <Dialog.Portal>
-                <Dialog.Overlay className="bg-black/50 fixed inset-0 z-[9999] transition-all duration-300 data-[state=closed]:animate-out data-[state=open]:fade-in data-[state=closed]:fade-out">
+                <Dialog.Overlay className="bg-supporting/10 backdrop-blur-[5px] fixed inset-0 z-[9999] transition-all duration-300 data-[state=closed]:animate-out data-[state=open]:fade-in data-[state=closed]:fade-out">
                     <Dialog.Content
                         onOpenAutoFocus={(e) => {
                             e.preventDefault();
                         }}
-                        className="w-full h-screen absolute overflow-y-auto ease-in-out right-0 transition-transform bg-white shadow-lg p-6 pb-0 border-l dark:border-black-more-light outline-none animate-in slide-in-from-right duration-200 dark:bg-black dark:text-white-dark"
+                        className="w-full h-screen absolute overflow-y-auto ease-in-out right-0 transition-transform bg-white shadow-lg p-6 pb-0 border-l dark:border-supporting/10 outline-none animate-in slide-in-from-right duration-200 dark:bg-black dark:text-white-dark"
                         style={{ maxWidth: width || '432px' }}
                     >
                         <div>{children}</div>
                         <Dialog.Close asChild>
                             <button
-                                className="outline-none btn absolute top-4 right-4 bg-gray-300 p-2 rounded-full dark:bg-black-more-light dark:border-none"
+                                className="outline-none btn absolute top-4 right-4 bg-gray-300 p-2 rounded-full dark:bg-supporting/20 dark:border-none"
                                 aria-label="Close"
                             >
                                 {/* <IconClose className="text-black w-5 h-5" /> */}

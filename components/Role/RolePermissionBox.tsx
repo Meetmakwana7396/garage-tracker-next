@@ -11,12 +11,12 @@ const RolePermissionBox = ({ permission, handlePermissionSelection, selectedPerm
     return (
         <div
             className={clsx(
-                'rounded-lg border overflow-hidden dark:border-black-more-light',
+                'rounded-lg border overflow-hidden dark:border-supporting/10',
                 selectedPermissionArray.includes(permission.id) && 'border-2 border-primary dark:border-primary'
             )}
         >
             <label
-                className="p-3 font-bold flex gap-2 border-b dark:border-black-more-light bg-supporting dark:bg-black-more-light/30 items-center cursor-pointer"
+                className="p-3 font-bold flex gap-2 border-b dark:border-black-light bg-supporting dark:bg-supporting/5 items-center cursor-pointer"
                 htmlFor={permission.id}
             >
                 <input

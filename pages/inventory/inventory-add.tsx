@@ -98,7 +98,7 @@ const InventoryAdd = () => {
 
                             <div className="sm:col-span-2">
                                 <label className="form-label">Additional Notes</label>
-                                <div className="h-36 rounded border-2 border-dashed relative dark:border-black-more-light">
+                                <div className="h-36 rounded border-2 border-dashed relative dark:border-supporting/10">
                                     <p className="z-20 text-gray-500 w-fit text-xl">Click to insert image</p>
                                 </div>
                             </div>
